@@ -6,7 +6,7 @@
 #    By: dario <dario@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 18:40:53 by dario             #+#    #+#              #
-#    Updated: 2025/10/11 20:59:45 by dario            ###   ########.fr        #
+#    Updated: 2025/10/11 22:42:25 by dario            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -lm
-RM			=	rm -f
+RM			=	rm -rf
 
 # Libft
 LIBFT		=	./libs/libft/
@@ -30,16 +30,22 @@ MLX_NAME	=	$(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE	=	$(MLX_PATH)/include/MLX42
 MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
 
-DIR			=	srcs/
-HDERS		=	srcs/minishell.h
+OBJ_DIR		=	obj/
+
+SRC_DIR		= source/
+
+VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
+				mlx\
+				render\
+				)
+
 SRC			=	main.c
 
 BUILTINS	=	
 
-SRCS		=	$(addprefix source/, $(SRC))
+# SRCS		=	$(addprefix source/, $(SRC))
 
-
-OBJS		=	$(SRCS:.c=.o)
+OBJS		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 define SIGNATURE
       _                                 _
@@ -96,15 +102,18 @@ $(MLX_PATH):
 	git clone https://github.com/codam-coding-college/MLX42.git ./libs/MLX42
 	@echo "$(BG_BLUE)MLX42 cloned!$(RST)"
 
-%.o: %.c
+$(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
 	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 test:
 	gcc test.c -o test
 
 clean:
 	@echo "$(BG_BLUE)Cleaning...$(BG_RST)"
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJ_DIR)
 	@make -C $(LIBFT) clean
 	@echo "$(CYAN)libft objs cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) objs cleaned!$(BG_RST)🧹"
@@ -112,6 +121,8 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
+	@$(RM) $(MLX_BUILD)
+	@echo "$(CYAN)MLX42 fully cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) fully cleaned!$(BG_RST)🧹"
 	@echo "$(BG_GREEN)All cleaned!$(BG_RST)"
 
