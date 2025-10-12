@@ -6,7 +6,7 @@
 #    By: dario <dario@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 18:40:53 by dario             #+#    #+#              #
-#    Updated: 2025/10/11 22:42:25 by dario            ###   ########.fr        #
+#    Updated: 2025/10/12 03:08:39 by dario            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
 
 OBJ_DIR		=	obj/
 
-SRC_DIR		= source/
+SRC_DIR		=	source/
 
 VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				mlx\
@@ -80,7 +80,7 @@ BG_WHITE	=	\033[47m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(MLX_NAME) $(OBJS)
+$(NAME): $(MLX_NAME) $(LIBFT_LIB) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAG) -o $(NAME)
 	@printf "$(MAGENTA)All $(NAME) source files compiled ✅$(RST)\033[0K\r"
 	@echo "\n$(BG_GREEN)$(NAME) compiled!$(BG_RST)"
@@ -99,7 +99,7 @@ $(MLX_NAME): $(MLX_PATH)
 
 $(MLX_PATH):
 	@echo "$(BG_BLUE)Cloning MLX42...$(RST)"
-	git clone https://github.com/codam-coding-college/MLX42.git ./libs/MLX42
+	git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
 	@echo "$(BG_BLUE)MLX42 cloned!$(RST)"
 
 $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
