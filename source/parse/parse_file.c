@@ -6,13 +6,13 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:59:37 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:03:21 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <fcntl.h>
-#include "../../include/parsing.h"
+#include "../../include/parse.h"
 #include "../../include/miniRT.h"
 
 bool	check_file_extension(char *arg);

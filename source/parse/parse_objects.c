@@ -6,11 +6,11 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:21:49 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:58:04 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:03:26 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
+#include "../../include/parse.h"
 #include "../../include/miniRT.h"
 
 int	parse_ambient(char *line)

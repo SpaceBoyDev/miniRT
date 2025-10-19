@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/19 23:42:22 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:03:18 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../include/miniRT.h"
-#include "../include/parsing.h"
+#include "../include/parse.h"
 
 int	main(int argc, char **argv)
 {

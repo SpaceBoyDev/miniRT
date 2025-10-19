@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:23:19 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:03:47 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSE_H
+# define PARSE_H
 
 int	parse_file(char *file);
 int	parse_line(char *line);

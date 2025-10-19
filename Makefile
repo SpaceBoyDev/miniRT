@@ -6,7 +6,7 @@
 #    By: dario <dario@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 18:40:53 by dario             #+#    #+#              #
-#    Updated: 2025/10/20 00:28:27 by dario            ###   ########.fr        #
+#    Updated: 2025/10/20 01:03:03 by dario            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_DIR		=	source/
 
 VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				mlx\
-				parsing\
+				parse\
 				render\
 				)
 

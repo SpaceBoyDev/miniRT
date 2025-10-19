@@ -6,11 +6,11 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 23:56:36 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 01:01:16 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:03:32 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
+#include "../../include/parse.h"
 #include "../../include/miniRT.h"
 
 // char	*read_obj_id(char *line)
