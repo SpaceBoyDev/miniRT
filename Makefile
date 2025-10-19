@@ -32,7 +32,7 @@ VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 SRC			=	main.c error_handling.c
 
 # Parsing
-SRC			+=	parse_file.c read_scene.c parse_objects.c
+SRC			+=	parse_file.c read_scene.c parse_objects.c parse_geometry.c
 
 BUILTINS	=	
 
@@ -122,27 +122,7 @@ fclean: clean
 re: fclean all
 
 norme:
-	@echo "$(BG_CYAN)SOURCES$(BG_RST)"
-	@for file in $(SRC_DIR); do \
-		norminette $$file | grep "OK!" > /dev/null; \
-		if [ $$? -eq 0 ]; then \
-			echo "$(GREEN)$$file: OK!$(RST)"; \
-		else \
-			echo "$(RED)"; \
-			norminette $$file; \
-			echo "$(RST)"; \
-		fi \
-	done
-	@echo "$(BG_CYAN)HEADERS$(BG_RST)"
-	@for header in $(INC_DIR); do \
-		norminette $$header | grep "OK!" > /dev/null; \
-		if [ $$? -eq 0 ]; then \
-			echo "$(GREEN)$$header: OK!$(RST)"; \
-		else \
-			echo "$(RED)"; \
-			norminette $$header; \
-			echo "$(RST)"; \
-		fi \
-	done
+	@echo "$(BG_BLUE)Checking norminette $(SRC_DIR) $(INC_DIR) $(LIBFT_PATH)...$(BG_RST)\n"
+	@if norminette $(SRC_DIR) $(INC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "$(RED)$$(norminette $(SRC_DIR) $(INC_DIR) $(LIBFT_PATH) | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 
 .PHONY: all clean fclean re check
