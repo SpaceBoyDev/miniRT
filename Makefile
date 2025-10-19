@@ -6,7 +6,7 @@
 #    By: dario <dario@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 18:40:53 by dario             #+#    #+#              #
-#    Updated: 2025/10/12 03:08:39 by dario            ###   ########.fr        #
+#    Updated: 2025/10/20 00:28:27 by dario            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,19 @@ MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
 
 OBJ_DIR		=	obj/
 
+INC_DIR		=	include/
 SRC_DIR		=	source/
 
 VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				mlx\
+				parsing\
 				render\
 				)
 
-SRC			=	main.c
+SRC			=	main.c error_handling.c
+
+# Parsing
+SRC			+=	parse_file.c read_scene.c parse_objects.c
 
 BUILTINS	=	
 
@@ -130,7 +135,7 @@ re: fclean all
 
 norme:
 	@echo "$(BG_CYAN)SOURCES$(BG_RST)"
-	@for file in $(SRCS); do \
+	@for file in $(SRC_DIR); do \
 		norminette $$file | grep "OK!" > /dev/null; \
 		if [ $$? -eq 0 ]; then \
 			echo "$(GREEN)$$file: OK!$(RST)"; \
@@ -141,7 +146,7 @@ norme:
 		fi \
 	done
 	@echo "$(BG_CYAN)HEADERS$(BG_RST)"
-	@for header in $(HDERS); do \
+	@for header in $(INC_DIR); do \
 		norminette $$header | grep "OK!" > /dev/null; \
 		if [ $$? -eq 0 ]; then \
 			echo "$(GREEN)$$header: OK!$(RST)"; \

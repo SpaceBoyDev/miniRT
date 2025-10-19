@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 19:10:27 by darmarti          #+#    #+#             */
-/*   Updated: 2025/10/20 00:00:35 by dario            ###   ########.fr       */
+/*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
+/*   Updated: 2025/10/20 00:23:19 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
+int	parse_file(char *file);
+int	parse_line(char *line);
 
-	if (!n)
-		return (0);
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i + 1 < n)
-		i++;
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-}
+int	parse_ambient(char *line);
+int	parse_camera(char *line);
+int	parse_light(char *line);
+int	parse_sphere(char *line);
+int	parse_plane(char *line);
+int	parse_cylinder(char *line);
+
+#endif

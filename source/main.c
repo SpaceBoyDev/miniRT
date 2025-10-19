@@ -6,21 +6,25 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/11 21:09:48 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/19 23:42:22 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------------------------------------------------------------------
+// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.
+// See README in the root project for more information.
+// -----------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "../include/miniRT.h"
+#include "../include/parsing.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_printf("hola\n");
-
-
-	mlx_t			*mlx;
-	
-
-	mlx = mlx_init(500, 500, "miniRT", false);
-	mlx_loop(mlx);
-	// end_game(vars, false);
+	if (argc != 2)
+		exit_error(ERR_ARGS);
+	exit_error(parse_file(argv[1]));
+	return (OK);
 }
