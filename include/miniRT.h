@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:27:37 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:01:25 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # define WIDTH		512
 # define HEIGHT		512
 
-# define ID_AMBIENT	"A"
-# define ID_CAMERA	"C"
-# define ID_LIGHT	"L"
-# define ID_SPHERE	"sp"
-# define ID_PLANE	"pl"
-# define ID_CYL		"cy"
+# define ID_AMBIENT	"A "
+# define ID_CAMERA	"C "
+# define ID_LIGHT	"L "
+# define ID_SPHERE	"sp "
+# define ID_PLANE	"pl "
+# define ID_CYL		"cy "
 
 typedef enum e_error		t_error;
 

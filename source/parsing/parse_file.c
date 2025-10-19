@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:17:18 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 00:59:37 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		parse_file(char *file)
 			break ;
 		if (ft_strncmp(line, "\n", 1) != 0)
 			parse_line(line);
+		free(line);
 	}
 	return (OK);
 }

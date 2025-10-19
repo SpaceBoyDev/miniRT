@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 23:56:36 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 00:28:03 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:01:16 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
 
 int	parse_line(char *line)
 {
-	if (ft_strncmp(line, ID_AMBIENT, 1))
-		return (parse_ambient(line));
-	else if (ft_strncmp(line, ID_CAMERA, 1))
+	if (!ft_strncmp(line, ID_AMBIENT, 2))
+		parse_ambient(line);
+	else if (!ft_strncmp(line, ID_CAMERA, 2))
 		parse_camera(line);
-	else if (ft_strncmp(line, ID_LIGHT, 1))
+	else if (!ft_strncmp(line, ID_LIGHT, 2))
 		return (parse_light(line));
-	else if (ft_strncmp(line, ID_SPHERE, 2))
+	else if (!ft_strncmp(line, ID_SPHERE, 3))
 		return (parse_sphere(line));
-	else if (ft_strncmp(line, ID_PLANE, 2))
+	else if (!ft_strncmp(line, ID_PLANE, 3))
 		return (parse_plane(line));
-	else if (ft_strncmp(line, ID_CYL, 2))
+	else if (!ft_strncmp(line, ID_CYL, 3))
 		return (parse_cylinder(line));
 	else
 		return (ERR_OBJ_ID);
