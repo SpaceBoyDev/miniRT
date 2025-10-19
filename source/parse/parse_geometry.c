@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   parse_objects_forms.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 01:35:28 by dario            ###   ########.fr       */
+/*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
+/*   Updated: 2025/10/20 01:31:04 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "../../include/parse.h"
 
-#include "miniRT.h"
+int	parse_sphere(char *line)
+{
+	printf("%s\n", __func__);
+	printf("%s", line);
+	return (OK);
+}
 
-// parse_file.c
-int	parse_file(char *file);
+int	parse_plane(char *line)
+{
+	printf("%s\n", __func__);
+	printf("%s", line);
+	return (OK);
+}
 
-// parse_objects.c
-int	parse_ambient(char *line);
-int	parse_camera(char *line);
-int	parse_light(char *line);
-
-// parse_geometry.c
-int	parse_sphere(char *line);
-int	parse_plane(char *line);
-int	parse_cylinder(char *line);
-
-#endif
+int	parse_cylinder(char *line)
+{
+	printf("%s\n", __func__);
+	printf("%s", line);
+	return (OK);
+}

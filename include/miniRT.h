@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 01:01:25 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:24:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ struct s_vector3
 
 struct s_scene
 {
-
 };
 
 struct s_ambient
@@ -69,7 +68,6 @@ struct s_ambient
 	t_color		color;
 };
 
-// error_handling.c
 void	exit_error(t_error error);
 
 #endif

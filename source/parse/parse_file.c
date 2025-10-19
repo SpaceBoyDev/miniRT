@@ -6,18 +6,46 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 01:03:21 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/20 01:33:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <fcntl.h>
 #include "../../include/parse.h"
-#include "../../include/miniRT.h"
 
-bool	check_file_extension(char *arg);
+static bool	check_file_extension(char *arg)
+{
+	int	i;
 
-int		parse_file(char *file)
+	i = 0;
+	while (arg[i])
+		++i;
+	if (arg[i - 1] != 't' || arg[i - 2] != 'r' || arg[i - 3] != '.')
+		return (false);
+	return (true);
+}
+
+static int	parse_line(char *line)
+{
+	if (!ft_strncmp(line, ID_AMBIENT, 2))
+		parse_ambient(line);
+	else if (!ft_strncmp(line, ID_CAMERA, 2))
+		parse_camera(line);
+	else if (!ft_strncmp(line, ID_LIGHT, 2))
+		return (parse_light(line));
+	else if (!ft_strncmp(line, ID_SPHERE, 3))
+		return (parse_sphere(line));
+	else if (!ft_strncmp(line, ID_PLANE, 3))
+		return (parse_plane(line));
+	else if (!ft_strncmp(line, ID_CYL, 3))
+		return (parse_cylinder(line));
+	else
+		return (ERR_OBJ_ID);
+	return (OK);
+}
+
+int	parse_file(char *file)
 {
 	int		fd;
 	char	*line;
@@ -37,16 +65,4 @@ int		parse_file(char *file)
 		free(line);
 	}
 	return (OK);
-}
-
-bool	check_file_extension(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-		++i;
-	if (arg[i - 1] != 't' || arg[i - 2] != 'r' || arg[i - 3] != '.')
-		return (false);
-	return (true);
 }
