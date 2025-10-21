@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/20 01:03:18 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/21 16:45:04 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 
 int	main(int argc, char **argv)
 {
+	t_scene	scene;
+
 	if (argc != 2)
 		exit_error(ERR_ARGS);
-	exit_error(parse_file(argv[1]));
+	exit_error(parse_file(argv[1], &scene));
 	return (OK);
 }

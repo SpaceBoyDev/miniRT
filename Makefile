@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -lm
+CFLAGS		=	-Wall -Wextra -Werror -lm #-fsanitize=address
 RM			=	rm -rf
 
 # Libft
@@ -32,7 +32,7 @@ VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 SRC			=	main.c error_handling.c
 
 # Parsing
-SRC			+=	parse_file.c read_scene.c parse_objects.c parse_geometry.c
+SRC			+=	parse_atributes.c parse_file.c parse_geometry.c parse_objects.c parse_vars.c read_scene.c 
 
 BUILTINS	=	
 

@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_geometry.c                                   :+:      :+:    :+:   */
+/*   parse_atributes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/10/21 17:27:40 by dario            ###   ########.fr       */
+/*   Created: 2025/10/21 17:20:31 by dario             #+#    #+#             */
+/*   Updated: 2025/10/21 17:54:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
 
-int	parse_sphere(char *line, t_scene *scene)
+bool	parse_ratio(char *str, double *result)
 {
-	printf("%s\n", __func__);
-	printf("%s", line);
-	(void)scene;
-	return (OK);
-}
+	if (!parse_double(str, result))
+		return (false);
+	printf("estoy bieen\n");
 
-int	parse_plane(char *line, t_scene *scene)
-{
-	printf("%s\n", __func__);
-	printf("%s", line);
-	(void)scene;
-	return (OK);
-}
-
-int	parse_cylinder(char *line, t_scene *scene)
-{
-	printf("%s\n", __func__);
-	printf("%s", line);
-	(void)scene;
-	return (OK);
+	if (*result > 1.0 || *result < 0.0)
+		return (false);
+	return (true);
 }
