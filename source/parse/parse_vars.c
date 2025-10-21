@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/21 17:55:15 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 01:44:13 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ bool	parse_double(char *str, double *result)
 {
 	int		i;
 	bool	is_decimal;
+	double	decimal;
 	double	ret;
 
 	i = 0;
 	is_decimal = false;
+	decimal = 1;
 	ret = 0;
 	printf("%s\n", str);
 	while (str[i] == ' ')
@@ -37,9 +39,9 @@ bool	parse_double(char *str, double *result)
 			ret += (ret * 10) + (str[i] - '0');
 		else if (ft_isdigit(str[i]) && is_decimal)
 		{
+			decimal /= 10;
 			printf("que\n");
-			ret += (str[i] - '0');
-			ret /= 10;
+			ret += (str[i] - '0') * decimal;
 		}
 		printf("\n");
 		++i;
