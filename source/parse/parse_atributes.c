@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 20:36:07 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:03:33 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,33 @@ char	*parse_color(char *str, t_color *result)
 	str = read_int_vector(str, result);
 	if (!str)
 		return (NULL);
+	printf("===Color===\n");
+	printf("R -> %i\n", result->r);
+	printf("G -> %i\n", result->g);
+	printf("B -> %i\n", result->b);
 	if (result->r > 255 || result->r < 0
 		|| result->g > 255 || result->g < 0
 		|| result->b > 255 || result->b < 0)
+		return (NULL);
+
+	return (str);
+}
+
+char	*parse_coords(char *str, t_color *result)
+{
+	if (!str)
+		return (NULL);
+	str = read_int_vector(str, result);
+	if (!str)
 		return (NULL);
 	printf("===Color===\n");
 	printf("R -> %i\n", result->r);
 	printf("G -> %i\n", result->g);
 	printf("B -> %i\n", result->b);
+	if (result->r > 255 || result->r < 0
+		|| result->g > 255 || result->g < 0
+		|| result->b > 255 || result->b < 0)
+		return (NULL);
+
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 21:01:06 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:02:13 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ enum e_error
 	ERR_OBJ_ID,
 	ERR_TRASH_LINE,
 	ERR_DUP_AMB,
+	ERR_DUP_CAM,
+	ERR_DUP_LIGHT,
 	ERR_BAD_RATIO,
 	ERR_BAD_COLOR,
 	MAX_ERR_CODE,

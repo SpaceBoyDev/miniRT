@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 21:01:01 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:02:30 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static const char	*g_message[MAX_ERR_CODE] = {
 	"Trash at the end of the line.\n"\
 	"Object should only have their own atributes.",
 	"Duplicated ambient lighting.",
+	"Duplicated camera.",
+	"Duplicated light.",
 	"The given ratio is not valid.",
 	"The given color is not valid.",
 };

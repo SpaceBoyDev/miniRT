@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:14:52 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 20:48:29 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:00:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,14 @@ bool	is_number(char *str)
 	int	i;
 
 	i = 0;
-	printf("Checkeando char -> %s\n", str);
+	if (str[i] == '+' || str[i] == '-')
+		++i;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-		{
-			printf("posicion %i ", i);
-			printf("en char %c", str[i]);
 			return (false);
-		}
 		++i;
 	}
-	printf("true :3\n");
 	return (true);
 }
 

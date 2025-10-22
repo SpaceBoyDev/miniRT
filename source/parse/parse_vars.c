@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 20:32:53 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:16:53 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,126 @@ char	*read_double(char *str, double *result)
 	return (&str[i]);
 }
 
+int len_int_vector(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (ft_isdigit(str[i]))
+            ++i;
+        else if (str[i] == ',' || str[i] == '+' || str[i] == '-')
+        {
+            if (str[i + 1] && (ft_isdigit(str[i + 1])
+                    || str[i + 1] == '+' || str[i + 1] == '-'))
+            {
+                ++i;
+                continue;
+            }
+            break;
+        }
+		else
+			break;
+    }
+    return (i);
+}
+
+int len_double_vector(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (ft_isdigit(str[i]))
+        {
+            ++i;
+            continue;
+        }
+		if (str[i] == '+' || str[i] == '-')
+		{
+			if (!str[i + 1] || !ft_isdigit(str[i + 1]))
+			{
+				++i;
+				break;
+			}
+		}
+        if (str[i] == ',')
+        {
+            if (str[i + 1] && (ft_isdigit(str[i + 1])
+                    || str[i + 1] == '+' || str[i + 1] == '-'))
+            {
+                ++i;
+                continue;
+            }
+            break;
+        }
+        break;
+    }
+    return (i);
+}
+
 char	*read_int_vector(char *str, t_color *result)
 {
 	char	**table;
 	char	*vector;
-	int		y;
+	int		i;
 
-	y = 0;
-	while ((str[y] && ft_isdigit(str[y])) || (str[y] && str[y] == ',' && ft_isdigit(str[y + 1])))
-		++y;
-	vector = malloc(sizeof(char) * (y + 1));
-	ft_strlcpy(vector, str, y + 1);	
+	i = len_int_vector(str);
+
+	vector = malloc(sizeof(char) * (i + 1));
+	ft_strlcpy(vector, str, i + 1);	
+	printf("Vector = %s\n", vector);
 	table = ft_split(vector, ',');
-	if (!table || table_len(table) != 3 ||
-		!is_number(table[0]) || !is_number(table[1])|| !is_number(table[2]))
+	if (!table || table_len(table) != 3)
 	{
 		free(vector);
 		free_table(table);
 		return (NULL);
 	}
+	// int x = 0;
+	// while (table[x])
+	// {
+	// 	printf("->%s", table[x]);
+	// 	++x;
+	// }
 	result->r = ft_atoi(table[0]);
 	result->g = ft_atoi(table[1]);
 	result->b = ft_atoi(table[2]);
 	free(vector);
 	free_table(table);
-	return (str + y);
+	return (str + i);
+}
+
+char	*read_double_vector(char *str, t_color *result)
+{
+	char	**table;
+	char	*vector;
+	int		i;
+
+	i = len_int_vector(str);
+
+	vector = malloc(sizeof(char) * (i + 1));
+	ft_strlcpy(vector, str, i + 1);	
+	printf("Vector = %s\n", vector);
+	table = ft_split(vector, ',');
+	if (!table || table_len(table) != 3)
+	{
+		free(vector);
+		free_table(table);
+		return (NULL);
+	}
+	// int x = 0;
+	// while (table[x])
+	// {
+	// 	printf("->%s", table[x]);
+	// 	++x;
+	// }
+	result->r = ft_atoi(table[0]);
+	result->g = ft_atoi(table[1]);
+	result->b = ft_atoi(table[2]);
+	free(vector);
+	free_table(table);
+	return (str + i);
 }
