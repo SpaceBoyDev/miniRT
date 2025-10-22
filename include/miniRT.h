@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/21 17:56:56 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 21:01:06 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ enum e_error
 	ERR_EXTENSION,
 	ERR_OPEN,
 	ERR_OBJ_ID,
+	ERR_TRASH_LINE,
 	ERR_DUP_AMB,
-	ERR_BAD_DOUBLE,
+	ERR_BAD_RATIO,
+	ERR_BAD_COLOR,
 	MAX_ERR_CODE,
 };
 
@@ -129,6 +131,8 @@ struct s_cylinder
 };
 
 
-void	exit_error(t_error error);
+void	exit_error(t_error error, t_scene *scene);
+void	free_table(char **table);
+void	free_scene(t_scene *scene);
 
 #endif

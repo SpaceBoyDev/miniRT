@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/21 17:37:57 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/22 21:01:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include <fcntl.h>
 #include "../../include/parse.h"
 
-// static void	finish_free_gnl(char *line, int fd)
-// {
-// 	if (!line)
-// 		return ;
+static void	finish_free_gnl(char *line, int fd)
+{
+	if (!line)
+		return ;
 
-// 	while (line)
-// 	{
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// }
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+}
 
 static bool	check_file_extension(char *arg)
 {
@@ -56,15 +56,14 @@ static int	parse_line(char *line, t_scene *scene)
 		parse_type = parse_cylinder;
 	else
 		return (ERR_OBJ_ID);
-	parse_type(line, scene);
-	return (OK);
+	return (parse_type(line, scene));
 }
 
 char	*advance_until_char(char *str, int *i)
 {
 	if (!str)
 		return (0);
-	while(str[*i] && str[*i] != ' ')
+	while (str[*i] && str[*i] != ' ')
 		++(*i);
 	return (&str[*i + 1]);
 }
@@ -72,6 +71,7 @@ char	*advance_until_char(char *str, int *i)
 int	parse_file(char *file, t_scene *scene)
 {
 	int		fd;
+	int		error;
 	char	*line;
 
 	if (!check_file_extension(file))
@@ -86,8 +86,10 @@ int	parse_file(char *file, t_scene *scene)
 			break ;
 		if (ft_strncmp(line, "\n", 1) != 0)
 		{
-			// finish_free_gnl(line, fd);
-			exit_error(parse_line(line, scene));
+			error = parse_line(line, scene);
+			if (error != 0)
+				finish_free_gnl(line, fd);
+			exit_error(error, scene);
 		}
 		free(line);
 	}
