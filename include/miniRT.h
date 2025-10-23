@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 23:02:13 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 03:16:31 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ enum e_error
 	ERR_DUP_LIGHT,
 	ERR_BAD_RATIO,
 	ERR_BAD_COLOR,
+	ERR_BAD_COORDS,
+	ERR_BAD_ORIENTATION,
 	MAX_ERR_CODE,
 };
 

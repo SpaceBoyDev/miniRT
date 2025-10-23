@@ -6,11 +6,18 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:14:52 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 23:00:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 03:26:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
+
+char	*skip_blank(char *str)
+{
+	while (*str && *str == ' ')
+		++str;
+	return (str);
+}
 
 int	table_len(char **table)
 {

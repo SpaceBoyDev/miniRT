@@ -6,11 +6,20 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 02:39:19 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 03:21:45 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
+
+double	check_double_sign(char *str, double *result)
+{
+	if (!str)
+		return (0);
+	if (str[0] == '-')
+		*result *= -1;
+	return (*result);
+}
 
 char	*read_double(char *str, double *result)
 {
@@ -30,14 +39,14 @@ char	*read_double(char *str, double *result)
 		else if (str[i] == '.' && is_decimal)
 			return (NULL);
 		if (ft_isdigit(str[i]) && !is_decimal)
-			ret += (ret * 10) + (str[i] - '0');
+			ret = (ret * 10) + (str[i] - '0');
 		else if (ft_isdigit(str[i]) && is_decimal)
 		{
 			decimal /= 10;
-			ret += (str[i] - '0') * decimal;
+			ret += ((str[i] - '0') * decimal);
 		}
 	}
-	*result = ret;
+	*result = check_double_sign(str, &ret);
 	return (&str[i]);
 }
 
@@ -61,9 +70,9 @@ int len_int_vector(char *str)
             if (str[i + 1] && (ft_isdigit(str[i + 1])
                     || str[i + 1] == '+' || str[i + 1] == '-'))
                 continue ;
-			break;
+			break ;
         }
-		break;
+		break ;
     }
     return (i);
 }
@@ -72,33 +81,25 @@ int len_double_vector(char *str)
 {
     int i;
 
-    i = 0;
-    while (str[i])
+    i = -1;
+    while (str[++i])
     {
         if (ft_isdigit(str[i]))
-        {
-            ++i;
-            continue;
-        }
-		if ((str[i] == '+') || (str[i] == '-'))
+            continue ;
+		else if ((str[i] == '+') || (str[i] == '-') || (str[i] == '.'))
 		{
-			if (!str[i + 1] || !ft_isdigit(str[i + 1]))
-			{
-				++i;
-				break;
-			}
+			if (str[i + 1] && ft_isdigit(str[i + 1]))
+				continue ;
+			break ;
 		}
-        if (str[i] == ',')
+        else if (str[i] == ',' && i != 0)
         {
             if (str[i + 1] && (ft_isdigit(str[i + 1])
                     || str[i + 1] == '+' || str[i + 1] == '-'))
-            {
-                ++i;
-                continue;
-            }
-            break;
+                continue ;
+			break ;
         }
-        break;
+		break ;
     }
     return (i);
 }
@@ -121,12 +122,6 @@ char	*read_int_vector(char *str, t_color *result)
 		free_table(table);
 		return (NULL);
 	}
-	// int x = 0;
-	// while (table[x])
-	// {
-	// 	printf("->%s", table[x]);
-	// 	++x;
-	// }
 	result->r = ft_atoi(table[0]);
 	result->g = ft_atoi(table[1]);
 	result->b = ft_atoi(table[2]);
@@ -135,13 +130,13 @@ char	*read_int_vector(char *str, t_color *result)
 	return (str + i);
 }
 
-char	*read_double_vector(char *str, t_color *result)
+char	*read_double_vector(char *str, double *x, double *y, double *z)
 {
 	char	**table;
 	char	*vector;
 	int		i;
 
-	i = len_int_vector(str);
+	i = len_double_vector(str);
 
 	vector = malloc(sizeof(char) * (i + 1));
 	ft_strlcpy(vector, str, i + 1);	
@@ -153,15 +148,9 @@ char	*read_double_vector(char *str, t_color *result)
 		free_table(table);
 		return (NULL);
 	}
-	// int x = 0;
-	// while (table[x])
-	// {
-	// 	printf("->%s", table[x]);
-	// 	++x;
-	// }
-	result->r = ft_atoi(table[0]);
-	result->g = ft_atoi(table[1]);
-	result->b = ft_atoi(table[2]);
+	read_double(table[0], x);
+	read_double(table[1], y);
+	read_double(table[2], z);
 	free(vector);
 	free_table(table);
 	return (str + i);
