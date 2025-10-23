@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 23:16:53 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 02:39:19 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,25 @@ int len_int_vector(char *str)
 {
     int i;
 
-    i = 0;
-    while (str[i])
+    i = -1;
+    while (str[++i])
     {
         if (ft_isdigit(str[i]))
-            ++i;
-        else if (str[i] == ',' || str[i] == '+' || str[i] == '-')
+            continue ;
+		else if ((str[i] == '+') || (str[i] == '-'))
+		{
+			if (str[i + 1] && ft_isdigit(str[i + 1]))
+				continue ;
+			break ;
+		}
+        else if (str[i] == ',' && i != 0)
         {
             if (str[i + 1] && (ft_isdigit(str[i + 1])
                     || str[i + 1] == '+' || str[i + 1] == '-'))
-            {
-                ++i;
-                continue;
-            }
-            break;
-        }
-		else
+                continue ;
 			break;
+        }
+		break;
     }
     return (i);
 }
@@ -78,7 +80,7 @@ int len_double_vector(char *str)
             ++i;
             continue;
         }
-		if (str[i] == '+' || str[i] == '-')
+		if ((str[i] == '+') || (str[i] == '-'))
 		{
 			if (!str[i + 1] || !ft_isdigit(str[i + 1]))
 			{
