@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 19:33:52 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 20:10:43 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,34 @@ enum e_error
 	ERR_EXTENSION,
 	ERR_OPEN,
 	ERR_OBJ_ID,
-	ERR_TRASH_LINE,
 	ERR_DUP_AMB,
 	ERR_DUP_CAM,
 	ERR_DUP_LIGHT,
-	ERR_BAD_RATIO,
-	ERR_BAD_COLOR,
-	ERR_BAD_COORDS,
-	ERR_BAD_ORIENTATION,
-	ERR_BAD_FOV,
+	ERR_AMB_RATIO,
+	ERR_AMB_COLOR,
+	ERR_AMB_TRASH,
+	ERR_CAM_COORDS,
+	ERR_CAM_ORIENTATION,
+	ERR_CAM_FOV,
+	ERR_CAM_TRASH,
+	ERR_LIGHT_COORDS,
+	ERR_LIGHT_RATIO,
+	ERR_LIGHT_COLOR,
+	ERR_LIGHT_TRASH,
+	ERR_SPHERE_COORDS,
+	ERR_SPHERE_DIAMETER,
+	ERR_SPHERE_COLOR,
+	ERR_SPHERE_TRASH,
+	ERR_PLANE_COORDS,
+	ERR_PLANE_NORMAL,
+	ERR_PLANE_COLOR,
+	ERR_PLANE_TRASH,
+	ERR_CYL_COORDS,
+	ERR_CYL_AXIS,
+	ERR_CYL_DIAMETER,
+	ERR_CYL_HEIGHT,
+	ERR_CYL_COLOR,
+	ERR_CYL_TRASH,
 	MAX_ERR_CODE,
 };
 
@@ -117,13 +136,15 @@ struct s_sphere
 	t_coords	position;
 	double		diameter;
 	t_color		color;
+	t_sphere	*next;
 };
 
 struct s_plane
 {
 	t_coords	position;
-	t_vector3	axis;
+	t_vector3	normal;
 	t_color		color;
+	t_plane		*next;
 };
 
 struct s_cylinder
@@ -133,6 +154,7 @@ struct s_cylinder
 	double		diameter;
 	double		height;
 	t_color		color;
+	t_cylinder	*next;
 };
 
 

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 19:33:06 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 20:12:08 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // parse_atributes.c
 char	*parse_ratio(char *str, double *result);
+char	*parse_double(char *str, double *result);
 char	*parse_color(char *str, t_color *result);
 char	*parse_coords(char *str, t_coords *result);
 char	*parse_normalized_vector(char *str, t_coords *vector);
