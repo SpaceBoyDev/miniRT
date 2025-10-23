@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 03:16:56 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 19:33:58 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static const char	*g_message[MAX_ERR_CODE] = {
 	"The given color is not valid.",
 	"The given coordinates are not valid.",
 	"The given orientation is not valid.",
+	"The given FOV is not valid.",
 };
 
 void	free_table(char **table)

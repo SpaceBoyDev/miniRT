@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:03:27 by darmarti          #+#    #+#             */
-/*   Updated: 2025/06/10 20:32:06 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 19:30:33 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	ft_atoi(const char *nptr)
 	if (*nptr == '-')
 	{
 		if (!ft_isdigit(*(nptr + 1)))
-			return (0);
+			return (-1);
 		negative = -1;
 		++nptr;
 	}
 	if (*nptr == '+' && ft_isdigit(*(nptr + 1)))
 		++nptr;
 	else if (*nptr == '+' && !ft_isdigit(*(nptr + 1)))
-		return (0);
+		return (-1);
 	while (ft_isdigit(*nptr))
 	{
 		num = (num * 10) + ((int)*nptr - '0');

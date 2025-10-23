@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:21:49 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 03:32:22 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 19:36:08 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_ambient(char *line, t_scene *scene)
 {
-	printf("%s\n", __func__);
+	printf("\n%s\n", __func__);
 	if (scene->ambient)
 		return (ERR_DUP_AMB);
 	scene->ambient = malloc(sizeof(t_ambient));
@@ -34,7 +34,7 @@ int	parse_ambient(char *line, t_scene *scene)
 
 int	parse_camera(char *line, t_scene *scene)
 {
-	printf("%s\n", __func__);
+	printf("\n%s\n", __func__);
 	if (scene->camera)
 		return (ERR_DUP_CAM);
 	scene->camera = malloc(sizeof(t_camera));
@@ -47,12 +47,18 @@ int	parse_camera(char *line, t_scene *scene)
 	line = parse_normalized_vector(line, &scene->camera->orientation);
 	if (!line)
 		return (ERR_BAD_ORIENTATION);
+	line = skip_blank(line);
+	line = parse_fov(line, &scene->camera->fov);
+	if (!line)
+		return (ERR_BAD_FOV);
+	if (!check_trash_line(line))
+		return (ERR_TRASH_LINE);
 	return (OK);
 }
 
 int	parse_light(char *line, t_scene *scene)
 {
-	printf("%s\n", __func__);
+	printf("\n%s\n", __func__);
 	if (scene->light)
 		return (ERR_DUP_LIGHT);
 	scene->light = malloc(sizeof(t_light));

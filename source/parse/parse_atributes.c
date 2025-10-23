@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 03:30:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/23 19:37:01 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,19 @@ char	*parse_normalized_vector(char *str, t_coords *result)
 	printf("X -> %f\n", result->x);
 	printf("Y -> %f\n", result->y);
 	printf("Z -> %f\n", result->z);
+	return (str);
+}
+
+char	*parse_fov(char *str, int *result)
+{
+	if (!str)
+		return (NULL);
+	*result = ft_atoi(str);
+	if (*result < 0 || *result > 180)
+		return (NULL);
+	while (*str && (ft_isdigit(*str) || *str == '+' || *str == '-'))
+		++str;
+	printf("===FOV===\n");
+	printf("FOV -> %i\n", *result);
 	return (str);
 }
