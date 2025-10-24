@@ -1,0 +1,130 @@
+===== ./miniRT ./scenes/invalid/double/bad_double3.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Cylinder diameter is not valid.[0m
+RESULT: EXIT 30 -> FAILURE for ./scenes/invalid/double/bad_double3.rt
+
+===== ./miniRT ./scenes/invalid/double/bad_double5.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Cylinder diameter is not valid.[0m
+RESULT: EXIT 30 -> FAILURE for ./scenes/invalid/double/bad_double5.rt
+
+===== ./miniRT ./scenes/invalid/double/bad_double4.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Cylinder diameter is not valid.[0m
+RESULT: EXIT 30 -> FAILURE for ./scenes/invalid/double/bad_double4.rt
+
+===== ./miniRT ./scenes/invalid/double/bad_double2.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Cylinder diameter is not valid.[0m
+RESULT: EXIT 30 -> FAILURE for ./scenes/invalid/double/bad_double2.rt
+
+===== ./miniRT ./scenes/invalid/double/bad_double.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Cylinder diameter is not valid.[0m
+RESULT: EXIT 30 -> FAILURE for ./scenes/invalid/double/bad_double.rt
+
+===== ./miniRT ./scenes/invalid/coords/bad_coords3.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Camera coordinates are not valid.[0m
+RESULT: EXIT 12 -> FAILURE for ./scenes/invalid/coords/bad_coords3.rt
+
+===== ./miniRT ./scenes/invalid/coords/bad_coords5.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Camera coordinates are not valid.[0m
+RESULT: EXIT 12 -> FAILURE for ./scenes/invalid/coords/bad_coords5.rt
+
+===== ./miniRT ./scenes/invalid/coords/bad_coords2.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Camera coordinates are not valid.[0m
+RESULT: EXIT 12 -> FAILURE for ./scenes/invalid/coords/bad_coords2.rt
+
+===== ./miniRT ./scenes/invalid/coords/bad_coords.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Camera coordinates are not valid.[0m
+RESULT: EXIT 12 -> FAILURE for ./scenes/invalid/coords/bad_coords.rt
+
+===== ./miniRT ./scenes/invalid/coords/bad_coords4.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Camera coordinates are not valid.[0m
+RESULT: EXIT 12 -> FAILURE for ./scenes/invalid/coords/bad_coords4.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color4.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient line has invalid values at the end.[0m
+RESULT: EXIT 11 -> FAILURE for ./scenes/invalid/color/bad_color4.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color7.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color7.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color5.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color5.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color3.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color3.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color8.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color8.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color6.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient line has invalid values at the end.[0m
+RESULT: EXIT 11 -> FAILURE for ./scenes/invalid/color/bad_color6.rt
+
+===== ./miniRT ./scenes/invalid/color/bad_color2.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient color is not valid.[0m
+RESULT: EXIT 10 -> FAILURE for ./scenes/invalid/color/bad_color2.rt
+
+===== ./miniRT ./scenes/invalid/other/dup_object.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Duplicated camera.[0m
+RESULT: EXIT 7 -> FAILURE for ./scenes/invalid/other/dup_object.rt
+
+===== ./miniRT ./scenes/invalid/other/bad_id.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Wrong scene object identifier.[0m
+RESULT: EXIT 5 -> FAILURE for ./scenes/invalid/other/bad_id.rt
+
+===== ./miniRT ./scenes/invalid/ratio/bad_ratio.rt =====
+Timestamp: 2025-10-24 06:10:20
+[1;31mError: Ambient ratio is not valid.[0m
+RESULT: EXIT 9 -> FAILURE for ./scenes/invalid/ratio/bad_ratio.rt
+
+===== Summary =====
+Total run: 21
+Failures: 21
+Failed items (path:exit_code):
+ - ./scenes/invalid/double/bad_double3.rt:30
+ - ./scenes/invalid/double/bad_double5.rt:30
+ - ./scenes/invalid/double/bad_double4.rt:30
+ - ./scenes/invalid/double/bad_double2.rt:30
+ - ./scenes/invalid/double/bad_double.rt:30
+ - ./scenes/invalid/coords/bad_coords3.rt:12
+ - ./scenes/invalid/coords/bad_coords5.rt:12
+ - ./scenes/invalid/coords/bad_coords2.rt:12
+ - ./scenes/invalid/coords/bad_coords.rt:12
+ - ./scenes/invalid/coords/bad_coords4.rt:12
+ - ./scenes/invalid/color/bad_color4.rt:11
+ - ./scenes/invalid/color/bad_color7.rt:10
+ - ./scenes/invalid/color/bad_color5.rt:10
+ - ./scenes/invalid/color/bad_color3.rt:10
+ - ./scenes/invalid/color/bad_color.rt:10
+ - ./scenes/invalid/color/bad_color8.rt:10
+ - ./scenes/invalid/color/bad_color6.rt:11
+ - ./scenes/invalid/color/bad_color2.rt:10
+ - ./scenes/invalid/other/dup_object.rt:7
+ - ./scenes/invalid/other/bad_id.rt:5
+ - ./scenes/invalid/ratio/bad_ratio.rt:9
