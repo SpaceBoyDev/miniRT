@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 04:01:08 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 06:18:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ bool	s_to_double(char *str, int *i, double *ret)
 		if (str[*i] == '.' && !is_decimal)
 			is_decimal = true;
 		else if (str[*i] == '.' && is_decimal)
+			return (false);
+		if ((str[*i] == '+' || str[*i] == '-')
+			&& str[*i + 1] && !ft_isdigit(str[*i + 1]))
 			return (false);
 		if (ft_isdigit(str[*i]) && !is_decimal)
 			*ret = (*ret * 10) + (str[*i] - '0');
@@ -125,8 +128,9 @@ char	*read_int_vector(char *str, t_color *result)
 	i = len_int_vector(str);
 
 	vector = malloc(sizeof(char) * (i + 1));
+	if (!vector)
+		return (NULL);
 	ft_strlcpy(vector, str, i + 1);	
-	printf("Vector = %s\n", vector);
 	table = ft_split(vector, ',');
 	if (!table || table_len(table) != 3)
 	{
@@ -151,8 +155,9 @@ char	*read_double_vector(char *str, double *x, double *y, double *z)
 	i = len_double_vector(str);
 
 	vector = malloc(sizeof(char) * (i + 1));
+	if (!vector)
+		return (NULL);
 	ft_strlcpy(vector, str, i + 1);	
-	printf("Vector = %s\n", vector);
 	table = ft_split(vector, ',');
 	if (!table || table_len(table) != 3)
 	{

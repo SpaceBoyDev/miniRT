@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 03:18:19 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 05:56:29 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,10 @@ char	*parse_double(char *str, double *result)
 {
 	if (!str)
 		return (NULL);
-	printf("super Antes -> %s\n", str);
-
 	str = read_double(str, result);
 	if (!str)
 		return (NULL);
-	printf("Antes -> %s\n", str);
 	str = skip_blank(str);
-	printf("Despues -> %s\n", str);
-
 	return (str);
 }
 

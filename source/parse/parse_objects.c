@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:21:49 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 20:34:29 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 06:17:11 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	parse_ambient(char *line, t_scene *scene)
 {
-	printf("\n%s\n", __func__);
 	if (scene->ambient)
 		return (ERR_DUP_AMB);
 	scene->ambient = malloc(sizeof(t_ambient));
+	if (!scene->ambient)
+		return(ERR_ALLOC);
 	++line;
 	line = skip_blank(line);
 	line = parse_ratio(line, &scene->ambient->lighting);
@@ -33,10 +34,11 @@ int	parse_ambient(char *line, t_scene *scene)
 
 int	parse_camera(char *line, t_scene *scene)
 {
-	printf("\n%s\n", __func__);
 	if (scene->camera)
 		return (ERR_DUP_CAM);
 	scene->camera = malloc(sizeof(t_camera));
+	if (!scene->camera)
+		return (ERR_ALLOC);
 	++line;
 	line = skip_blank(line);
 	line = parse_coords(line, &scene->camera->position);
@@ -55,10 +57,11 @@ int	parse_camera(char *line, t_scene *scene)
 
 int	parse_light(char *line, t_scene *scene)
 {
-	printf("\n%s\n", __func__);
 	if (scene->light)
 		return (ERR_DUP_LIGHT);
 	scene->light = malloc(sizeof(t_light));
+	if (!scene->light)
+		return (ERR_ALLOC);
 	++line;
 	line = skip_blank(line);
 	line = parse_coords(line, &scene->light->position);

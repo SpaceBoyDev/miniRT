@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 20:10:43 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 06:12:10 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ struct s_cylinder
 	t_cylinder	*next;
 };
 
-
+void	print_error(t_error error);
 void	exit_error(t_error error, t_scene *scene);
 void	free_table(char **table);
 void	free_scene(t_scene *scene);

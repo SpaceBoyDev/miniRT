@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 20:10:43 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 06:14:52 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ void	print_data(t_scene *scene)
 	}
 }
 
+void test_error_codes()
+{
+	int	i;
+
+	i = -1;
+	while (++i < MAX_ERR_CODE)
+	{
+		printf("Error nº%i\n", i);
+		print_error(i);
+		printf("\n");
+	}
+}
+
 void	init_scene(t_scene *scene)
 {
 	scene->ambient = NULL;
@@ -86,12 +99,12 @@ void	init_scene(t_scene *scene)
 int	main(int argc, char **argv)
 {
 	t_scene	scene;
-
+	test_error_codes();
 	init_scene(&scene);
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
 	exit_error(parse_file(argv[1], &scene), &scene);
-	print_data(&scene);
+	//print_data(&scene);
 	free_scene(&scene);
 	return (OK);
 }

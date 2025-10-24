@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 20:42:20 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 06:16:21 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int	parse_sphere(char *line, t_scene *scene)
 	t_sphere	*sphere;
 
 	sphere = malloc(sizeof(t_sphere));
+	if (!sphere)
+		return (ERR_ALLOC);
 	if (!scene->sphere_list)
 		sphere->next = NULL;
 	else
 		sphere->next = scene->sphere_list;
 	scene->sphere_list = sphere;
 	line += 2;
-	printf("%s\n", __func__);
 	line = skip_blank(line);
 	line = parse_coords(line, &sphere->position);
 	if (!line)
@@ -41,10 +42,11 @@ int	parse_sphere(char *line, t_scene *scene)
 
 int	parse_plane(char *line, t_scene *scene)
 {
-	printf("%s\n", __func__);
 	t_plane	*plane;
 
 	plane = malloc(sizeof(t_plane));
+	if (!plane)
+		return (ERR_ALLOC);
 	if (!scene->plane_list)
 		plane->next = NULL;
 	else
@@ -68,10 +70,11 @@ int	parse_plane(char *line, t_scene *scene)
 
 int	parse_cylinder(char *line, t_scene *scene)
 {
-	printf("%s\n", __func__);
 	t_cylinder	*cylinder;
 
 	cylinder = malloc(sizeof(t_cylinder));
+	if (!cylinder)
+		return (ERR_ALLOC);
 	if (!scene->cylinder_list)
 		cylinder->next = NULL;
 	else
