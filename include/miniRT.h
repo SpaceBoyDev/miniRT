@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 21:53:02 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:05:41 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ struct s_vector3
 struct s_data
 {
 	mlx_t	*mlx;
-	t_scene *scene;
+	t_scene	*scene;
 };
 
 struct s_scene

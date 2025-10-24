@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:21:49 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 06:17:11 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:03:16 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	parse_ambient(char *line, t_scene *scene)
 		return (ERR_DUP_AMB);
 	scene->ambient = malloc(sizeof(t_ambient));
 	if (!scene->ambient)
-		return(ERR_ALLOC);
+		return (ERR_ALLOC);
 	++line;
 	line = skip_blank(line);
 	line = parse_ratio(line, &scene->ambient->lighting);

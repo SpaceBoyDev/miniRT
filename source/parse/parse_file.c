@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/22 21:01:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:02:57 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	finish_free_gnl(char *line, int fd)
 {
 	if (!line)
 		return ;
-
 	while (line)
 	{
 		free(line);
