@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:05:41 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:25:45 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include "../libs/libft/libft.h"
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
-# define WIDTH		512
-# define HEIGHT		512
+// MLX Window
+# define WIN_WIDTH	512
+# define WIN_HEIGHT	512
+# define WIN_NAME	"MiniRT"
 
 // Defines for objects IDs
 # define ID_AMBIENT	"A "
@@ -87,6 +89,8 @@ enum e_error
 	ERR_CYL_HEIGHT,
 	ERR_CYL_COLOR,
 	ERR_CYL_TRASH,
+	ERR_MLX_INIT,
+	ERR_MLX_HOOK,
 	MAX_ERR_CODE,
 };
 

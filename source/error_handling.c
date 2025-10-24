@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 20:49:38 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:26:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static const char	*g_message[MAX_ERR_CODE] = {
 	"Cylinder height is not valid.",
 	"Cylinder color is not valid.",
 	"Cylinder line has invalid values at the end.",
+	"MLX failed to initialize.",
+	"MLX failed to add hook.",
 };
 
 void	free_table(char **table)

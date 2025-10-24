@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 07:26:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 22:27:56 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdbool.h>
 #include "../include/miniRT.h"
 #include "../include/parse.h"
+#include "../include/mlx.h"
 
 void	print_data(t_scene *scene)
 {
@@ -98,13 +99,16 @@ void	init_scene(t_scene *scene)
 
 int	main(int argc, char **argv)
 {
-	t_scene	scene;
+	t_data	data;
+	t_scene scene;
 
+	(void)data;
+	data.scene = &scene;
 	init_scene(&scene);
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
 	exit_error(parse_file(argv[1], &scene), &scene);
-	//print_data(&scene);
+	exit_error(initialize_mlx(&data), &scene);
 	free_scene(&scene);
 	return (OK);
 }
