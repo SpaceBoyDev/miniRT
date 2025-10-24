@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:48:25 by dario             #+#    #+#             */
-/*   Updated: 2025/10/23 19:18:35 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 04:01:08 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,41 @@ double	check_double_sign(char *str, double *result)
 	return (*result);
 }
 
+bool	s_to_double(char *str, int *i, double *ret)
+{
+	bool	is_decimal;
+	double	decimal;
+
+	is_decimal = false;
+	decimal = 1;
+	while (str[++*i] && str[*i] != ' ')
+	{
+		if (str[*i] == '.' && !is_decimal)
+			is_decimal = true;
+		else if (str[*i] == '.' && is_decimal)
+			return (false);
+		if (ft_isdigit(str[*i]) && !is_decimal)
+			*ret = (*ret * 10) + (str[*i] - '0');
+		else if (ft_isdigit(str[*i]) && is_decimal)
+		{
+			decimal /= 10;
+			*ret += ((str[*i] - '0') * decimal);
+		}
+	}
+	return (true);
+}
+
 char	*read_double(char *str, double *result)
 {
 	int		i;
-	bool	is_decimal;
-	double	decimal;
 	double	ret;
 
 	i = -1;
-	is_decimal = false;
-	decimal = 1;
 	ret = 0;
-	while (str[++i] && str[i] != ' ')
-	{
-		if (str[i] == '.' && !is_decimal)
-			is_decimal = true;
-		else if (str[i] == '.' && is_decimal)
-			return (NULL);
-		if (ft_isdigit(str[i]) && !is_decimal)
-			ret = (ret * 10) + (str[i] - '0');
-		else if (ft_isdigit(str[i]) && is_decimal)
-		{
-			decimal /= 10;
-			ret += ((str[i] - '0') * decimal);
-		}
-	}
+	if (!s_to_double(str, &i, &ret))
+		return (NULL);
+	if (str[i - 1] && !ft_isdigit(str[i - 1]))
+		return (NULL);
 	*result = check_double_sign(str, &ret);
 	return (&str[i]);
 }
