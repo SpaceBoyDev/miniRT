@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 06:12:10 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 21:53:02 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_color		t_color;
 typedef struct s_vector3	t_vector3;
 typedef struct s_vector3	t_coords;
 
+// Typedef data
+typedef struct s_data		t_data;
+
 // Typedef scene
 typedef struct s_scene		t_scene;
 
@@ -43,7 +46,7 @@ typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
 
-// Typedef Geometry
+// Typedef Scene Geometry
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
@@ -99,6 +102,12 @@ struct s_vector3
 	double	x;
 	double	y;
 	double	z;
+};
+
+struct s_data
+{
+	mlx_t	*mlx;
+	t_scene *scene;
 };
 
 struct s_scene

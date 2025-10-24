@@ -38,9 +38,9 @@ SRC			+=	parse_atributes.c \
 				parse_objects.c \
 				parse_utils.c \
 				parse_vars.c \
+				parse_vector_atributes.c \
+				parse_vector_vars.c \
 				read_scene.c 
-
-BUILTINS	=	
 
 # SRCS		=	$(addprefix source/, $(SRC))
 

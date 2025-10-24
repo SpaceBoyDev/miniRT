@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 06:14:52 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/24 07:26:05 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	init_scene(t_scene *scene)
 int	main(int argc, char **argv)
 {
 	t_scene	scene;
-	test_error_codes();
+
 	init_scene(&scene);
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
