@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 20:39:23 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/25 21:18:37 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ struct s_vector3
 
 struct s_ray
 {
-	t_coords	position;
-	t_vec3	orientation;
+	t_coords	origin;
+	t_vec3		direction;
 };
 
 struct s_data
