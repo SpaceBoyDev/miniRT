@@ -45,6 +45,9 @@ SRC			+=	parse_atributes.c \
 				parse_vector_atributes.c \
 				parse_vector_vars.c
 
+# Render
+SRC			+=	render.c
+
 # SRCS		=	$(addprefix source/, $(SRC))
 
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

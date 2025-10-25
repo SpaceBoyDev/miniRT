@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:26:59 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/25 18:10:36 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static const char	*g_message[MAX_ERR_CODE] = {
 	"Cylinder line has invalid values at the end.",
 	"MLX failed to initialize.",
 	"MLX failed to add hook.",
+	"MLX failed to create image.",
+	"MLX failed to render the image to the window.",
 };
 
 void	free_table(char **table)

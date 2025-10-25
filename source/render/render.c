@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 19:01:45 by dario            ###   ########.fr       */
+/*   Created: 2025/10/25 17:46:01 by dario             #+#    #+#             */
+/*   Updated: 2025/10/25 19:06:52 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/mlx.h"
 #include "../../include/render.h"
 
-void	close_window_hook(void *param)
+int	render(t_data *data)
 {
-	t_data	*data;
+	uint32_t	i;
+	uint32_t	j;
+	uint32_t	color;
 
-	data = (t_data *)param;
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+	color = 475983279;
+
+	i = 0;
+	while (i < WIN_WIDTH)
 	{
-		mlx_close_window(data->mlx);
-		// mlx_terminate(mlx); COMENTADO POR AHORA PORQUE CAUSA SEGFAULT ??
+		j = 0;
+		while (j < WIN_HEIGHT)
+		{
+			mlx_put_pixel(data->img, i, j, color);
+			++j;
+		}
+		++i;
 	}
-}
 
-void	render_hook(void *param)
-{
-	t_data	*data;
-
-	data = (t_data *)param;
-	render(data);
-	mlx_image_to_window(data->mlx, data->img, 0, 0);
+	return (OK);
 }

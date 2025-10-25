@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:25:45 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/25 18:10:57 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ enum e_error
 	ERR_CYL_TRASH,
 	ERR_MLX_INIT,
 	ERR_MLX_HOOK,
+	ERR_MLX_IMG,
+	ERR_MLX_IMG_TO_WIN,
 	MAX_ERR_CODE,
 };
 
@@ -110,8 +112,9 @@ struct s_vector3
 
 struct s_data
 {
-	mlx_t	*mlx;
-	t_scene	*scene;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_scene		*scene;
 };
 
 struct s_scene
