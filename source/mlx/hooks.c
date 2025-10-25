@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 19:01:45 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/25 20:00:45 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	render_hook(void *param)
 	data = (t_data *)param;
 	render(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
+	
 }

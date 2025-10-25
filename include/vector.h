@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 20:26:04 by dario            ###   ########.fr       */
+/*   Created: 2025/10/25 20:27:31 by dario             #+#    #+#             */
+/*   Updated: 2025/10/25 21:02:09 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
 # include "miniRT.h"
 # include <math.h>
 
-#ifndef M_PI
-# define M_PI 3.14159265358979323846
-#endif
-
-int	render(t_data *data);
+t_vec3	vec3(double x, double y, double z);
+t_vec3	vec3_add(t_vec3 a, t_vec3 b);
+t_vec3	vec3_sub(t_vec3 a, t_vec3 b);
+t_vec3	vec3_scale(t_vec3 v3, double scale);
+double	vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
+double	vec3_magnitude(t_vec3 vec3);
+t_vec3	vec3_normalize(t_vec3 v3);
 
 #endif

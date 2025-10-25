@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 18:10:57 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/25 20:39:23 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ typedef enum e_error		t_error;
 
 // Typedef special atributes
 typedef struct s_color		t_color;
-typedef struct s_vector3	t_vector3;
+typedef struct s_vector3	t_vec3;
 typedef struct s_vector3	t_coords;
+
+//Typedef ray
+typedef struct s_ray		t_ray;
 
 // Typedef data
 typedef struct s_data		t_data;
@@ -110,6 +113,12 @@ struct s_vector3
 	double	z;
 };
 
+struct s_ray
+{
+	t_coords	position;
+	t_vec3	orientation;
+};
+
 struct s_data
 {
 	mlx_t		*mlx;
@@ -136,7 +145,7 @@ struct s_ambient
 struct s_camera
 {
 	t_coords	position;
-	t_vector3	orientation;
+	t_vec3	orientation;
 	int			fov;
 };
 
@@ -158,7 +167,7 @@ struct s_sphere
 struct s_plane
 {
 	t_coords	position;
-	t_vector3	normal;
+	t_vec3	normal;
 	t_color		color;
 	t_plane		*next;
 };
@@ -166,7 +175,7 @@ struct s_plane
 struct s_cylinder
 {
 	t_coords	position;
-	t_vector3	axis;
+	t_vec3	axis;
 	double		diameter;
 	double		height;
 	t_color		color;

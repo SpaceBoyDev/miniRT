@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 20:26:04 by dario            ###   ########.fr       */
+/*   Created: 2025/10/25 20:27:18 by dario             #+#    #+#             */
+/*   Updated: 2025/10/25 21:02:22 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#include "../../include/vector.h"
 
-# include "miniRT.h"
-# include <math.h>
+t_vec3	vec3(double x, double y, double z)
+{
+	return ((t_vec3){x, y, z});
+}
 
-#ifndef M_PI
-# define M_PI 3.14159265358979323846
-#endif
+t_vec3	vec3_add(t_vec3 a, t_vec3 b)
+{
+	return (vec3(a.x + b.x, a.y + b.y, a.z + b.z));
+}
 
-int	render(t_data *data);
+t_vec3	vec3_sub(t_vec3 a, t_vec3 b)
+{
+	return (vec3(a.x - b.x, a.y - b.y, a.z - b.z));
+}
 
-#endif
+t_vec3	vec3_scale(t_vec3 v3, double scale)
+{
+	return (vec3(v3.x * scale, v3.y * scale, v3.z * scale));
+}

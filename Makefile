@@ -27,6 +27,7 @@ VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				mlx\
 				parse\
 				render\
+				vector\
 				)
 
 SRC			=	main.c error_handling.c
@@ -47,6 +48,10 @@ SRC			+=	parse_atributes.c \
 
 # Render
 SRC			+=	render.c
+
+# Vector
+SRC			+=	vector.c\
+				vector2.c
 
 # SRCS		=	$(addprefix source/, $(SRC))
 
