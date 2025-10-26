@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:17:45 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 19:03:24 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/26 20:31:02 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	initialize_mlx(t_data *data)
 	if (!data->img)
 		return (ERR_MLX_IMG);
 	if (!mlx_loop_hook(data->mlx, &render_hook, data))
+		return (ERR_MLX_HOOK);
+	if (!mlx_loop_hook(data->mlx, &move_cam_hook, data))
+		return (ERR_MLX_HOOK);
+	if (!mlx_loop_hook(data->mlx, &look_cam_hook, data))
 		return (ERR_MLX_HOOK);
 	if (!mlx_loop_hook(data->mlx, &close_window_hook, data))
 		return (ERR_MLX_HOOK);
