@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 19:00:13 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 20:34:05 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
 // MLX Window
-# define WIN_WIDTH	400
-# define WIN_HEIGHT	400
+# define WIN_WIDTH	300
+# define WIN_HEIGHT	300
 # define WIN_NAME	"MiniRT"
 
 // Defines for objects IDs
@@ -132,7 +132,8 @@ struct s_hit
 	double	distance;
 	t_vec3	hit_point;
 	t_vec3	normal;
-	t_color	hit_color;
+	t_color	color;
+	t_obj	*hit_obj;
 };
 
 struct s_data

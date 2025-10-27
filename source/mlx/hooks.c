@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/26 23:48:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 20:05:10 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ void	move_cam_hook(void *param)
 		pos->x -= (right.x / rlen) * speed;
 		pos->y -= (right.y / rlen) * speed;
 		pos->z -= (right.z / rlen) * speed;
+	}
+	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+	{
+		--pos->y;
+	}
+	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
+	{
+		++pos->y;
 	}
 }
 
@@ -228,5 +236,4 @@ void	render_hook(void *param)
 	data = (t_data *)param;
 	render(data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	
 }

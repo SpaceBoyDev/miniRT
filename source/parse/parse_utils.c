@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:14:52 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 19:20:52 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 20:56:26 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ void	*init_obj(t_scene *scene, t_id id)
 		return (NULL);
 	new_obj->id = id;
 	new_obj->geo = new_geo;
+	new_obj->next = NULL;
 	if (!scene->objs)
 		new_obj->next = NULL;
 	else
-	{
 		new_obj->next = scene->objs;
-	}
 	scene->objs = new_obj;
 	return (new_geo);
 }

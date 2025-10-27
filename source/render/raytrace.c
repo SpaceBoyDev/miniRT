@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:52:14 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 21:34:52 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,45 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	return (t_ray){cam->position, dir};
 }
 
-t_color	trace_ray(t_ray *ray, t_scene *scene)
+t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
 {
-	double	t_min;
-	t_obj	*current;
-	void	*hit;
-	t_hit	ray_hit;
+	t_obj	*closest = NULL;
+	t_obj	*obj;
+	t_hit	hit;
+	double	closest_dist = INFINITY;
 
-	t_min = INFINITY;
-	hit = NULL;
-	current = scene->objs;
-	while (current)
+	hit.distance = 0;
+	hit.did_hit = false;
+	if (!scene || !scene->objs)
+		return (NULL);
+	obj = scene->objs;
+	while (obj)
 	{
-		if (current->id == SPHERE)
-			ray_hit = hit_sphere((t_sphere *)current->geo, ray);
-		if (ray_hit.did_hit && ray_hit.distance < t_min)
+		if (obj->id == SPHERE)
 		{
-			t_min = ray_hit.distance;
-			hit = current;
+			hit = hit_sphere(obj, (t_sphere *)obj->geo, ray);
+			if (hit.did_hit)
+			{
+				if (hit.distance > 0 && hit.distance < closest_dist)
+				{
+					closest_dist = hit.distance;
+					closest = obj;
+				}
+			}
 		}
-		current = current->next;
+		obj = obj->next;
 	}
 
-	if (hit)
-		return (ray_hit.hit_color);
+	return (closest);
+}
+
+t_color	trace_ray(t_ray *ray, t_scene *scene)
+{
+	t_obj	*closest_obj;
+
+	closest_obj = get_closest_obj(ray, scene);
+	if (closest_obj && closest_obj->id == SPHERE)
+		return (((t_sphere *)(closest_obj->geo))->color);
 	else
-		return ((t_color){0, 0, 0});
+		return (scene->ambient->color);
 }
