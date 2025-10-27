@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:01 by dario             #+#    #+#             */
-/*   Updated: 2025/10/26 20:50:38 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 13:34:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,52 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	double px = (2 * ((x + 0.5) / (double)width) - 1) * aspect_ratio * fov_adjust;
 	double py = (1 - 2 * ((y + 0.5) / (double)height)) * fov_adjust;
 
-	t_vec3 dir = vec3_normalize((t_vec3){-px, -py, -1});
+	/* camera basis from cam->orientation */
+	t_vec3 forward = vec3_normalize(cam->orientation);
+	t_vec3 world_up = (fabs(forward.y) > 0.999) ? (t_vec3){0, 0, 1} : (t_vec3){0, 1, 0};
+	t_vec3 right = vec3_normalize(vec3_cross(forward, world_up));
+	t_vec3 up = vec3_cross(right, forward);
+
+	/* camera-space direction (matches previous convention: -px, -py, -1) */
+	t_vec3 cam_dir = (t_vec3){-px, -py, -1.0};
+	t_vec3 dir = vec3_normalize(
+		vec3_add(
+			vec3_add(vec3_scale(right, cam_dir.x), vec3_scale(up, cam_dir.y)),
+			vec3_scale(forward, cam_dir.z)
+		)
+	);
+
 	return (t_ray){cam->position, dir};
 }
 
-bool	hit_sphere(t_sphere *s, t_ray *r, double *t)
+t_hit	hit_sphere(t_sphere *s, t_ray *r)
 {
-	t_vec3 oc = vec3_add(r->origin, s->position);
-	double a = vec3_dot(r->direction, r->direction);
-	double b = 2.0 * vec3_dot(oc, r->direction);
-	double c = vec3_dot(oc, oc) - (s->diameter/2) * (s->diameter/2);
-	double discriminant = b*b - 4*a*c;
+	t_hit	hit;
+	t_vec3	offset;
+	double	a;
+	double	b; 
+	double	c;
+	double	discriminant;
+	double	dst;
 
-	if (discriminant < 0)
-		return false;
-	else
+	offset = vec3_add(r->origin, s->position);
+	a = vec3_dot(r->direction, r->direction);
+	b = 2 * vec3_dot(offset, r->direction);
+	c = vec3_dot(offset, offset) - pow(s->diameter/2, 2);
+	discriminant = b * b - 4 * a * c;
+
+	if (discriminant >= 0)
 	{
-		double t0 = (-b - sqrt(discriminant)) / (2.0 * a);
-		double t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-		*t = (t0 < t1) ? t0 : t1;
-		return true;
+		dst = (-b - sqrt(discriminant)) / (2.0 * a);
+		if (dst >= 0)
+		{
+			hit.did_hit = true;
+			hit.distance = dst;
+			hit.hit_point = vec3_scale(vec3_add(r->origin, r->direction), dst);
+			hit.normal = vec3_normalize(vec3_sub(hit.hit_point, s->position));
+		}
 	}
+	return (hit);
 }
 
 t_color	trace_ray(t_ray *ray, t_scene *scene)
@@ -49,14 +74,15 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	double t_min = INFINITY;
 	t_sphere	*current;
 	t_sphere *hit = NULL;
+	t_hit	ray_hit;
 
 	current = scene->sphere_list;
 	while (current)
 	{
-		double t;
-		if (hit_sphere(current, ray, &t) && t < t_min && t > 0)
+		ray_hit = hit_sphere(current, ray);
+		if (ray_hit.did_hit && ray_hit.distance < t_min)
 		{
-			t_min = t;
+			t_min = ray_hit.distance;
 			hit = current;
 		}
 		current = current->next;

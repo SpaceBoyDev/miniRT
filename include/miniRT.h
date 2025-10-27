@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/26 19:58:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 13:14:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
 // MLX Window
-# define WIN_WIDTH	1080
-# define WIN_HEIGHT	720
+# define WIN_WIDTH	400
+# define WIN_HEIGHT	400
 # define WIN_NAME	"MiniRT"
 
 // Defines for objects IDs
@@ -39,6 +39,7 @@ typedef struct s_vector3	t_coords;
 
 //Typedef ray
 typedef struct s_ray		t_ray;
+typedef struct s_hit		t_hit;
 
 // Typedef data
 typedef struct s_data		t_data;
@@ -117,6 +118,14 @@ struct s_ray
 {
 	t_coords	origin;
 	t_vec3		direction;
+};
+
+struct s_hit
+{
+	bool	did_hit;
+	double	distance;
+	t_vec3	hit_point;
+	t_vec3	normal;
 };
 
 struct s_data
