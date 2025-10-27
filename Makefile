@@ -47,7 +47,10 @@ SRC			+=	parse_atributes.c \
 				parse_vector_vars.c
 
 # Render
-SRC			+=	render.c
+SRC			+=	raytrace.c \
+				render_sphere.c \
+				render_utils.c \
+				render.c
 
 # Vector
 SRC			+=	vector.c\
