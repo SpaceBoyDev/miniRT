@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 18:10:36 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 18:48:58 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,12 @@ void	free_geometry(t_scene *scene)
 {
 	void	*next;
 
-	while (scene->sphere_list)
+	while (scene->objs)
 	{
-		next = scene->sphere_list->next;
-		free(scene->sphere_list);
-		scene->sphere_list = next;
-	}
-	while (scene->plane_list)
-	{
-		next = scene->plane_list->next;
-		free(scene->plane_list);
-		scene->plane_list = next;
-	}
-	while (scene->cylinder_list)
-	{
-		next = scene->cylinder_list->next;
-		free(scene->cylinder_list);
-		scene->cylinder_list = next;
+		next = scene->objs->next;
+		free(scene->objs->geo);
+		free(scene->objs);
+		scene->objs = next;
 	}
 }
 

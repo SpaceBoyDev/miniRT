@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:19:07 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 19:00:13 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef enum e_geometry_id	t_id;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
+
+// Typedef Object
+typedef struct s_obj		t_obj;
 
 // Typedef Scene Geometry
 typedef struct s_sphere		t_sphere;
@@ -144,9 +147,7 @@ struct s_scene
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
-	t_sphere	*sphere_list;
-	t_plane		*plane_list;
-	t_cylinder	*cylinder_list;
+	t_obj		*objs;
 };
 
 struct s_ambient
@@ -158,7 +159,7 @@ struct s_ambient
 struct s_camera
 {
 	t_coords	position;
-	t_vec3	orientation;
+	t_vec3		orientation;
 	int			fov;
 };
 
@@ -176,20 +177,25 @@ enum e_geometry_id
 	CYLINDER,
 };
 
+struct s_obj
+{
+	t_id	id;
+	void	*geo;
+	t_obj	*next;
+};
+
 struct s_sphere
 {
 	t_coords	position;
 	double		diameter;
 	t_color		color;
-	t_sphere	*next;
 };
 
 struct s_plane
 {
 	t_coords	position;
-	t_vec3	normal;
+	t_vec3		normal;
 	t_color		color;
-	t_plane		*next;
 };
 
 struct s_cylinder
@@ -199,7 +205,6 @@ struct s_cylinder
 	double		diameter;
 	double		height;
 	t_color		color;
-	t_cylinder	*next;
 };
 
 void	print_error(t_error error);

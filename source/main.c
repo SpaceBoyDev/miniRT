@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:27:56 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 19:24:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,36 @@ void	print_data(t_scene *scene)
 		printf("Coords %f %f %f\n", scene->light->position.x, scene->light->position.y, scene->light->position.z);
 		printf("Ratio %f\n", scene->light->brightness);
 	}
-	t_plane *plane = scene->plane_list;
-	while (plane)
+	t_obj	*obj = scene->objs;
+	while (obj)
 	{
-		printf("\n\tPLANE\n");
-		printf("Coords %f %f %f\n", plane->position.x, plane->position.y, plane->position.z);
-		printf("Normal %f %f %f\n", plane->normal.x, plane->normal.y, plane->normal.z);
-		printf("Color %i %i %i\n", plane->color.r, plane->color.g, plane->color.b);
-		plane = plane->next;
-	}
-	t_sphere *sphere = scene->sphere_list;
-	while (sphere)
-	{
-		printf("\n\tSPHERE\n");
-		printf("Coords %f %f %f\n", sphere->position.x, sphere->position.y, sphere->position.z);
-		printf("Diameter %f\n", sphere->diameter);
-		printf("Color %i %i %i\n", sphere->color.r, sphere->color.g, sphere->color.b);
-		sphere = sphere->next;
-	}
-	t_cylinder *cylinder = scene->cylinder_list;
-	while (cylinder)
-	{
-		printf("\n\tCYLINDER\n");
-		printf("Coords %f %f %f\n", cylinder->position.x, cylinder->position.y, cylinder->position.z);
-		printf("Axis %f %f %f\n", cylinder->axis.x, cylinder->axis.y, cylinder->axis.z);
-		printf("Diameter %f\n", cylinder->diameter);
-		printf("Height %f\n", cylinder->height);
-		printf("Color %i %i %i\n", cylinder->color.r, cylinder->color.g, cylinder->color.b);
-		cylinder = cylinder->next;
+		if (obj->id == SPHERE)
+		{
+			t_sphere *sphere = (t_sphere *)obj->geo; 
+			printf("\n\tSPHERE\n");
+			printf("Coords %f %f %f\n", sphere->position.x, sphere->position.y, sphere->position.z);
+			printf("Diameter %f\n", sphere->diameter);
+			printf("Color %i %i %i\n", sphere->color.r, sphere->color.g, sphere->color.b);
+		}
+		else if (obj->id == PLANE)
+		{
+			t_plane *plane = (t_plane *)obj->geo;
+			printf("\n\tPLANE\n");
+			printf("Coords %f %f %f\n", plane->position.x, plane->position.y, plane->position.z);
+			printf("Normal %f %f %f\n", plane->normal.x, plane->normal.y, plane->normal.z);
+			printf("Color %i %i %i\n", plane->color.r, plane->color.g, plane->color.b);
+		}
+		else if (obj->id == CYLINDER)
+		{
+			t_cylinder *cylinder = (t_cylinder *)obj->geo;
+			printf("\n\tCYLINDER\n");
+			printf("Coords %f %f %f\n", cylinder->position.x, cylinder->position.y, cylinder->position.z);
+			printf("Axis %f %f %f\n", cylinder->axis.x, cylinder->axis.y, cylinder->axis.z);
+			printf("Diameter %f\n", cylinder->diameter);
+			printf("Height %f\n", cylinder->height);
+			printf("Color %i %i %i\n", cylinder->color.r, cylinder->color.g, cylinder->color.b);
+		}
+		obj = obj->next;
 	}
 }
 
@@ -92,9 +94,7 @@ void	init_scene(t_scene *scene)
 	scene->ambient = NULL;
 	scene->camera = NULL;
 	scene->light = NULL;
-	scene->sphere_list = NULL;
-	scene->plane_list = NULL;
-	scene->cylinder_list = NULL;
+	scene->objs = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -108,6 +108,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
 	exit_error(parse_file(argv[1], &scene), &scene);
+	print_data(data.scene);
 	exit_error(initialize_mlx(&data), &scene);
 	free_scene(&scene);
 	return (OK);

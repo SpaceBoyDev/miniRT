@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 17:42:23 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 18:52:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,46 +37,20 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	return (t_ray){cam->position, dir};
 }
 
-t_hit	bounce_ray(t_hit last_hit, t_scene *scene)
-{
-	double		t_min;
-	t_sphere	*current;
-	t_sphere	*hit;
-	t_hit		ray_hit;
-	t_ray		ray;
-
-	ray.origin = last_hit.hit_point;
-	ray.direction = vec3_sub(scene->light->position, last_hit.hit_point);
-	(void)hit;
-	t_min = INFINITY;
-	hit = NULL;
-	current = scene->sphere_list;
-	while (current)
-	{
-		ray_hit = hit_sphere(current, &ray);
-		if (ray_hit.did_hit && ray_hit.distance < t_min)
-		{
-			t_min = ray_hit.distance;
-			hit = current;
-		}
-		current = current->next;
-	}
-	return (ray_hit);
-}
-
 t_color	trace_ray(t_ray *ray, t_scene *scene)
 {
-	double		t_min;
-	t_sphere	*current;
-	t_sphere	*hit;
-	t_hit		ray_hit;
+	double	t_min;
+	t_obj	*current;
+	void	*hit;
+	t_hit	ray_hit;
 
 	t_min = INFINITY;
 	hit = NULL;
-	current = scene->sphere_list;
+	current = scene->objs;
 	while (current)
 	{
-		ray_hit = hit_sphere(current, ray);
+		if (current->id == SPHERE)
+			ray_hit = hit_sphere((t_sphere *)current->geo, ray);
 		if (ray_hit.did_hit && ray_hit.distance < t_min)
 		{
 			t_min = ray_hit.distance;
@@ -86,7 +60,7 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	}
 
 	if (hit)
-		return (hit->color);
+		return (ray_hit.hit_color);
 	else
 		return ((t_color){0, 0, 0});
 }

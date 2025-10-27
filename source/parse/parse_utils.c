@@ -6,11 +6,64 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:14:52 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:07:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 19:20:52 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
+
+	// t_sphere	*sphere;
+
+	// sphere = malloc(sizeof(t_sphere));
+	// if (!sphere)
+	// 	return (ERR_ALLOC);
+
+	// if (!scene->objs)
+	// 	scene->objs->next = NULL;
+	// else
+	// 	sphere->next = scene->sphere_list;
+	// scene->sphere_list = sphere;
+
+
+	// 	t_sphere	*sphere;
+
+	// sphere = malloc(sizeof(t_sphere));
+	// if (!sphere)
+	// 	return (ERR_ALLOC);
+
+	// if (!scene->sphere_list)
+	// 	sphere->next = NULL;
+	// else
+	// 	sphere->next = scene->sphere_list;
+	// scene->sphere_list = sphere;
+
+void	*init_obj(t_scene *scene, t_id id)
+{
+	t_obj	*new_obj;
+	void	*new_geo;
+
+	new_obj = malloc(sizeof(t_obj));
+	if (id == SPHERE)
+		new_geo = malloc(sizeof(t_sphere));
+	else if (id == PLANE)
+		new_geo = malloc(sizeof(t_plane));
+	else if (id == CYLINDER)
+		new_geo = malloc(sizeof(t_cylinder));
+	else
+		return (NULL);
+	if (!new_geo || !new_obj)
+		return (NULL);
+	new_obj->id = id;
+	new_obj->geo = new_geo;
+	if (!scene->objs)
+		new_obj->next = NULL;
+	else
+	{
+		new_obj->next = scene->objs;
+	}
+	scene->objs = new_obj;
+	return (new_geo);
+}
 
 char	*skip_blank(char *str)
 {

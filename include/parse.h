@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 21:59:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 18:41:58 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		parse_camera(char *line, t_scene *scene);
 int		parse_light(char *line, t_scene *scene);
 
 // parse_utils.c
+void	*init_obj(t_scene *scene, t_id id);
 char	*skip_blank(char *str);
 int		table_len(char **table);
 bool	is_number(char *str);
