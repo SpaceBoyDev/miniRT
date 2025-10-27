@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 13:14:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 18:19:07 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_data		t_data;
 
 // Typedef scene
 typedef struct s_scene		t_scene;
+
+// Typedef ENUM Geometry ID
+typedef enum e_geometry_id	t_id;
 
 // Typedef Scene Objects
 typedef struct s_ambient	t_ambient;
@@ -126,6 +129,7 @@ struct s_hit
 	double	distance;
 	t_vec3	hit_point;
 	t_vec3	normal;
+	t_color	hit_color;
 };
 
 struct s_data
@@ -163,6 +167,13 @@ struct s_light
 	t_coords	position;
 	double		brightness;
 	t_color		color;
+};
+
+enum e_geometry_id
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
 };
 
 struct s_sphere

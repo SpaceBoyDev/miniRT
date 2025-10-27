@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:27:18 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 13:25:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/27 18:10:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,10 @@ t_vec3	vec3_sub(t_vec3 a, t_vec3 b)
 t_vec3	vec3_scale(t_vec3 v3, double scale)
 {
 	return (vec3(v3.x * scale, v3.y * scale, v3.z * scale));
+}
+
+// División de un double a un vector. a * b
+t_vec3	vec3_div(t_vec3 v3, double scale)
+{
+	return (vec3(v3.x / scale, v3.y / scale, v3.z / scale));
 }
