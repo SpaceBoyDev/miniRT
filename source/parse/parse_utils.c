@@ -6,36 +6,11 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:14:52 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 20:56:26 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 20:55:56 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
-
-	// t_sphere	*sphere;
-
-	// sphere = malloc(sizeof(t_sphere));
-	// if (!sphere)
-	// 	return (ERR_ALLOC);
-
-	// if (!scene->objs)
-	// 	scene->objs->next = NULL;
-	// else
-	// 	sphere->next = scene->sphere_list;
-	// scene->sphere_list = sphere;
-
-
-	// 	t_sphere	*sphere;
-
-	// sphere = malloc(sizeof(t_sphere));
-	// if (!sphere)
-	// 	return (ERR_ALLOC);
-
-	// if (!scene->sphere_list)
-	// 	sphere->next = NULL;
-	// else
-	// 	sphere->next = scene->sphere_list;
-	// scene->sphere_list = sphere;
 
 void	*init_obj(t_scene *scene, t_id id)
 {

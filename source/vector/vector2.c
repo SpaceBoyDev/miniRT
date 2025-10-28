@@ -6,17 +6,19 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:27:18 by dario             #+#    #+#             */
-/*   Updated: 2025/10/25 21:02:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 21:01:22 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/vector.h"
 
+// Producto escalar de dos vectores
 double	vec3_dot(t_vec3 a, t_vec3 b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
+// Producto vectorial de dos vectores
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 {
 	return (vec3(a.y * b.z - a.z * b.y,
@@ -24,11 +26,13 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 			a.x * b.y - a.y * b.x));
 }
 
+// Magnitud de un vector
 double	vec3_magnitude(t_vec3 vec3)
 {
 	return (sqrt(pow(vec3.x, 2) + pow(vec3.y, 2) + pow(vec3.z, 2)));
 }
 
+// Devuelve el vector normalizado
 t_vec3	vec3_normalize(t_vec3 v3)
 {
 	return (vec3_scale(v3, 1 / vec3_magnitude(v3)));

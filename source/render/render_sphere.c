@@ -6,34 +6,12 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:04:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 21:00:15 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 20:58:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/render.h"
 #include "../../include/vector.h"
-
-// t_sphere	*check_spheres(t_ray *ray, t_hit *ray_hit, t_scene *scene)
-// {
-// 	double		t_min;
-// 	t_sphere	*current;
-// 	t_sphere	*hit;
-
-// 	t_min = INFINITY;
-// 	hit = NULL;
-// 	current = scene->sphere_list;
-// 	while (current)
-// 	{
-// 		*ray_hit = hit_sphere(current, ray);
-// 		if (ray_hit->did_hit && ray_hit->distance < t_min)
-// 		{
-// 			t_min = ray_hit->distance;
-// 			hit = current;
-// 		}
-// 		current = current->next;
-// 	}
-// 	return (hit);
-// }
 
 t_hit	hit_sphere(t_obj *obj, t_sphere *s, t_ray *r)
 {

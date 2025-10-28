@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 20:34:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 21:01:32 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
 // MLX Window
-# define WIN_WIDTH	300
-# define WIN_HEIGHT	300
+# define WIN_WIDTH	600
+# define WIN_HEIGHT	600
 # define WIN_NAME	"MiniRT"
 
 // Defines for objects IDs

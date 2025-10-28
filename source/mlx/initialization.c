@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:17:45 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 19:28:15 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 00:54:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	initialize_mlx(t_data *data)
 {
-	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, WIN_NAME, true);
+	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, WIN_NAME, false);
 	if (!data->mlx)
 		return (ERR_MLX_INIT);
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);

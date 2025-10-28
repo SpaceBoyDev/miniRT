@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 21:34:52 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 20:58:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,9 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	t_vec3 up = vec3_cross(right, forward);
 
 	t_vec3 cam_dir = (t_vec3){-px, -py, -1.0};
-	t_vec3 dir = vec3_normalize(
-		vec3_add(
-			vec3_add(vec3_scale(right, cam_dir.x), vec3_scale(up, cam_dir.y)),
-			vec3_scale(forward, cam_dir.z)
-		)
-	);
+	t_vec3 dir = vec3_normalize(vec3_add(vec3_add(vec3_scale(right, cam_dir.x),
+			vec3_scale(up, cam_dir.y)),
+			vec3_scale(forward, cam_dir.z)));
 
 	return (t_ray){cam->position, dir};
 }

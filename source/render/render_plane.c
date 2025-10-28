@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 17:42:28 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:16:04 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 20:59:17 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,5 @@ t_hit	hit_plane(t_plane *p, t_ray *r)
 	hit.distance = dst;
 	//hit.hit_point =
 	hit.normal = p->normal;
-	return (hit);
-}
-
-t_sphere	*check_planes(t_ray *ray, t_hit *ray_hit, t_scene *scene)
-{
-	double		t_min;
-	t_plane		*current;
-	t_plane		*hit;
-
-	t_min = INFINITY;
-	hit = NULL;
-	current = scene->plane_list;
-	while (current)
-	{
-		*ray_hit = hit_plane(current, ray);
-		if (ray_hit->did_hit && ray_hit->distance < t_min)
-		{
-			t_min = ray_hit->distance;
-			hit = current;
-		}
-		current = current->next;
-	}
 	return (hit);
 }

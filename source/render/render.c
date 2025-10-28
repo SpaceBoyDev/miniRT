@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:01 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 20:43:51 by dario            ###   ########.fr       */
+/*   Updated: 2025/10/28 20:59:43 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	render(t_data *data)
 		{
 			ray = generate_ray(data->scene->camera, x, y, WIN_WIDTH, WIN_HEIGHT);
 			color = trace_ray(&ray, data->scene);
-			if (x == WIN_WIDTH / 2 && y == WIN_HEIGHT /2)
-			{
-				printf("Direccion del rayo\nx:%f y:%f z:%f\n", ray.direction.x, ray.direction.y, ray.direction.z);
-				printf("Origen del rayo\nx:%f y:%f z:%f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-			}
 			mlx_put_pixel(data->img, x, y, rgb_to_uint(&color));
 			++y;
 		}
