@@ -56,8 +56,6 @@ SRC			+=	raytrace.c \
 SRC			+=	vector.c\
 				vector2.c
 
-# SRCS		=	$(addprefix source/, $(SRC))
-
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 define SIGNATURE
@@ -120,9 +118,6 @@ $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-
-test:
-	gcc test.c -o test
 
 clean:
 	@echo "$(BG_BLUE)Cleaning...$(BG_RST)"
