@@ -16,10 +16,6 @@
 # include "miniRT.h"
 # include <math.h>
 
-#ifndef M_PI
-# define M_PI 3.14159265358979323846
-#endif
-
 // raytrace.c
 t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height);
 t_color	trace_ray(t_ray *ray, t_scene *scene);

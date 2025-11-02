@@ -1,0 +1,192 @@
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
+// Typedef ENUM error
+typedef enum e_error		t_error;
+
+// Typedef special atributes
+typedef struct s_color		t_color;
+typedef struct s_vector3	t_vec3;
+typedef struct s_vector3	t_coords;
+
+//Typedef ray
+typedef struct s_ray		t_ray;
+typedef struct s_hit		t_hit;
+
+// Typedef data
+typedef struct s_data		t_data;
+
+// Typedef scene
+typedef struct s_scene		t_scene;
+
+// Typedef ENUM Geometry ID
+typedef enum e_geometry_id	t_id;
+
+// Typedef Scene Objects
+typedef struct s_ambient	t_ambient;
+typedef struct s_camera		t_camera;
+typedef struct s_light		t_light;
+
+// Union geo
+typedef union u_geo		t_geo;
+
+// Typedef Object
+typedef struct s_obj		t_obj;
+
+// Typedef Scene Geometry
+typedef struct s_sphere		t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_cylinder	t_cylinder;
+
+enum e_error
+{
+	OK = 0,
+	ERR_ALLOC,
+	ERR_ARGS,
+	ERR_EXTENSION,
+	ERR_OPEN,
+	ERR_OBJ_ID,
+	ERR_DUP_AMB,
+	ERR_DUP_CAM,
+	ERR_DUP_LIGHT,
+	ERR_AMB_RATIO,
+	ERR_AMB_COLOR,
+	ERR_AMB_TRASH,
+	ERR_CAM_COORDS,
+	ERR_CAM_ORIENTATION,
+	ERR_CAM_FOV,
+	ERR_CAM_TRASH,
+	ERR_LIGHT_COORDS,
+	ERR_LIGHT_RATIO,
+	ERR_LIGHT_COLOR,
+	ERR_LIGHT_TRASH,
+	ERR_SPHERE_COORDS,
+	ERR_SPHERE_DIAMETER,
+	ERR_SPHERE_COLOR,
+	ERR_SPHERE_TRASH,
+	ERR_PLANE_COORDS,
+	ERR_PLANE_NORMAL,
+	ERR_PLANE_COLOR,
+	ERR_PLANE_TRASH,
+	ERR_CYL_COORDS,
+	ERR_CYL_AXIS,
+	ERR_CYL_DIAMETER,
+	ERR_CYL_HEIGHT,
+	ERR_CYL_COLOR,
+	ERR_CYL_TRASH,
+	ERR_MLX_INIT,
+	ERR_MLX_HOOK,
+	ERR_MLX_IMG,
+	ERR_MLX_IMG_TO_WIN,
+	MAX_ERR_CODE,
+};
+
+struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+};
+
+struct s_vector3
+{
+	double	x;
+	double	y;
+	double	z;
+};
+
+struct s_ray
+{
+	t_coords	origin;
+	t_vec3		direction;
+};
+
+struct s_hit
+{
+	bool	did_hit;
+	double	distance;
+	t_vec3	hit_point;
+	t_vec3	normal;
+	t_color	color;
+	t_obj	*hit_obj;
+};
+
+struct s_data
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_scene		*scene;
+};
+
+struct s_scene
+{
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_obj		*objs;
+};
+
+struct s_ambient
+{
+	double		lighting;
+	t_color		color;
+};
+
+struct s_camera
+{
+	t_coords	position;
+	t_vec3		orientation;
+	int			fov;
+};
+
+struct s_light
+{
+	t_coords	position;
+	double		brightness;
+	t_color		color;
+};
+
+enum e_geometry_id
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+};
+
+struct s_sphere
+{
+	t_coords	position;
+	double		diameter;
+	t_color		color;
+};
+
+struct s_plane
+{
+	t_coords	position;
+	t_vec3		normal;
+	t_color		color;
+};
+
+struct s_cylinder
+{
+	t_coords	position;
+	t_vec3	    axis;
+	double		diameter;
+	double		height;
+	t_color		color;
+};
+
+union u_geo {
+    t_sphere    sphere;
+    t_plane     plane;
+    t_cylinder  cylinder;
+};
+
+struct s_obj
+{
+	t_id	id;
+    t_geo	*geo;
+	t_obj	*next;
+};
+
+#endif

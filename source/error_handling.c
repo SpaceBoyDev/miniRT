@@ -100,8 +100,6 @@ void	print_error(t_error error)
 
 void	exit_error(t_error error, t_scene *scene)
 {
-	if (error == OK)
-		return ;
 	if (scene)
 		free_scene(scene);
 	print_error(error);

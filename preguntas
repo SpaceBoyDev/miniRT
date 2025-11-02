@@ -1,0 +1,6 @@
+# parser
+por que finish_free_gnl recorre todo el archivo?
+cmabiar los returns de int a t_error
+
+# render
+pasar speed a los defines, y mas tarde a una struct parameters
