@@ -15,10 +15,12 @@
 
 int	initialize_mlx(t_data *data)
 {
+
 	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, WIN_NAME, false);
 	if (!data->mlx)
 		return (ERR_MLX_INIT);
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+
 	if (!data->img)
 		return (ERR_MLX_IMG);
 	if (!mlx_loop_hook(data->mlx, &render_hook, data))

@@ -28,6 +28,9 @@ t_hit		hit_sphere(t_obj *obj, t_sphere *s, t_ray *r);
 uint32_t	rgb_to_uint(t_color *color);
 
 // render.c
-int	render(t_data *data);
+int	    render(t_data *data);
+
+// fps_counter.c
+void fps_counter(struct timeval *start);
 
 #endif

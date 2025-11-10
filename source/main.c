@@ -89,24 +89,30 @@ void test_error_codes()
 	}
 }
 
+
+#include <sys/time.h>
 int	main(int argc, char **argv)
 {
 	t_data      data;
-	t_scene     scene;
+    t_scene     scene;
     t_error     status;
+    struct timeval *start;
 
-	(void)data;
-	ft_memset(&scene, 0, sizeof(t_scene));
-	data.scene = &scene;
+
+    start = (struct timeval *)malloc(sizeof(struct timeval));
+    gettimeofday(start, NULL);
+	ft_memset(&data, 0, sizeof(t_data));
+    data.scene = &scene; 
+    data.start = start;
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
-	status = parse_file(argv[1], &scene);
+	status = parse_file(argv[1], data.scene);
 	if (status != OK)
-        exit_error(status, &scene);
+        exit_error(status, data.scene);
 	print_data(data.scene);
 	status = initialize_mlx(&data);
 	if (status != OK)
-        exit_error(status, &scene);
-	free_scene(&scene);
+        exit_error(status, data.scene);
+	free_scene(data.scene);
 	return (OK);
 }

@@ -13,6 +13,7 @@
 #include "../../include/mlx.h"
 #include "../../include/render.h"
 #include "../../include/vector.h"
+#include <sys/time.h>
 
 void	close_window_hook(void *param)
 {
@@ -232,8 +233,9 @@ void	look_cam_hook(void *param)
 void	render_hook(void *param)
 {
 	t_data	*data;
-
 	data = (t_data *)param;
+
 	render(data);
+    fps_counter(data->start);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }

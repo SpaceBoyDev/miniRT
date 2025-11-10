@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-cflags		=	-Wall -Wextra -Werror -lm
+cflags		=	-Wall -Wextra -Werror -lm -g3
 RM			=	rm -rf
 
 # Libft
@@ -50,7 +50,7 @@ SRC			+=	parse_atributes.c \
 SRC			+=	raytrace.c \
 				render_sphere.c \
 				render_utils.c \
-				render.c
+				render.c	
 
 # Vector
 SRC			+=	vector.c\

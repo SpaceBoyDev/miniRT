@@ -116,6 +116,7 @@ struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_scene		*scene;
+    struct timeval *start;
 };
 
 struct s_scene
