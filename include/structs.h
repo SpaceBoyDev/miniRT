@@ -19,6 +19,9 @@ typedef struct s_data		t_data;
 // Typedef scene
 typedef struct s_scene		t_scene;
 
+// Typedef fps
+typedef struct s_fps        t_fps;
+
 // Typedef ENUM Geometry ID
 typedef enum e_geometry_id	t_id;
 
@@ -116,8 +119,16 @@ struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_scene		*scene;
-    struct timeval *start;
+    t_fps       *fps;
 };
+
+typedef struct s_fps {
+    double frame_times[60];
+    int index;
+    int count;
+    double last_update;
+    double current_fps;
+} t_fps;
 
 struct s_scene
 {

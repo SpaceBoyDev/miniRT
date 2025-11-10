@@ -236,6 +236,6 @@ void	render_hook(void *param)
 	data = (t_data *)param;
 
 	render(data);
-    fps_counter(data->start);
+    fps_counter(data->mlx, data->fps);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }

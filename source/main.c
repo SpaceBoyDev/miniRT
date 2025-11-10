@@ -89,23 +89,20 @@ void test_error_codes()
 	}
 }
 
-
-#include <sys/time.h>
 int	main(int argc, char **argv)
 {
 	t_data      data;
     t_scene     scene;
+    t_fps       fps;
     t_error     status;
-    struct timeval *start;
 
-
-    start = (struct timeval *)malloc(sizeof(struct timeval));
-    gettimeofday(start, NULL);
-	ft_memset(&data, 0, sizeof(t_data));
-    data.scene = &scene; 
-    data.start = start;
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
+	ft_memset(&data, 0, sizeof(t_data));
+	ft_memset(&scene, 0, sizeof(t_scene));
+	ft_memset(&fps, 0, sizeof(t_fps));
+    data.scene = &scene; 
+    data.fps = &fps; 
 	status = parse_file(argv[1], data.scene);
 	if (status != OK)
         exit_error(status, data.scene);

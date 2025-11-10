@@ -15,6 +15,7 @@
 
 # include "miniRT.h"
 # include <math.h>
+#include <sys/time.h>
 
 // raytrace.c
 t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height);
@@ -31,6 +32,7 @@ uint32_t	rgb_to_uint(t_color *color);
 int	    render(t_data *data);
 
 // fps_counter.c
-void fps_counter(struct timeval *start);
+int ft_dtoa(double n, char *str, int precision);
+void fps_counter(mlx_t *mlx, t_fps *fps);
 
 #endif

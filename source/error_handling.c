@@ -80,6 +80,12 @@ void	free_geometry(t_scene *scene)
 	}
 }
 
+void	free_data(t_data *data){
+    free(data->mlx);
+    free(data->img);
+    free_scene(data->scene);
+}
+
 void	free_scene(t_scene *scene)
 {
 	if (scene->ambient)
