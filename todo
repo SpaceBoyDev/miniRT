@@ -1,0 +1,13 @@
+# parser
+- por que finish_free_gnl recorre todo el archivo?
+- cmabiar los returns de int a t_error
+- normalizar el vector de orientacion en el parseo
+- guardar el fow como radian 
+
+# render
+- pasar speed a los defines, y mas tarde a una struct parameters
+- evitar hacer la conversion a radianes en cada frame
+- el viewport son las dimensiones de la ventana
+- el viewport no esta centrado en la celda, lo que hace que tenga un pequeño desvio
+- la struct hit es demasiado complejo, en esencia solo necesitas el color. (mirar si es relevante para otras cosas)
+- la comprobacion de si un objeto ha hiteado o es ineficiente de cojones

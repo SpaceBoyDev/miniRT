@@ -93,8 +93,6 @@ void	free_scene(t_scene *scene)
 
 void	print_error(t_error error)
 {
-	if (error == OK)
-		return ;
 	printf(RED "Error: %s" RST "\n", g_message[error]);
 }
 
