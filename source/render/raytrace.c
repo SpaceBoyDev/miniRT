@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/10/28 20:58:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/13 17:36:33 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	return (t_ray){cam->position, dir};
 }
 
-t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
+t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 {
 	t_obj	*closest = NULL;
 	t_obj	*obj;
 	t_hit	hit;
 	double	closest_dist = INFINITY;
+	clear_hit(&hit);
 
 	hit.distance = 0;
 	hit.did_hit = false;
@@ -62,15 +63,24 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
 		}
 		obj = obj->next;
 	}
-
+	*out_hit = hit;
 	return (closest);
+}
+
+void	light_bounce(t_hit *hit, t_scene *scene)
+{
+	// t_vec3	direction;
+
+	// direction = vec3_sub();
 }
 
 t_color	trace_ray(t_ray *ray, t_scene *scene)
 {
+	t_hit	hit;
 	t_obj	*closest_obj;
 
-	closest_obj = get_closest_obj(ray, scene);
+	closest_obj = get_closest_obj(ray, scene, &hit);
+	light_bounce(&hit, scene);
 	if (closest_obj && closest_obj->id == SPHERE)
 		return (((t_sphere *)(closest_obj->geo))->color);
 	else

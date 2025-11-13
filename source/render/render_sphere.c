@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:04:15 by dario             #+#    #+#             */
-/*   Updated: 2025/10/28 20:58:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/13 17:35:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_hit	hit_sphere(t_obj *obj, t_sphere *s, t_ray *r)
 	double	c;
 	double	discriminant;
 	double	dst;
+	clear_hit(&hit);
 
 	offset = vec3_add(r->origin, s->position);
 	a = vec3_dot(r->direction, r->direction);

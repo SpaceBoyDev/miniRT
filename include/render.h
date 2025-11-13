@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 20:43:59 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/13 17:33:42 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "miniRT.h"
 # include <math.h>
 #include <sys/time.h>
+
+// hit.c
+void	clear_hit(t_hit *hit);
 
 // raytrace.c
 t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height);
