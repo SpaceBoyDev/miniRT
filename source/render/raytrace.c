@@ -40,6 +40,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
 	t_obj	*obj;
 	t_hit	hit;
 	double	closest_dist = INFINITY;
+    t_hit (*hit_funcs[3])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder};
 
 	hit.distance = 0;
 	hit.did_hit = false;
@@ -48,18 +49,15 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
 	obj = scene->objs;
 	while (obj)
 	{
-		if (obj->id == SPHERE)
-		{
-			hit = hit_sphere(obj, (t_sphere *)obj->geo, ray);
-			if (hit.did_hit)
-			{
-				if (hit.distance > 0 && hit.distance < closest_dist)
-				{
-					closest_dist = hit.distance;
-					closest = obj;
-				}
-			}
-		}
+        hit = hit_funcs[obj->id](obj, obj->geo, ray);
+        if (hit.did_hit)
+        {
+            if (hit.distance > 0 && hit.distance < closest_dist)
+            {
+                closest_dist = hit.distance;
+                closest = obj;
+            }
+        }
 		obj = obj->next;
 	}
 
@@ -73,6 +71,10 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	closest_obj = get_closest_obj(ray, scene);
 	if (closest_obj && closest_obj->id == SPHERE)
 		return (((t_sphere *)(closest_obj->geo))->color);
+    else if (closest_obj && closest_obj->id == PLANE)
+		return (((t_plane *)(closest_obj->geo))->color);
+    else if (closest_obj && closest_obj->id == CYLINDER)
+		return (((t_cylinder *)(closest_obj->geo))->color);
 	else
 		return (scene->ambient->color);
 }

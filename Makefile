@@ -48,7 +48,7 @@ SRC			+=	parse_atributes.c \
 
 # Render
 SRC			+=	raytrace.c \
-				render_sphere.c \
+				hit.c \
 				render_utils.c \
 				render.c	
 
