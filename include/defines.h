@@ -14,6 +14,8 @@
 # define ID_PLANE	"pl "
 # define ID_CYL		"cy "
 
+# define EPS	0.001f
+
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif

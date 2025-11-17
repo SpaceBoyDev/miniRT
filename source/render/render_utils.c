@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:09:56 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 21:00:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/17 20:20:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,14 @@ int ft_dtoa(double n, char *str, int precision)
     
     str[i] = '\0';
     return i;
+}
+
+void	clear_hit(t_hit *hit)
+{
+	hit->color = (t_color){0, 0, 0};
+	hit->did_hit = false;
+	hit->distance = -1;
+	hit->hit_obj = NULL;
+	hit->hit_point = (t_vec3) {0, 0, 0};
+	hit->normal = (t_vec3) {0, 0, 0};
 }

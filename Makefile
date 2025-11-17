@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-cflags		=	-Wall -Wextra -Werror -g3 -lm 
+CFLAGS		=	-Wall -Wextra -Werror -lm -g3 #-fsanitize=address 
 RM			=	rm -rf
 
 # Libft
@@ -48,6 +48,7 @@ SRC			+=	parse_atributes.c \
 
 # Render
 SRC			+=	hit.c \
+				light.c \
 				raytrace.c \
 				render_sphere.c \
 				render_utils.c \
