@@ -35,5 +35,4 @@ t_hit	    hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r);
 // fps_counter.c
 int         ft_dtoa(double n, char *str, int precision);
 void        fps_counter(mlx_t *mlx, t_fps *fps);
-
 #endif

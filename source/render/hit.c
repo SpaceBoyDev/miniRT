@@ -62,44 +62,133 @@ t_hit	hit_plane(t_obj *obj, t_geo *geo, t_ray *r)
 	return hit;
 }
 
-t_hit	hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r)
+t_hit hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r)
 {
-	t_cylinder *c = &(geo->cylinder);
-	t_hit hit = {0};
-	t_vec3 oc = vec3_sub(r->origin, c->position);
-	t_vec3 axis = vec3_normalize(c->axis);
-	
-	// Proyecciones para ecuación cuadrática del cuerpo
-	t_vec3 d_perp = vec3_sub(r->direction, vec3_scale(axis, vec3_dot(r->direction, axis)));
-	t_vec3 oc_perp = vec3_sub(oc, vec3_scale(axis, vec3_dot(oc, axis)));
-	
-	double a = vec3_dot(d_perp, d_perp);
-	double b = 2 * vec3_dot(oc_perp, d_perp);
-	double c_val = vec3_dot(oc_perp, oc_perp) - pow(c->diameter / 2, 2);
-	double discriminant = b * b - 4 * a * c_val;
-	
-	if (discriminant < 0)
-		return (hit);
-	
-	double t = (-b - sqrt(discriminant)) / (2 * a);
-	if (t < 0)
-		t = (-b + sqrt(discriminant)) / (2 * a);
-	if (t < 0)
-		return (hit);
-	
-	// Verificar altura
-	t_vec3 p = vec3_add(r->origin, vec3_scale(r->direction, t));
-	double h = vec3_dot(vec3_sub(p, c->position), axis);
-	if (h < 0 || h > c->height)
-		return (hit);
-	
-	hit.did_hit = true;
-	hit.distance = t;
-	hit.hit_point = p;
-	hit.normal = vec3_normalize(vec3_sub(vec3_sub(p, c->position), vec3_scale(axis, h)));
-	hit.hit_obj = obj;
-	hit.color = c->color;
-	return (hit);
-}
+    t_cylinder *c = &(geo->cylinder);
+    t_hit best = {0};
 
+    double radius = c->diameter * 0.5;
+    t_vec3 axis = vec3_normalize(c->axis);
+    t_vec3 oc = vec3_sub(r->origin, c->position);
+
+    /* =======================================================
+    ** 1) INTERSECCIÓN LATERAL DEL CILINDRO
+    ** ======================================================= */
+
+    double d_dot_a  = vec3_dot(r->direction, axis);
+    double oc_dot_a = vec3_dot(oc, axis);
+
+    t_vec3 d_perp  = vec3_sub(r->direction, vec3_scale(axis, d_dot_a));
+    t_vec3 oc_perp = vec3_sub(oc, vec3_scale(axis, oc_dot_a));
+
+    double a = vec3_dot(d_perp, d_perp);
+    double b = 2 * vec3_dot(oc_perp, d_perp);
+    double c_val = vec3_dot(oc_perp, oc_perp) - radius * radius;
+
+    double disc = b*b - 4*a*c_val;
+
+    if (fabs(a) > 1e-9 && disc >= 0)
+    {
+        double sqrtD = sqrt(disc);
+        double t0 = (-b - sqrtD) / (2*a);
+        double t1 = (-b + sqrtD) / (2*a);
+
+        for (int i = 0; i < 2; i++)
+        {
+            double t = (i == 0 ? t0 : t1);
+            if (t <= 0) continue;
+
+            t_vec3 p = vec3_add(r->origin, vec3_scale(r->direction, t));
+
+            double h = vec3_dot(vec3_sub(p, c->position), axis);
+
+            if (h >= 0 && h <= c->height)
+            {
+                t_hit h_hit = {0};
+                h_hit.did_hit = true;
+                h_hit.distance = t;
+                h_hit.hit_point = p;
+
+                t_vec3 radial = vec3_sub(vec3_sub(p, c->position), vec3_scale(axis, h));
+                h_hit.normal = vec3_normalize(radial);
+
+                h_hit.hit_obj = obj;
+                h_hit.color = c->color;
+
+                if (!best.did_hit || t < best.distance)
+                    best = h_hit;
+            }
+        }
+    }
+
+
+    /* =======================================================
+    ** 2) INTERSECCIÓN TAPA INFERIOR
+    ** ======================================================= */
+    {
+        t_vec3 center_bot = c->position;
+        double denom = vec3_dot(r->direction, axis);
+
+        if (fabs(denom) > 1e-9)
+        {
+            double t = vec3_dot(vec3_sub(center_bot, r->origin), axis) / denom;
+            if (t > 0)
+            {
+                t_vec3 p = vec3_add(r->origin, vec3_scale(r->direction, t));
+                t_vec3 diff = vec3_sub(p, center_bot);
+                double dist2 = vec3_dot(diff, diff);
+
+                if (dist2 <= radius * radius)
+                {
+                    t_hit h_hit = {0};
+                    h_hit.did_hit = true;
+                    h_hit.distance = t;
+                    h_hit.hit_point = p;
+                    h_hit.normal = vec3_scale(axis, -1);
+                    h_hit.hit_obj = obj;
+                    h_hit.color = c->color;
+
+                    if (!best.did_hit || t < best.distance)
+                        best = h_hit;
+                }
+            }
+        }
+    }
+
+
+    /* =======================================================
+    ** 3) INTERSECCIÓN TAPA SUPERIOR
+    ** ======================================================= */
+    {
+        t_vec3 center_top = vec3_add(c->position, vec3_scale(axis, c->height));
+        double denom = vec3_dot(r->direction, axis);
+
+        if (fabs(denom) > 1e-9)
+        {
+            double t = vec3_dot(vec3_sub(center_top, r->origin), axis) / denom;
+            if (t > 0)
+            {
+                t_vec3 p = vec3_add(r->origin, vec3_scale(r->direction, t));
+                t_vec3 diff = vec3_sub(p, center_top);
+                double dist2 = vec3_dot(diff, diff);
+
+                if (dist2 <= radius * radius)
+                {
+                    t_hit h_hit = {0};
+                    h_hit.did_hit = true;
+                    h_hit.distance = t;
+                    h_hit.hit_point = p;
+                    h_hit.normal = axis;
+                    h_hit.hit_obj = obj;
+                    h_hit.color = c->color;
+
+                    if (!best.did_hit || t < best.distance)
+                        best = h_hit;
+                }
+            }
+        }
+    }
+
+    return best;
+}
 

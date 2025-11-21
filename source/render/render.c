@@ -34,5 +34,6 @@ int	render(t_data *data)
 		++x;
 	}
 
+
 	return (OK);
 }
