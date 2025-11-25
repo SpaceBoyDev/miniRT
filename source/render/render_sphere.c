@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:04:15 by dario             #+#    #+#             */
-/*   Updated: 2025/11/13 17:35:14 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/25 21:03:55 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_hit	hit_sphere(t_obj *obj, t_sphere *s, t_ray *r)
 	double	dst;
 	clear_hit(&hit);
 
-	offset = vec3_add(r->origin, s->position);
+	offset = vec3_sub(r->origin, s->position);
 	a = vec3_dot(r->direction, r->direction);
 	b = 2 * vec3_dot(offset, r->direction);
 	c = vec3_dot(offset, offset) - pow(s->diameter / 2, 2);
@@ -36,8 +36,10 @@ t_hit	hit_sphere(t_obj *obj, t_sphere *s, t_ray *r)
 		{
 			hit.did_hit = true;
 			hit.distance = dst;
-			hit.hit_point = vec3_scale(vec3_add(r->origin, r->direction), dst);
+			hit.hit_point = vec3_add(r->origin, vec3_scale(r->direction, dst));
 			hit.normal = vec3_normalize(vec3_sub(hit.hit_point, s->position));
+			if (vec3_dot(hit.normal, r->direction) > 0)
+				hit.normal = vec3_scale(hit.normal, -1.0);
 			hit.hit_obj = obj;
 			hit.color = s->color;
 		}

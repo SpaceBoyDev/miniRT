@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/11/17 20:20:23 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/25 21:04:22 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	t_vec3 right = vec3_normalize(vec3_cross(forward, world_up));
 	t_vec3 up = vec3_cross(right, forward);
 
-	t_vec3 cam_dir = (t_vec3){-px, -py, -1.0};
+	t_vec3 cam_dir = (t_vec3){px, py, 1.0};
 	t_vec3 dir = vec3_normalize(vec3_add(vec3_add(vec3_scale(right, cam_dir.x),
 			vec3_scale(up, cam_dir.y)),
 			vec3_scale(forward, cam_dir.z)));
@@ -56,12 +56,12 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 				{
 					closest_dist = hit.distance;
 					closest = obj;
+					*out_hit = hit;
 				}
 			}
 		}
 		obj = obj->next;
 	}
-	*out_hit = hit;
 	return (closest);
 }
 
@@ -72,8 +72,11 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 
 	clear_hit(&hit);
 	closest_obj = get_closest_obj(ray, scene, &hit);
-	if (closest_obj && light_bounce(&hit, scene))
-		return ((t_color){255, 255, 255});
+	if (closest_obj)
+	{
+		if (light_bounce(&hit, scene))
+			return ((t_color){255, 255, 255});
+	}
 		
 	if (closest_obj && closest_obj->id == SPHERE)
 	{
