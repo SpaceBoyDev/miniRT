@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/11/25 21:29:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:45:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,13 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 
 	clear_hit(&hit);
 	closest_obj = get_closest_obj(ray, scene, &hit);
-	if (closest_obj)
-	{
-		if (light_bounce(&hit, scene))
-			return ((t_color){255, 255, 255});
-	}
 		
 	if (closest_obj && closest_obj->id == SPHERE)
-		return (((t_sphere *)(closest_obj->geo))->color);
+		return (light_bounce(&hit, scene));
     else if (closest_obj && closest_obj->id == PLANE)
-		return (((t_plane *)(closest_obj->geo))->color);
+		return (light_bounce(&hit, scene));
     else if (closest_obj && closest_obj->id == CYLINDER)
-		return (((t_cylinder *)(closest_obj->geo))->color);
+		return (light_bounce(&hit, scene));
 	else
-		return (scene->ambient->color);
+		return ((t_color){0,0,0});
 }

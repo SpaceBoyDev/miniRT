@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/11/25 21:35:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/25 22:28:05 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // hit.c
 
 // light.c
-bool	light_bounce(t_hit *hit, t_scene *scene);
+t_color		light_bounce(t_hit *hit, t_scene *scene);
 
 // raytrace.c
 t_ray	    generate_ray(t_camera *cam, int x, int y, int width, int height);

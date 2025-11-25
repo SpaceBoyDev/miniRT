@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 20:05:10 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:38:56 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	move_cam_hook(void *param)
 	pos = &data->scene->camera->position;
 	ori = &data->scene->camera->orientation;
 	right = vec3_cross(*ori, vec3(0, 1, 0));
-	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
 		float len = sqrtf(vec3_magnitude(*ori));
 		if (len <= 1e-6f)
@@ -49,7 +49,7 @@ void	move_cam_hook(void *param)
 		pos->y -= (ori->y / len) * speed;
 		pos->z -= (ori->z / len) * speed;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		float len = sqrtf(vec3_magnitude(*ori));
 		if (len <= 1e-6f)
@@ -58,7 +58,7 @@ void	move_cam_hook(void *param)
 		pos->y += (ori->y / len) * speed;
 		pos->z += (ori->z / len) * speed;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
 		float rlen = sqrtf(vec3_magnitude(right));
 		if (rlen <= 1e-6f)
@@ -67,7 +67,7 @@ void	move_cam_hook(void *param)
 		pos->y += (right.y / rlen) * speed;
 		pos->z += (right.z / rlen) * speed;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		float rlen = sqrtf(vec3_magnitude(right));
 		if (rlen <= 1e-6f)
@@ -76,11 +76,11 @@ void	move_cam_hook(void *param)
 		pos->y -= (right.y / rlen) * speed;
 		pos->z -= (right.z / rlen) * speed;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
 	{
 		--pos->y;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
 	{
 		++pos->y;
 	}

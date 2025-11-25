@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 19:24:03 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:08:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_data(t_scene *scene)
 	if (scene->ambient)
 	{
 		printf("\n\tAMBIENT\n");
-		printf("Color %i %i %i\n", scene->ambient->color.r, scene->ambient->color.g, scene->ambient->color.b);
+		printf("Color %f %f %f\n", scene->ambient->color.r, scene->ambient->color.g, scene->ambient->color.b);
 		printf("Ratio %f\n", scene->ambient->lighting);
 	}
 	if (scene->camera)
@@ -52,7 +52,7 @@ void	print_data(t_scene *scene)
 			printf("\n\tSPHERE\n");
 			printf("Diameter %f\n", sphere.diameter);
 			printf("Coords %f %f %f\n", sphere.position.x, sphere.position.y, sphere.position.z);
-			printf("Color %i %i %i\n", sphere.color.r, sphere.color.g, sphere.color.b);
+			printf("Color %f %f %f\n", sphere.color.r, sphere.color.g, sphere.color.b);
 		}
 		else if (obj->id == PLANE)
 		{
@@ -60,7 +60,7 @@ void	print_data(t_scene *scene)
 			printf("\n\tPLANE\n");
 			printf("Coords %f %f %f\n", plane.position.x, plane.position.y, plane.position.z);
 			printf("Normal %f %f %f\n", plane.normal.x, plane.normal.y, plane.normal.z);
-			printf("Color %i %i %i\n", plane.color.r, plane.color.g, plane.color.b);
+			printf("Color %f %f %f\n", plane.color.r, plane.color.g, plane.color.b);
 		}
 		else if (obj->id == CYLINDER)
 		{
@@ -70,7 +70,7 @@ void	print_data(t_scene *scene)
 			printf("Axis %f %f %f\n", cylinder.axis.x, cylinder.axis.y, cylinder.axis.z);
 			printf("Diameter %f\n", cylinder.diameter);
 			printf("Height %f\n", cylinder.height);
-			printf("Color %i %i %i\n", cylinder.color.r, cylinder.color.g, cylinder.color.b);
+			printf("Color %f %f %f\n", cylinder.color.r, cylinder.color.g, cylinder.color.b);
 		}
 		obj = obj->next;
 	}
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 	status = parse_file(argv[1], data.scene);
 	if (status != OK)
         exit_error(status, data.scene);
-	//print_data(data.scene);
+	print_data(data.scene);
 	status = initialize_mlx(&data);
 	if (status != OK)
         exit_error(status, data.scene);

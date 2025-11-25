@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 20:17:20 by dario             #+#    #+#             */
-/*   Updated: 2025/11/25 20:55:37 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:48:36 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,68 @@ bool	light_is_behind(t_hit *hit, t_ray *ray)
 	return (vec3_dot(hit->normal, ray->direction) < 0);
 }
 
-t_vec3	calc_dir(t_vec3 from, t_vec3 to)
+t_vec3	calc_dir(t_vec3 from, t_vec3 to, bool normalize)
 {
-	return (vec3_normalize(vec3_sub(to, from)));
+	if (normalize)
+		return (vec3_normalize(vec3_sub(to, from)));
+	else
+		return (vec3_sub(to, from));
 }
 
-bool	light_bounce(t_hit *hit, t_scene *scene)
+static void	clamp_values(t_color *color)
+{
+	if (color->r > 1)
+		color->r = 1;
+	if (color->g > 1)
+		color->g = 1;
+	if (color->b > 1)
+		color->b = 1;
+}
+
+static void	apply_lambert(t_light *light, t_hit point, t_color color, t_color *final)
+{
+	double	attenuation;
+	double	lambert;
+	double	intensity;
+
+	attenuation = 1.0 / (1.0 + 0.1 * point.distance);
+	lambert = vec3_dot(point.normal, calc_dir(point.hit_point, light->position, true));
+	if (lambert < 0)
+		lambert = 0;
+	intensity = light->brightness * attenuation * lambert;
+	final->r += color.r * intensity;
+	final->g += color.g * intensity;
+	final->b += color.b * intensity;
+}
+
+static void	apply_ambient(t_ambient *ambient, t_color *color)
+{
+	color->r *= ambient->color.r * ambient->lighting;
+	color->g *= ambient->color.g * ambient->lighting;
+	color->b *= ambient->color.b * ambient->lighting;
+}
+
+t_color	light_bounce(t_hit *hit, t_scene *scene)
 {
 	t_ray	ray;
 	t_obj	*closest_obj;
 	t_hit	light_hit;
 	t_vec3	origin_adjusted;
+	t_color	final;
 
+	final = hit->color;
 	clear_hit(&light_hit);
 
+	hit->distance = vec3_magnitude(calc_dir(hit->hit_point, scene->light->position, false));
 	origin_adjusted = vec3_add(hit->hit_point, vec3_scale(hit->normal, EPS));
-
-	ray.direction = calc_dir(origin_adjusted, scene->light->position);
+	ray.direction = calc_dir(origin_adjusted, scene->light->position, true);
 	ray.origin = origin_adjusted;
-
-	// printf("Dirección: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
-	// printf("Origen: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	// printf("Origen original: %f, %f, %f\n", hit->hit_point.x, hit->hit_point.y, hit->hit_point.z);
-	// exit(1);
-
 	closest_obj = get_closest_obj(&ray, scene, &light_hit);
-
+	if (closest_obj && hit->distance < light_hit.distance)
+		closest_obj = NULL;
+	apply_ambient(scene->ambient, &final);
 	if (!closest_obj && !light_is_behind(&light_hit, &ray))
-	{
-		return (true);
-	}
-	return (false);
+		apply_lambert(scene->light, *hit, hit->color, &final);
+	clamp_values(&final);
+	return (final);
 }

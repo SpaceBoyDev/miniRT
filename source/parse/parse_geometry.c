@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:53:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:47:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	parse_sphere(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_SPHERE_DIAMETER);
 	line = parse_color(line, &sphere->color);
+	sphere->color.r = sphere->color.r / 255.0;
+	sphere->color.g = sphere->color.g / 255.0;
+	sphere->color.b = sphere->color.b / 255.0;
 	if (!line)
 		return (ERR_SPHERE_COLOR);
 	if (!check_trash_line(line))
@@ -47,6 +50,9 @@ int	parse_plane(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_PLANE_NORMAL);
 	line = parse_color(line, &plane->color);
+	plane->color.r = plane->color.r / 255.0;
+	plane->color.g = plane->color.g / 255.0;
+	plane->color.b = plane->color.b / 255.0;
 	if (!line)
 		return (ERR_PLANE_COLOR);
 	if (!check_trash_line(line))
@@ -74,6 +80,9 @@ int	parse_cylinder(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_CYL_HEIGHT);
 	line = parse_color(line, &cylinder->color);
+	cylinder->color.r = cylinder->color.r / 255.0;
+	cylinder->color.g = cylinder->color.g / 255.0;
+	cylinder->color.b = cylinder->color.b / 255.0;
 	if (!line)
 		return (ERR_CYL_COLOR);
 	if (!check_trash_line(line))
