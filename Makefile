@@ -47,11 +47,10 @@ SRC			+=	parse_atributes.c \
 				parse_vector_vars.c
 
 # Render
-SRC			+=	hit.c \
+SRC			+=	fps_counter.c \
+				hit.c \
 				light.c \
 				raytrace.c \
-				hit.c \
-				fps_counter.c \
 				render_utils.c \
 				render.c	
 

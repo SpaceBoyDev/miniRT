@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/11/25 21:27:10 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/25 21:29:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
             {
                 closest_dist = hit.distance;
                 closest = obj;
+				*out_hit = hit;
             }
         }
 		obj = obj->next;
@@ -76,7 +77,6 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	}
 		
 	if (closest_obj && closest_obj->id == SPHERE)
-	{
 		return (((t_sphere *)(closest_obj->geo))->color);
     else if (closest_obj && closest_obj->id == PLANE)
 		return (((t_plane *)(closest_obj->geo))->color);
