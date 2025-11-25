@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 	status = parse_file(argv[1], data.scene);
 	if (status != OK)
         exit_error(status, data.scene);
-	print_data(data.scene);
+	//print_data(data.scene);
 	status = initialize_mlx(&data);
 	if (status != OK)
         exit_error(status, data.scene);

@@ -35,3 +35,4 @@ int	initialize_mlx(t_data *data)
 	mlx_loop(data->mlx);
 	return (OK);
 }
+

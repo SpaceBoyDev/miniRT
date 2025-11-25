@@ -50,7 +50,8 @@ SRC			+=	parse_atributes.c \
 SRC			+=	hit.c \
 				light.c \
 				raytrace.c \
-				render_sphere.c \
+				hit.c \
+				fps_counter.c \
 				render_utils.c \
 				render.c	
 
