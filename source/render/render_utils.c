@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:09:56 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 21:00:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 16:27:04 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 uint32_t	rgb_to_uint(t_color *color)
 {
-	return (color->r << 24 | color->g << 16 | color->b << 8 | 255);
+	int	red;
+	int	green;
+	int	blue;
+
+	red = color->r * 255;
+	green = color->g * 255;
+	blue = color->b * 255;
+	return (red << 24 | green << 16 | blue << 8 | 255);
 }
 
 int ft_dtoa(double n, char *str, int precision)
@@ -58,4 +65,10 @@ int ft_dtoa(double n, char *str, int precision)
     
     str[i] = '\0';
     return i;
+}
+
+void	clear_hit(t_hit *hit)
+{
+	ft_memset(hit, 0, sizeof(t_hit));
+	hit->distance = -1;
 }

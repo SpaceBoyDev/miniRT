@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/10/28 20:58:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 16:15:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	t_vec3 right = vec3_normalize(vec3_cross(forward, world_up));
 	t_vec3 up = vec3_cross(right, forward);
 
-	t_vec3 cam_dir = (t_vec3){-px, -py, -1.0};
+	t_vec3 cam_dir = (t_vec3){px, py, 1.0};
 	t_vec3 dir = vec3_normalize(vec3_add(vec3_add(vec3_scale(right, cam_dir.x),
 			vec3_scale(up, cam_dir.y)),
 			vec3_scale(forward, cam_dir.z)));
@@ -34,7 +34,7 @@ t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
 	return (t_ray){cam->position, dir};
 }
 
-t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
+t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 {
 	t_obj	*closest = NULL;
 	t_obj	*obj;
@@ -42,8 +42,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
 	double	closest_dist = INFINITY;
     t_hit (*hit_funcs[3])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder};
 
-	hit.distance = 0;
-	hit.did_hit = false;
+	clear_hit(&hit);
 	if (!scene || !scene->objs)
 		return (NULL);
 	obj = scene->objs;
@@ -56,25 +55,23 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene)
             {
                 closest_dist = hit.distance;
                 closest = obj;
+				*out_hit = hit;
             }
         }
 		obj = obj->next;
 	}
-
 	return (closest);
 }
 
 t_color	trace_ray(t_ray *ray, t_scene *scene)
 {
+	t_hit	hit;
 	t_obj	*closest_obj;
 
-	closest_obj = get_closest_obj(ray, scene);
-	if (closest_obj && closest_obj->id == SPHERE)
-		return (((t_sphere *)(closest_obj->geo))->color);
-    else if (closest_obj && closest_obj->id == PLANE)
-		return (((t_plane *)(closest_obj->geo))->color);
-    else if (closest_obj && closest_obj->id == CYLINDER)
-		return (((t_cylinder *)(closest_obj->geo))->color);
+	clear_hit(&hit);
+	closest_obj = get_closest_obj(ray, scene, &hit);
+	if (closest_obj)
+		return (light_bounce(&hit, scene));
 	else
-		return (scene->ambient->color);
+		return ((t_color){0,0,0});
 }
