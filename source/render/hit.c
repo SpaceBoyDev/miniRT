@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:28:21 by dario             #+#    #+#             */
-/*   Updated: 2025/11/25 21:34:38 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 16:36:18 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_hit	hit_plane(t_obj *obj, t_geo *geo, t_ray *r)
 		hit.normal = p->normal;
 	else
 		hit.normal = vec3_scale(p->normal, -1);
+    hit.color = p->color;
 
 	return hit;
 }
