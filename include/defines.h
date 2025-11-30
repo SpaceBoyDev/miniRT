@@ -1,6 +1,10 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
 // MLX Window
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	800

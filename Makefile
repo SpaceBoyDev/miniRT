@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -lm -g3 #-fsanitize=address 
+CFLAGS		=	-Wall -Wextra -Werror -lm -g3 -O3
 RM			=	rm -rf
 
 # Libft
@@ -121,7 +121,7 @@ $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-debug: CFLAGS += -g3 -fsanitize=address
+debug: CFLAGS += -g3 -fsanitize=address -DDEBUG=1
 debug: all
 
 clean:
