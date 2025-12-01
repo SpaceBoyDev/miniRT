@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -lm -g3 -O3
+CFLAGS		=	-Wall -Wextra -Werror -g3 -O3
 RM			=	rm -rf
 
 # Libft
@@ -16,7 +16,10 @@ MLX_PATH	=	./libs/MLX42
 MLX_BUILD	=	$(MLX_PATH)/build
 MLX_NAME	=	$(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE	=	$(MLX_PATH)/include/MLX42
-MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
+MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -lm -pthread
+
+# Linker
+LDFLAGS		=  -lm
 
 OBJ_DIR		=	obj/
 
@@ -30,7 +33,7 @@ VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				vector\
 				)
 
-SRC			=	main.c error_handling.c
+SRC			=	main.c error_handling.c free.c
 
 # MLX
 SRC			+=	hooks.c \
@@ -94,7 +97,7 @@ BG_WHITE	=	\033[47m
 all: $(NAME)
 
 $(NAME): $(MLX_NAME) $(LIBFT_LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAG) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAG) $(LDFLAGS) -o $(NAME)
 	@printf "$(MAGENTA)All $(NAME) source files compiled ✅$(RST)\033[0K\r"
 	@echo "\n$(BG_GREEN)$(NAME) compiled!$(BG_RST)"
 	@echo "$(MAGENTA)$$SIGNATURE$(RST)"
@@ -134,7 +137,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
-	@$(RM) $(MLX_BUILD)
+	@$(RM) $(MLX_PATH)
 	@echo "$(CYAN)MLX42 fully cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) fully cleaned!$(BG_RST)🧹"
 	@echo "$(BG_GREEN)All cleaned!$(BG_RST)"
