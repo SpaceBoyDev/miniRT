@@ -30,7 +30,7 @@ t_hit		hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r);
 t_color		light_bounce(t_hit *hit, t_scene *scene);
 
 // raytrace.c
-t_ray		generate_ray(t_camera *cam, int x, int y, int width, int height);
+t_ray		generate_ray(t_camera *cam, int x, int y);
 t_obj		*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit);
 t_color		trace_ray(t_ray *ray, t_scene *scene);
 

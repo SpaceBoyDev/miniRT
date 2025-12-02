@@ -19,6 +19,7 @@
 # define ID_CYL		"cy "
 
 # define EPS	0.0001f
+# define SPEED	1
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846

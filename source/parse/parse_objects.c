@@ -25,9 +25,9 @@ int	parse_ambient(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_AMB_RATIO);
 	line = parse_color(line, &scene->ambient->color);
-	scene->ambient->color.r = scene->ambient->color.r / 255.0;
-	scene->ambient->color.g = scene->ambient->color.g / 255.0;
-	scene->ambient->color.b = scene->ambient->color.b / 255.0;
+	scene->ambient->color.r /=  255.0;
+	scene->ambient->color.g /=  255.0;
+	scene->ambient->color.b /=  255.0;
 	if (!line)
 		return (ERR_AMB_COLOR);
 	if (!check_trash_line(line))
@@ -76,9 +76,9 @@ int	parse_light(char *line, t_scene *scene)
 		return (ERR_LIGHT_RATIO);
 	line = skip_blank(line);
 	line = parse_color(line, &scene->light->color);
-	scene->light->color.r = scene->light->color.r / 255.0;
-	scene->light->color.g = scene->light->color.g / 255.0;
-	scene->light->color.b = scene->light->color.b / 255.0;
+	scene->light->color.r /= 255.0;
+	scene->light->color.g /= 255.0;
+	scene->light->color.b /= 255.0;
 	if (!line)
 		return (ERR_LIGHT_COLOR);
 	if (!check_trash_line(line))

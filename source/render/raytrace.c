@@ -13,13 +13,13 @@
 #include "../../include/render.h"
 #include "../../include/vector.h"
 
-t_ray	generate_ray(t_camera *cam, int x, int y, int width, int height)
+t_ray	generate_ray(t_camera *cam, int x, int y)
 {
-	double aspect_ratio = (double)width / (double)height;
+	double aspect_ratio = (double)WIN_WIDTH / (double)WIN_HEIGHT;
 	double fov_adjust = tan((cam->fov * M_PI / 180.0) / 2.0);
 
-	double px = (2 * ((x + 0.5) / (double)width) - 1) * aspect_ratio * fov_adjust;
-	double py = (1 - 2 * ((y + 0.5) / (double)height)) * fov_adjust;
+	double px = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1) * aspect_ratio * fov_adjust;
+	double py = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT)) * fov_adjust;
 
 	t_vec3 forward = vec3_normalize(cam->orientation);
 	t_vec3 world_up = (fabs(forward.y) > 0.999) ? (t_vec3){0, 0, 1} : (t_vec3){0, 1, 0};
@@ -42,7 +42,6 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 	double	closest_dist = INFINITY;
     t_hit (*hit_funcs[3])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder};
 
-	clear_hit(&hit);
 	if (!scene || !scene->objs)
 		return (NULL);
 	obj = scene->objs;

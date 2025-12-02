@@ -26,14 +26,12 @@ int	render(t_data *data)
 		y = 0;
 		while (y < WIN_HEIGHT)
 		{
-			ray = generate_ray(data->scene->camera, x, y, WIN_WIDTH, WIN_HEIGHT);
+			ray = generate_ray(data->scene->camera, x, y);
 			color = trace_ray(&ray, data->scene);
 			mlx_put_pixel(data->img, x, y, rgb_to_uint(&color));
 			++y;
 		}
 		++x;
 	}
-
-
 	return (OK);
 }

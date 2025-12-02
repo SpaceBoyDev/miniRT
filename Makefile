@@ -119,7 +119,7 @@ $(MLX_PATH):
 	@echo "$(BG_BLUE)MLX42 cloned!$(RST)"
 
 $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
-	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -lm -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

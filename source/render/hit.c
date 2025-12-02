@@ -50,22 +50,20 @@ t_hit	hit_sphere(t_obj *obj, t_geo *geo, t_ray *r)
 
 t_hit	hit_plane(t_obj *obj, t_geo *geo, t_ray *r)
 {
-	t_hit	hit = {0}; // Inicializa todos los campos a cero
+	t_hit	hit = {0};
 	t_plane	*p = &(geo->plane);
 	double	denominator = vec3_dot(r->direction, p->normal);
 	(void)obj;
 	if (fabs(denominator) < __DBL_EPSILON__)
-		return hit; // Ray is parallel to plane
+		return hit;
 
 	double	dst = vec3_dot(vec3_sub(p->position, r->origin), p->normal) / denominator;
 	if (dst < 0)
-		return hit; // Plane is behind ray
+		return hit;
 
 	hit.did_hit = true;
 	hit.distance = dst;
-	// Calcula el punto de intersección
 	hit.hit_point = vec3_add(r->origin, vec3_scale(r->direction, dst));
-	// Normal siempre hacia el lado opuesto al ray
 	if (vec3_dot(r->direction, p->normal) < 0)
 		hit.normal = p->normal;
 	else
@@ -133,7 +131,6 @@ t_hit hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r)
             }
         }
     }
-
 
     /* =======================================================
     ** 2) INTERSECCIÓN TAPA INFERIOR

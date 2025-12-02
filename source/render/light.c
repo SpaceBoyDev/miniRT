@@ -38,6 +38,7 @@ static void	apply_lambert(t_light *light, t_hit point, t_color color, t_color *f
 	double	intensity;
 
     // hay que tomar la distancia al foco de luz , no a la camara.
+    // distance = distance(point.hit, punto del foco)
 	attenuation = 1.0 / (1.0 + 0.1 * point.distance);
 	lambert = vec3_dot(point.normal, calc_dir(point.hit_point, light->position, true));
 	if (lambert < 0)
