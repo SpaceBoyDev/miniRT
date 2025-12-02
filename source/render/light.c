@@ -31,22 +31,23 @@ static void	clamp_values(t_color *color)
 		color->b = 1;
 }
 
-static void	apply_lambert(t_light *light, t_hit point, t_color color, t_color *final)
+static void	apply_lambert(t_light *light, t_hit point, t_color *final)
 {
 	double	attenuation;
 	double	lambert;
 	double	intensity;
+	t_vec3	light_dir;
 
-    // hay que tomar la distancia al foco de luz , no a la camara.
-    // distance = distance(point.hit, punto del foco)
-	attenuation = 1.0 / (1.0 + 0.1 * point.distance);
-	lambert = vec3_dot(point.normal, calc_dir(point.hit_point, light->position, true));
+	light_dir = calc_dir(point.hit_point, light->position, true);
+	lambert = vec3_dot(point.normal, light_dir);
 	if (lambert < 0)
 		lambert = 0;
+	attenuation = 1.0 / (1.0 + 0.1 * point.distance);
 	intensity = light->brightness * attenuation * lambert;
-	final->r += color.r * intensity; // (light->color.r * intensity); // TODO: Revisar cálculo de luz y que sea correcto
-	final->g += color.g * intensity; // (light->color.g * intensity); // TODO: Revisar cálculo de luz y que sea correcto
-	final->b += color.b * intensity; // (light->color.b * intensity); // TODO: Revisar cálculo de luz y que sea correcto
+
+	final->r += point.color.r * light->color.r * intensity;
+	final->g += point.color.g * light->color.g * intensity;
+	final->b += point.color.b * light->color.b * intensity;
 }
 
 static void	apply_ambient(t_ambient *ambient, t_color *color)
@@ -73,7 +74,7 @@ t_color	light_bounce(t_hit *hit, t_scene *scene)
 	closest_obj = get_closest_obj(&ray, scene, &light_hit);
 	apply_ambient(scene->ambient, &final);
 	if (!closest_obj || (closest_obj && hit->distance < light_hit.distance))
-		apply_lambert(scene->light, *hit, hit->color, &final);
+		apply_lambert(scene->light, *hit, &final);
 	clamp_values(&final);
 	return (final);
 }
