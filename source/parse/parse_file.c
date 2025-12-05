@@ -53,6 +53,12 @@ static int	parse_line(char *line, t_scene *scene)
 		parse_type = parse_plane;
 	else if (!ft_strncmp(line, ID_CYL, 3))
 		parse_type = parse_cylinder;
+	else if (!ft_strncmp(line, ID_CONE, 3))
+		parse_type = parse_cone;
+	else if (!ft_strncmp(line, ID_PB, 3))
+		parse_type = parse_paraboloid;
+	else if (!ft_strncmp(line, ID_HB, 3))
+		parse_type = parse_hyperboloid;
 	else
 		return (ERR_OBJ_ID);
 	return (parse_type(line, scene));

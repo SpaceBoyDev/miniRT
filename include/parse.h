@@ -33,6 +33,9 @@ int		parse_file(char *file, t_scene *scene);
 int		parse_sphere(char *line, t_scene *scene);
 int		parse_plane(char *line, t_scene *scene);
 int		parse_cylinder(char *line, t_scene *scene);
+int	    parse_cone(char *line, t_scene *scene);
+int	    parse_paraboloid(char *line, t_scene *scene);
+int	    parse_hyperboloid(char *line, t_scene *scene);
 
 // parse_objects.c
 int		parse_ambient(char *line, t_scene *scene);

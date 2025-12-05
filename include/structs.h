@@ -40,6 +40,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
+typedef struct s_cone	t_cone;
 
 enum e_error
 {
@@ -77,12 +78,48 @@ enum e_error
 	ERR_CYL_HEIGHT,
 	ERR_CYL_COLOR,
 	ERR_CYL_TRASH,
+	ERR_CONE_COORDS,
+	ERR_CONE_AXIS,
+	ERR_CONE_DIAMETER,
+	ERR_CONE_HEIGHT,
+	ERR_CONE_COLOR,
+	ERR_CONE_TRASH,
+    ERR_HB_COORDS,
+    ERR_HB_AXIS,
+    ERR_HB_APARAM,
+    ERR_HB_BPARAM,
+    ERR_HB_CPARAM,
+    ERR_HB_LIMIT,
+    ERR_HB_COLOR,
+    ERR_HB_TRASH,
+    ERR_PB_AXIS,
+    ERR_PB_COORDS,
+    ERR_PB_FACTOR,
+    ERR_PB_LIMIT,
+    ERR_PB_COLOR,
+    ERR_PB_TRASH,
+	MAX_ERR_CODE,
 	ERR_MLX_INIT,
 	ERR_MLX_HOOK,
 	ERR_MLX_IMG,
 	ERR_MLX_IMG_TO_WIN,
-	MAX_ERR_CODE,
 };
+
+struct s_data
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_scene		*scene;
+    t_fps       *fps;
+};
+
+typedef struct s_fps {
+    double frame_times[60];
+    int index;
+    int count;
+    double last_update;
+    double current_fps;
+} t_fps;
 
 struct s_color
 {
@@ -114,22 +151,6 @@ struct s_hit
 	t_obj	*hit_obj;
 };
 
-struct s_data
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_scene		*scene;
-    t_fps       *fps;
-};
-
-typedef struct s_fps {
-    double frame_times[60];
-    int index;
-    int count;
-    double last_update;
-    double current_fps;
-} t_fps;
-
 struct s_scene
 {
 	t_ambient	*ambient;
@@ -160,9 +181,12 @@ struct s_light
 
 enum e_geometry_id
 {
-	SPHERE,
-	PLANE,
-	CYLINDER,
+    SPHERE,
+    PLANE,
+    CYLINDER,
+    CONE,
+    PARABOLOID,
+    HYPERBOLOID,
 };
 
 struct s_sphere
@@ -188,10 +212,42 @@ struct s_cylinder
 	t_color		color;
 };
 
+struct s_cone
+{
+    t_coords    position;
+    t_vec3      axis;
+    double      diameter;
+    double      height;
+    t_color     color;
+};
+
+typedef struct s_paraboloid
+{
+	t_coords	position;
+	t_coords	axis;
+	double		k_factor;
+	double		h_limit;
+	t_color		color;
+}	t_paraboloid;
+
+typedef struct s_hyperboloid
+{
+	t_coords	position; 
+	t_vec3		axis;   
+	double		a_param;
+	double		b_param;
+	double		c_param;
+	double		h_limit;
+	t_color		color;
+}	t_hyperboloid;
+
 union u_geo {
-    t_sphere    sphere;
-    t_plane     plane;
-    t_cylinder  cylinder;
+    t_sphere        sphere;
+    t_plane         plane;
+    t_cylinder      cylinder;
+    t_cone          cone;
+    t_paraboloid    paraboloid;
+    t_hyperboloid   hyperboloid;
 };
 
 struct s_obj

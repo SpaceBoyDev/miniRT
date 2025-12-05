@@ -51,7 +51,12 @@ SRC			+=	parse_atributes.c \
 
 # Render
 SRC			+=	fps_counter.c \
-				hit.c \
+				hit_sphere.c \
+				hit_plane.c \
+				hit_cylinder.c \
+				hit_cone.c \
+				hit_paraboloid.c \
+				hit_hyperboloid.c	\
 				light.c \
 				raytrace.c \
 				render_utils.c \

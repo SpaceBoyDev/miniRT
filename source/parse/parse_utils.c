@@ -18,14 +18,7 @@ void	*init_obj(t_scene *scene, t_id id)
 	void	*new_geo;
 
 	new_obj = malloc(sizeof(t_obj));
-	if (id == SPHERE)
-		new_geo = malloc(sizeof(t_sphere));
-	else if (id == PLANE)
-		new_geo = malloc(sizeof(t_plane));
-	else if (id == CYLINDER)
-		new_geo = malloc(sizeof(t_cylinder));
-	else
-		return (NULL);
+	new_geo = malloc(sizeof(t_geo));
 	if (!new_geo || !new_obj)
 		return (NULL);
 	new_obj->id = id;

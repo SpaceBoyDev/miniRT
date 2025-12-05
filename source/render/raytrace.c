@@ -40,7 +40,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 	t_obj	*obj;
 	t_hit	hit;
 	double	closest_dist = INFINITY;
-    t_hit (*hit_funcs[3])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder};
+    t_hit (*hit_funcs[6])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder, hit_cone, hit_paraboloid, hit_hyperboloid};
 
 	if (!scene || !scene->objs)
 		return (NULL);

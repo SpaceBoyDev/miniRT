@@ -25,6 +25,9 @@ void		fps_counter(mlx_t *mlx, t_fps *fps);
 t_hit		hit_plane(t_obj *obj, t_geo *geo, t_ray *r);
 t_hit		hit_sphere(t_obj *obj, t_geo *geo, t_ray *r);
 t_hit		hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r);
+t_hit	    hit_cone(t_obj *obj, t_geo *geo, t_ray *r);
+t_hit       hit_paraboloid(t_obj *obj, t_geo *geo, t_ray *r);
+t_hit	    hit_hyperboloid(t_obj *obj, t_geo *geo, t_ray *r);
 
 // light.c
 t_color		light_bounce(t_hit *hit, t_scene *scene);
