@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:01 by dario             #+#    #+#             */
-/*   Updated: 2025/10/28 20:59:43 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:39:25 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	render(t_data *data)
 {
 	uint32_t	x;
 	uint32_t	y;
-	t_ray 		ray;
+	t_ray		ray;
 	t_color		color;
 
 	x = 0;

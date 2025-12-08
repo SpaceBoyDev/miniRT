@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:15:12 by dario             #+#    #+#             */
-/*   Updated: 2025/10/26 20:30:46 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:37:02 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	look_cam_hook(void *param);
 void	render_hook(void *param);
 
 // initialization.c
-int	initialize_mlx(t_data *data);
+int		initialize_mlx(t_data *data);
 
 #endif

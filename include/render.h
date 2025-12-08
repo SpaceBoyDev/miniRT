@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 21:17:59 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 23:51:25 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ void		update_best(t_hit *best, t_hit *candidate);
 
 // render.c
 int			render(t_data *data);
-
 
 #endif

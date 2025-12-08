@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:43:08 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 20:43:10 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 23:51:07 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 
 t_hit	hit_plane(t_obj *obj, t_geo *geo, t_ray *r)
 {
-	t_hit	hit = {0};
-	t_plane	*p = &(geo->plane);
-	double	denominator = vec3_dot(r->direction, p->normal);
+	t_hit	hit;
+	t_plane	*p;
+	double	denominator;
+	double	dst;
+
 	(void)obj;
+	clear_hit(&hit);
+	p = &(geo->plane);
+	denominator = vec3_dot(r->direction, p->normal);
 	if (fabs(denominator) < __DBL_EPSILON__)
-		return hit;
-
-	double	dst = vec3_dot(vec3_sub(p->position, r->origin), p->normal) / denominator;
+		return (hit);
+	dst = vec3_dot(vec3_sub(p->position, r->origin), p->normal) / denominator;
 	if (dst < 0)
-		return hit;
-
+		return (hit);
 	hit.did_hit = true;
 	hit.distance = dst;
 	hit.hit_point = vec3_add(r->origin, vec3_scale(r->direction, dst));
@@ -33,7 +36,6 @@ t_hit	hit_plane(t_obj *obj, t_geo *geo, t_ray *r)
 		hit.normal = p->normal;
 	else
 		hit.normal = vec3_scale(p->normal, -1);
-    hit.color = p->color;
-
-	return hit;
+	hit.color = p->color;
+	return (hit);
 }

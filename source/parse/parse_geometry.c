@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 20:49:38 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:39:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	parse_cylinder(char *line, t_scene *scene)
 int	parse_cone(char *line, t_scene *scene)
 {
 	t_cone	*cone;
-	
+
 	cone = (t_cone *)init_obj(scene, CONE);
 	line += 2;
 	line = skip_blank(line);

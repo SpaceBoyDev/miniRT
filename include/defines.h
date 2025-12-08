@@ -6,16 +6,16 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 20:46:14 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:33:35 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-#ifndef DEBUG
-# define DEBUG 0
-#endif
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 // MLX Window
 # define WIN_WIDTH	800
@@ -34,8 +34,8 @@
 # define EPS	0.0001f
 # define SPEED	1
 
-#ifndef M_PI
-# define M_PI 3.14159265358979323846
-#endif
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 #endif

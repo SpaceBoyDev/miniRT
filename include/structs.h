@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:46:27 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 20:51:11 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:36:51 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_data		t_data;
 typedef struct s_scene		t_scene;
 
 // Typedef fps
-typedef struct s_fps        t_fps;
+typedef struct s_fps		t_fps;
 
 // Typedef ENUM Geometry ID
 typedef enum e_geometry_id	t_id;
@@ -43,7 +43,7 @@ typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
 
 // Union geo
-typedef union u_geo		t_geo;
+typedef union u_geo			t_geo;
 
 // Typedef Object
 typedef struct s_obj		t_obj;
@@ -53,6 +53,9 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_cone		t_cone;
+
+// EXTRAS
+typedef struct s_fps		t_fps;
 
 enum e_error
 {
@@ -108,16 +111,17 @@ struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_scene		*scene;
-    t_fps       *fps;
+	t_fps		*fps;
 };
 
-typedef struct s_fps {
-    double frame_times[60];
-    int index;
-    int count;
-    double last_update;
-    double current_fps;
-} t_fps;
+struct s_fps
+{
+	double	frame_times[60];
+	int		index;
+	int		count;
+	double	last_update;
+	double	current_fps;
+};
 
 struct s_color
 {
@@ -179,10 +183,10 @@ struct s_light
 
 enum e_geometry_id
 {
-    SPHERE,
-    PLANE,
-    CYLINDER,
-    CONE,
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	CONE,
 };
 
 struct s_sphere
@@ -202,7 +206,7 @@ struct s_plane
 struct s_cylinder
 {
 	t_coords	position;
-	t_vec3	    axis;
+	t_vec3		axis;
 	double		diameter;
 	double		height;
 	t_color		color;
@@ -210,24 +214,25 @@ struct s_cylinder
 
 struct s_cone
 {
-    t_coords    position;
-    t_vec3      axis;
-    double      diameter;
-    double      height;
-    t_color     color;
+	t_coords	position;
+	t_vec3		axis;
+	double		diameter;
+	double		height;
+	t_color		color;
 };
 
-union u_geo {
-    t_sphere        sphere;
-    t_plane         plane;
-    t_cylinder      cylinder;
-    t_cone          cone;
+union u_geo
+{
+	t_sphere	sphere;
+	t_plane		plane;
+	t_cylinder	cylinder;
+	t_cone		cone;
 };
 
 struct s_obj
 {
 	t_id	id;
-    t_geo	*geo;
+	t_geo	*geo;
 	t_obj	*next;
 };
 

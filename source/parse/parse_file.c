@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 21:03:24 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:38:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int	parse_file(char *file, t_scene *scene)
 		{
 			error = parse_line(line, scene);
 			if (error != 0)
-            {
-                finish_free_gnl(line, fd);
-                exit_error(error, scene);
-            }
+			{
+				finish_free_gnl(line, fd);
+				exit_error(error, scene);
+			}
 		}
 		free(line);
 	}
