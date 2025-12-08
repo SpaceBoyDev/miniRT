@@ -6,15 +6,13 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:48:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:02:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-void	print_error2(t_error error)
-{
-	static const char	*g_message[20] = {
+static const char	*g_message[MAX_ERR_CODE] = {
 		"",
 		"Could not allocate memory.",
 		"You must input a .rt file as the single argument.\n"\
@@ -36,14 +34,6 @@ void	print_error2(t_error error)
 		"Light ratio is not valid.",
 		"Light color is not valid.",
 		"Light line has invalid values at the end."
-	};
-	printf(RED "Error: %s" RST "\n", g_message[error]);
-}
-
-
-void	print_error3(t_error error)
-{
-	static const char	*g_message2[18] = {
 		"Sphere coordinates are not valid.",
 		"Sphere diameter is not valid.",
 		"Sphere color is not valid.",
@@ -57,23 +47,23 @@ void	print_error3(t_error error)
 		"Cylinder diameter is not valid.",
 		"Cylinder height is not valid.",
 		"Cylinder color is not valid.",
-		"Cylinder line has invalid values at the end.",
+		"Cone coordinates are not valid.",
+		"Cone axis is not valid.",
+		"Cone diameter is not valid.",
+		"Cone height is not valid.",
+		"Cone color is not valid.",
+		"Cone line has invalid values at the end.",
 		"MLX failed to initialize.",
 		"MLX failed to add hook.",
 		"MLX failed to create image.",
 		"MLX failed to render the image to the window."
-	};
-	printf(RED "Error: %s" RST "\n", g_message2[error - 20]);
-}
+};
 
 void	print_error(t_error error)
 {
 	if (error == OK)
 		return ;
-	if (error < 20)
-		print_error2(error);
-	else
-		print_error3(error);
+	ft_printf(RED "Error: %s" RST "\n", g_message[error]);
 }
 
 void	exit_error(t_error error, t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 00:47:14 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 20:49:38 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,77 +117,5 @@ int	parse_cone(char *line, t_scene *scene)
 		return (ERR_CONE_COLOR);
 	if (!check_trash_line(line))
 		return (ERR_CONE_TRASH);
-	return (OK);
-}
-
-int	parse_paraboloid(char *line, t_scene *scene)
-{
-	t_paraboloid	*paraboloid;
-
-	paraboloid = (t_paraboloid *)init_obj(scene, PARABOLOID); 
-	if (!paraboloid)
-		return (ERR_ALLOC);
-	
-	line += 2;
-	line = skip_blank(line);
-
-	line = parse_coords(line, &paraboloid->position);
-	if (!line)
-		return (ERR_PB_COORDS);
-
-	line = parse_normalized_vector(line, &paraboloid->axis);
-	if (!line)
-		return (ERR_PB_AXIS);
-
-	line = parse_double(line, &paraboloid->k_factor);
-	if (!line || paraboloid->k_factor <= 0.0) // k_factor debe ser positivo
-		return (ERR_PB_FACTOR);
-	
-	line = parse_double(line, &paraboloid->h_limit);
-	if (!line || paraboloid->h_limit <= 0.0) // H debe ser positivo
-		return (ERR_PB_LIMIT);
-
-	line = parse_color(line, &paraboloid->color);
-	if (!line)
-		return (ERR_PB_COLOR);
-	
-	if (!check_trash_line(line))
-		return (ERR_PB_TRASH);
-
-	return (OK);
-}
-
-int	parse_hyperboloid(char *line, t_scene *scene)
-{
-	t_hyperboloid	*hyperboloid;
-
-	hyperboloid = (t_hyperboloid *)init_obj(scene, HYPERBOLOID);
-	if (!hyperboloid)
-		return (ERR_ALLOC);
-	line += 2;
-	line = skip_blank(line);
-	line = parse_coords(line, &hyperboloid->position);
-	if (!line)
-		return (ERR_HB_COORDS);
-	line = parse_normalized_vector(line, &hyperboloid->axis);
-	if (!line)
-		return (ERR_HB_AXIS);
-	line = parse_double(line, &hyperboloid->a_param);
-	if (!line || hyperboloid->a_param <= 0.0)
-		return (ERR_HB_APARAM);
-	line = parse_double(line, &hyperboloid->b_param);
-	if (!line || hyperboloid->b_param <= 0.0)
-		return (ERR_HB_BPARAM);
-	line = parse_double(line, &hyperboloid->c_param);
-	if (!line || hyperboloid->c_param <= 0.0)
-		return (ERR_HB_CPARAM);
-	line = parse_double(line, &hyperboloid->h_limit);
-	if (!line || hyperboloid->h_limit <= 0.0)
-		return (ERR_HB_LIMIT);
-	line = parse_color(line, &hyperboloid->color);
-	if (!line)
-		return (ERR_HB_COLOR);
-	if (!check_trash_line(line))
-		return (ERR_HB_TRASH);
 	return (OK);
 }

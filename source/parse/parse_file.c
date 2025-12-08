@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:36:39 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 22:02:57 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:03:24 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ static int	parse_line(char *line, t_scene *scene)
 		parse_type = parse_cylinder;
 	else if (!ft_strncmp(line, ID_CONE, 3))
 		parse_type = parse_cone;
-	else if (!ft_strncmp(line, ID_PB, 3))
-		parse_type = parse_paraboloid;
-	else if (!ft_strncmp(line, ID_HB, 3))
-		parse_type = parse_hyperboloid;
 	else
 		return (ERR_OBJ_ID);
 	return (parse_type(line, scene));

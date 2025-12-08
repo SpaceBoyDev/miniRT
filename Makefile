@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3 -O3
+CFLAGS		=	-Wall -Wextra -Werror -g3
 RM			=	rm -rf
 
 # Libft
@@ -55,8 +55,6 @@ SRC			+=	fps_counter.c \
 				hit_plane.c \
 				hit_cylinder.c \
 				hit_cone.c \
-				hit_paraboloid.c \
-				hit_hyperboloid.c	\
 				light.c \
 				raytrace.c \
 				render_utils.c \
@@ -142,7 +140,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
-	@$(RM) $(MLX_PATH)
+	@$(RM) $(MLX_BUILD)
 	@echo "$(CYAN)MLX42 fully cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) fully cleaned!$(BG_RST)🧹"
 	@echo "$(BG_GREEN)All cleaned!$(BG_RST)"

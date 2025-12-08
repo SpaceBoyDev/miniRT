@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 16:15:20 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 20:53:13 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_scene *scene, t_hit *out_hit)
 	t_obj	*obj;
 	t_hit	hit;
 	double	closest_dist = INFINITY;
-    t_hit (*hit_funcs[6])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder, hit_cone, hit_paraboloid, hit_hyperboloid};
+    t_hit (*hit_funcs[6])(t_obj*, t_geo*, t_ray*) = {hit_sphere, hit_plane, hit_cylinder, hit_cone};
 
 	if (!scene || !scene->objs)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:09:56 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 16:27:04 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:17:30 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,10 @@ void	clear_hit(t_hit *hit)
 {
 	ft_memset(hit, 0, sizeof(t_hit));
 	hit->distance = -1;
+}
+
+void    update_best(t_hit *best, t_hit *candidate)
+{
+    if (candidate->did_hit && (!best->did_hit || candidate->distance < best->distance))
+        *best = *candidate;
 }

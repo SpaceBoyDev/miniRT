@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 20:46:12 by dario             #+#    #+#             */
+/*   Updated: 2025/12/08 20:46:14 by dario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINES_H
 # define DEFINES_H
 
@@ -18,8 +30,6 @@
 # define ID_PLANE	    "pl "
 # define ID_CYL		    "cy "
 # define ID_CONE	    "co "
-# define ID_PB      	"pb "
-# define ID_HB      	"hb "
 
 # define EPS	0.0001f
 # define SPEED	1
@@ -27,6 +37,5 @@
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
-
 
 #endif

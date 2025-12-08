@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:37:58 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:41:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 20:57:49 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int		parse_file(char *file, t_scene *scene);
 int		parse_sphere(char *line, t_scene *scene);
 int		parse_plane(char *line, t_scene *scene);
 int		parse_cylinder(char *line, t_scene *scene);
-int	    parse_cone(char *line, t_scene *scene);
-int	    parse_paraboloid(char *line, t_scene *scene);
-int	    parse_hyperboloid(char *line, t_scene *scene);
+int		parse_cone(char *line, t_scene *scene);
 
 // parse_objects.c
 int		parse_ambient(char *line, t_scene *scene);

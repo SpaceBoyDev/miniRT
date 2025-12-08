@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 17:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 16:28:51 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:17:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ void		fps_counter(mlx_t *mlx, t_fps *fps);
 t_hit		hit_plane(t_obj *obj, t_geo *geo, t_ray *r);
 t_hit		hit_sphere(t_obj *obj, t_geo *geo, t_ray *r);
 t_hit		hit_cylinder(t_obj *obj, t_geo *geo, t_ray *r);
-t_hit	    hit_cone(t_obj *obj, t_geo *geo, t_ray *r);
-t_hit       hit_paraboloid(t_obj *obj, t_geo *geo, t_ray *r);
-t_hit	    hit_hyperboloid(t_obj *obj, t_geo *geo, t_ray *r);
+t_hit		hit_cone(t_obj *obj, t_geo *geo, t_ray *r);
 
 // light.c
 t_color		light_bounce(t_hit *hit, t_scene *scene);
@@ -39,7 +37,8 @@ t_color		trace_ray(t_ray *ray, t_scene *scene);
 
 // render_utils.c
 uint32_t	rgb_to_uint(t_color *color);
-void		clear_hit(t_hit *hit);;
+void		clear_hit(t_hit *hit);
+void		update_best(t_hit *best, t_hit *candidate);
 
 // render.c
 int			render(t_data *data);

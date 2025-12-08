@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 20:43:01 by dario             #+#    #+#             */
+/*   Updated: 2025/12/08 21:16:54 by dario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/render.h"
 #include "../../include/vector.h"
 
@@ -35,12 +47,6 @@ static t_hit make_hit(double t, t_vec3 p, t_vec3 n, t_cyl_data *data)
     h.hit_obj = data->obj;
     h.color = data->cyl->color;
     return h;
-}
-
-static void update_best(t_hit *best, t_hit *candidate)
-{
-    if (candidate->did_hit && (!best->did_hit || candidate->distance < best->distance))
-        *best = *candidate;
 }
 
 static t_hit check_lateral_hit(t_ray *r, double t, 
