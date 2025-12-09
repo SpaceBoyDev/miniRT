@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 00:38:56 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/09 14:41:34 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void	cam_move_forward_back(t_data *data, t_vec3 *pos, t_vec3 *ori, const double 
 		vec3_translate_by_dir(pos, *ori, speed, false);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		vec3_translate_by_dir(pos, *ori, speed, true);
+
+	if (mlx_is_key_down(data->mlx, MLX_KEY_P))
+		printf("%f,%f,%f %f,%f,%f\n", pos->x, pos->y, pos->z,
+			ori->x, ori->y, ori->z);
 }
 
 void	cam_move_sideways(t_data *data, t_vec3 *pos, t_vec3 right, const double speed)
@@ -93,6 +97,8 @@ void	move_cam_hook(void *param)
 	cam_move_forward_back(data, pos, ori, speed);
 	cam_move_sideways(data, pos, right, speed);
 	cam_move_vertical(data, pos);
+
+
 }
 
 t_vec3	vec3_rotate_rodrigues(t_vec3 v, t_vec3 k, float angle)

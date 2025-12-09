@@ -33,7 +33,7 @@ VPATH		=  $(SRC_DIR) $(addprefix $(SRC_DIR), \
 				vector\
 				)
 
-SRC			=	main.c error_handling.c free.c
+SRC			=	main.c error_handling.c free.c debug.c
 
 # MLX
 SRC			+=	hooks.c \

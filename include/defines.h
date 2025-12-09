@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:46:12 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 21:33:35 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/09 14:33:26 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # endif
 
 // MLX Window
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	800
+# define WIN_WIDTH	300
+# define WIN_HEIGHT	300
 # define WIN_NAME	"MiniRT"
 
 // Defines for objects IDs
