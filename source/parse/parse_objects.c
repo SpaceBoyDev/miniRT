@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:21:49 by dario             #+#    #+#             */
-/*   Updated: 2025/12/08 21:37:34 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/09 14:16:55 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ int	parse_ambient(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_AMB_RATIO);
 	line = parse_color(line, &scene->ambient->color);
-	scene->ambient->color.r /= 255.0;
-	scene->ambient->color.g /= 255.0;
-	scene->ambient->color.b /= 255.0;
 	if (!line)
 		return (ERR_AMB_COLOR);
 	if (!check_trash_line(line))
@@ -76,9 +73,6 @@ int	parse_light(char *line, t_scene *scene)
 		return (ERR_LIGHT_RATIO);
 	line = skip_blank(line);
 	line = parse_color(line, &scene->light->color);
-	scene->light->color.r /= 255.0;
-	scene->light->color.g /= 255.0;
-	scene->light->color.b /= 255.0;
 	if (!line)
 		return (ERR_LIGHT_COLOR);
 	if (!check_trash_line(line))

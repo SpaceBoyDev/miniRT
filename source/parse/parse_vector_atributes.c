@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 21:53:45 by dario             #+#    #+#             */
-/*   Updated: 2025/10/24 21:54:19 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/09 14:16:23 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ char	*parse_color(char *str, t_color *result)
 		|| result->g > 255 || result->g < 0
 		|| result->b > 255 || result->b < 0)
 		return (NULL);
+
+	result->r /= 255.0;
+	result->g /= 255.0;
+	result->b /= 255.0;
 	str = skip_blank(str);
 	return (str);
 }
