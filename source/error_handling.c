@@ -17,8 +17,8 @@ void	print_error2(t_error error)
 	static const char	*g_message[20] = {
 		"",
 		"Could not allocate memory.",
-		"You must input a .rt file as the single argument.\n"\
-		"How to execute: './miniRT <file.rt>'.",
+		("You must input a .rt file as the single argument.\n"\
+		"How to execute: './miniRT <file.rt>'."),
 		"The scene file must have the .rt extension.",
 		"Could not open file.",
 		"Wrong scene object identifier.",
@@ -37,9 +37,9 @@ void	print_error2(t_error error)
 		"Light color is not valid.",
 		"Light line has invalid values at the end."
 	};
+
 	printf(RED "Error: %s" RST "\n", g_message[error]);
 }
-
 
 void	print_error3(t_error error)
 {
@@ -63,6 +63,7 @@ void	print_error3(t_error error)
 		"MLX failed to create image.",
 		"MLX failed to render the image to the window."
 	};
+
 	printf(RED "Error: %s" RST "\n", g_message2[error - 20]);
 }
 

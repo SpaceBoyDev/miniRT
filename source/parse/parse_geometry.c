@@ -16,9 +16,7 @@ int	parse_sphere(char *line, t_scene *scene)
 {
 	t_sphere	*sphere;
 
-	sphere = (t_sphere *)init_obj(scene, SPHERE);
-	line += 2;
-	line = skip_blank(line);
+	line = line_advance_and_init(scene, line, SPHERE, (void **)&sphere);
 	line = parse_coords(line, &sphere->position);
 	if (!line)
 		return (ERR_SPHERE_COORDS);
@@ -40,9 +38,7 @@ int	parse_plane(char *line, t_scene *scene)
 {
 	t_plane	*plane;
 
-	plane = (t_plane *)init_obj(scene, PLANE);
-	line += 2;
-	line = skip_blank(line);
+	line = line_advance_and_init(scene, line, PLANE, (void **)&plane);
 	line = parse_coords(line, &plane->position);
 	if (!line)
 		return (ERR_PLANE_COORDS);
@@ -64,9 +60,7 @@ int	parse_cylinder(char *line, t_scene *scene)
 {
 	t_cylinder	*cylinder;
 
-	cylinder = (t_cylinder *)init_obj(scene, CYLINDER);
-	line += 2;
-	line = skip_blank(line);
+	line = line_advance_and_init(scene, line, CYLINDER, (void **)&cylinder);
 	line = parse_coords(line, &cylinder->position);
 	if (!line)
 		return (ERR_CYL_COORDS);
@@ -93,10 +87,8 @@ int	parse_cylinder(char *line, t_scene *scene)
 int	parse_cone(char *line, t_scene *scene)
 {
 	t_cone	*cone;
-	
-	cone = (t_cone *)init_obj(scene, CONE);
-	line += 2;
-	line = skip_blank(line);
+
+	line = line_advance_and_init(scene, line, CONE, (void **)&cone);
 	line = parse_coords(line, &cone->position);
 	if (!line)
 		return (ERR_CONE_COORDS);
@@ -117,77 +109,5 @@ int	parse_cone(char *line, t_scene *scene)
 		return (ERR_CONE_COLOR);
 	if (!check_trash_line(line))
 		return (ERR_CONE_TRASH);
-	return (OK);
-}
-
-int	parse_paraboloid(char *line, t_scene *scene)
-{
-	t_paraboloid	*paraboloid;
-
-	paraboloid = (t_paraboloid *)init_obj(scene, PARABOLOID); 
-	if (!paraboloid)
-		return (ERR_ALLOC);
-	
-	line += 2;
-	line = skip_blank(line);
-
-	line = parse_coords(line, &paraboloid->position);
-	if (!line)
-		return (ERR_PB_COORDS);
-
-	line = parse_normalized_vector(line, &paraboloid->axis);
-	if (!line)
-		return (ERR_PB_AXIS);
-
-	line = parse_double(line, &paraboloid->k_factor);
-	if (!line || paraboloid->k_factor <= 0.0) // k_factor debe ser positivo
-		return (ERR_PB_FACTOR);
-	
-	line = parse_double(line, &paraboloid->h_limit);
-	if (!line || paraboloid->h_limit <= 0.0) // H debe ser positivo
-		return (ERR_PB_LIMIT);
-
-	line = parse_color(line, &paraboloid->color);
-	if (!line)
-		return (ERR_PB_COLOR);
-	
-	if (!check_trash_line(line))
-		return (ERR_PB_TRASH);
-
-	return (OK);
-}
-
-int	parse_hyperboloid(char *line, t_scene *scene)
-{
-	t_hyperboloid	*hyperboloid;
-
-	hyperboloid = (t_hyperboloid *)init_obj(scene, HYPERBOLOID);
-	if (!hyperboloid)
-		return (ERR_ALLOC);
-	line += 2;
-	line = skip_blank(line);
-	line = parse_coords(line, &hyperboloid->position);
-	if (!line)
-		return (ERR_HB_COORDS);
-	line = parse_normalized_vector(line, &hyperboloid->axis);
-	if (!line)
-		return (ERR_HB_AXIS);
-	line = parse_double(line, &hyperboloid->a_param);
-	if (!line || hyperboloid->a_param <= 0.0)
-		return (ERR_HB_APARAM);
-	line = parse_double(line, &hyperboloid->b_param);
-	if (!line || hyperboloid->b_param <= 0.0)
-		return (ERR_HB_BPARAM);
-	line = parse_double(line, &hyperboloid->c_param);
-	if (!line || hyperboloid->c_param <= 0.0)
-		return (ERR_HB_CPARAM);
-	line = parse_double(line, &hyperboloid->h_limit);
-	if (!line || hyperboloid->h_limit <= 0.0)
-		return (ERR_HB_LIMIT);
-	line = parse_color(line, &hyperboloid->color);
-	if (!line)
-		return (ERR_HB_COLOR);
-	if (!check_trash_line(line))
-		return (ERR_HB_TRASH);
 	return (OK);
 }

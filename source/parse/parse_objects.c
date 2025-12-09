@@ -25,9 +25,9 @@ int	parse_ambient(char *line, t_scene *scene)
 	if (!line)
 		return (ERR_AMB_RATIO);
 	line = parse_color(line, &scene->ambient->color);
-	scene->ambient->color.r /=  255.0;
-	scene->ambient->color.g /=  255.0;
-	scene->ambient->color.b /=  255.0;
+	scene->ambient->color.r /= 255.0;
+	scene->ambient->color.g /= 255.0;
+	scene->ambient->color.b /= 255.0;
 	if (!line)
 		return (ERR_AMB_COLOR);
 	if (!check_trash_line(line))

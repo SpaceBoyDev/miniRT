@@ -93,10 +93,7 @@ int	parse_file(char *file, t_scene *scene)
 		{
 			error = parse_line(line, scene);
 			if (error != 0)
-            {
-                finish_free_gnl(line, fd);
-                exit_error(error, scene);
-            }
+				return (finish_free_gnl(line, fd), exit_error(error, scene), 0);
 		}
 		free(line);
 	}

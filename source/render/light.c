@@ -44,7 +44,6 @@ static void	apply_lambert(t_light *light, t_hit point, t_color *final)
 		lambert = 0;
 	attenuation = 1.0 / (1.0 + 0.1 * point.distance);
 	intensity = light->brightness * attenuation * lambert;
-
 	final->r += point.color.r * light->color.r * intensity;
 	final->g += point.color.g * light->color.g * intensity;
 	final->b += point.color.b * light->color.b * intensity;
@@ -67,7 +66,8 @@ t_color	light_bounce(t_hit *hit, t_scene *scene)
 
 	clear_hit(&light_hit);
 	final = hit->color;
-	hit->distance = vec3_magnitude(calc_dir(hit->hit_point, scene->light->position, false));
+	hit->distance = vec3_magnitude(calc_dir(hit->hit_point, \
+	scene->light->position, false));
 	origin_adjusted = vec3_add(hit->hit_point, vec3_scale(hit->normal, EPS));
 	ray.direction = calc_dir(origin_adjusted, scene->light->position, true);
 	ray.origin = origin_adjusted;

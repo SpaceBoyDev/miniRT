@@ -24,47 +24,64 @@ uint32_t	rgb_to_uint(t_color *color)
 	return (red << 24 | green << 16 | blue << 8 | 255);
 }
 
-int ft_dtoa(double n, char *str, int precision)
+static int	ft_dtoa_int_part(double *n, char *str, int i)
 {
-    int i = 0;
-    long int_part;
-    double frac_part;
-    char temp[20]; 
-    int digit;
+	long	int_part;
+	char	temp[20];
+	int		j;
 
-    if (n < 0) {
-        str[i++] = '-';
-        n = -n;
-    }
-    
-    int_part = (long)n;
-    frac_part = n - int_part;
-    
-    if (int_part == 0)
-        str[i++] = '0';
-    else {
-        
-        int j = 0;
-        while (int_part > 0) {
-            temp[j++] = (int_part % 10) + '0';
-            int_part /= 10;
-        }
-        while (j > 0)
-            str[i++] = temp[--j];
-    }
-    
-    if (precision > 0) {
-        str[i++] = '.';
-        while (precision-- > 0) {
-            frac_part *= 10;
-            digit = (int)frac_part;
-            str[i++] = digit + '0';
-            frac_part -= digit;
-        }
-    }
-    
-    str[i] = '\0';
-    return i;
+	if (*n < 0)
+	{
+		str[i++] = '-';
+		*n = -(*n);
+	}
+	int_part = (long)*n;
+	if (int_part == 0)
+		str[i++] = '0';
+	else
+	{
+		j = 0;
+		while (int_part > 0)
+		{
+			temp[j++] = (int_part % 10) + '0';
+			int_part /= 10;
+		}
+		while (j > 0)
+			str[i++] = temp[--j];
+	}
+	return (i);
+}
+
+static int	ft_dtoa_frac_part(double n, char *str, int i, int precision)
+{
+	double	frac_part;
+	int		digit;
+
+	frac_part = n - (long)n;
+	if (precision > 0)
+	{
+		str[i++] = '.';
+		while (precision-- > 0)
+		{
+			frac_part *= 10;
+			digit = (int)frac_part;
+			str[i++] = digit + '0';
+			frac_part -= digit;
+		}
+	}
+	return (i);
+}
+
+int	ft_dtoa(double n, char *str, int precision)
+{
+	int		i;
+	double	temp_n;
+
+	temp_n = n;
+	i = ft_dtoa_int_part(&temp_n, str, 0);
+	i = ft_dtoa_frac_part(temp_n, str, i, precision);
+	str[i] = '\0';
+	return (i);
 }
 
 void	clear_hit(t_hit *hit)

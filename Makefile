@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3 -O3
+CFLAGS		=	-Wall -Wextra -Werror -g
 RM			=	rm -rf
 
 # Libft
@@ -19,7 +19,7 @@ MLX_INCLUDE	=	$(MLX_PATH)/include/MLX42
 MLX_FLAG	=	-L $(MLX_BUILD) -l mlx42 -l glfw -l dl -lm -pthread
 
 # Linker
-LDFLAGS		=  -lm
+LDFLAGS		=  	-lm
 
 OBJ_DIR		=	obj/
 
@@ -37,12 +37,14 @@ SRC			=	main.c error_handling.c free.c
 
 # MLX
 SRC			+=	hooks.c \
-				initialization.c
+				initialization.c \
+				camera.c
 
 # Parsing
 SRC			+=	parse_atributes.c \
 				parse_file.c \
 				parse_geometry.c \
+				parse_geometry2.c \
 				parse_objects.c \
 				parse_utils.c \
 				parse_vars.c \
@@ -54,11 +56,15 @@ SRC			+=	fps_counter.c \
 				hit_sphere.c \
 				hit_plane.c \
 				hit_cylinder.c \
+				hit_cylinder2.c \
 				hit_cone.c \
 				hit_paraboloid.c \
+				hit_paraboloid2.c \
 				hit_hyperboloid.c	\
+				hit_utils.c	\
 				light.c \
 				raytrace.c \
+				raytrace2.c \
 				render_utils.c \
 				render.c	
 
@@ -124,7 +130,7 @@ $(MLX_PATH):
 	@echo "$(BG_BLUE)MLX42 cloned!$(RST)"
 
 $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
-	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -lm -o $@
+	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

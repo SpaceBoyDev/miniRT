@@ -17,7 +17,7 @@ int	render(t_data *data)
 {
 	uint32_t	x;
 	uint32_t	y;
-	t_ray 		ray;
+	t_ray		ray;
 	t_color		color;
 
 	x = 0;
