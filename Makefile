@@ -148,7 +148,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
-	@$(RM) $(MLX_PATH)
+	@$(RM) $(MLX_BUILD)
 	@echo "$(CYAN)MLX42 fully cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) fully cleaned!$(BG_RST)🧹"
 	@echo "$(BG_GREEN)All cleaned!$(BG_RST)"
