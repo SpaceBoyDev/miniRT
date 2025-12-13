@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 20:17:20 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 16:44:47 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/13 19:57:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ t_color	light_bounce(t_hit *hit, t_scene *scene)
 
 	clear_hit(&light_hit);
 	final = hit->color;
-	hit->distance = vec3_magnitude(calc_dir(hit->hit_point, \
-	scene->light->position, false));
+	hit->distance = vec3_magnitude(calc_dir(hit->hit_point,
+				scene->light->position, false));
 	origin_adjusted = vec3_add(hit->hit_point, vec3_scale(hit->normal, EPS));
 	ray.direction = calc_dir(origin_adjusted, scene->light->position, true);
 	ray.origin = origin_adjusted;

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_geometry2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/13 19:58:09 by dario             #+#    #+#             */
+/*   Updated: 2025/12/13 19:59:22 by dario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/parse.h"
 
-char	*line_advance_and_init(t_scene *scene, char *line \
-, int obj_type, void **obj)
+char	*line_advance_and_init(t_scene *scene, char *line,
+	int obj_type, void **obj)
 {
 	*obj = init_obj(scene, obj_type);
 	if (!*obj)
@@ -88,8 +100,8 @@ int	parse_hyperboloid(char *line, t_scene *scene)
 	int				error_code;
 
 	error_code = OK;
-	ptr = line_advance_and_init(scene, line, HYPERBOLOID, \
-	(void **)&hyperboloid);
+	ptr = line_advance_and_init(scene, line, HYPERBOLOID,
+			(void **)&hyperboloid);
 	if (!ptr)
 		return (ERR_ALLOC);
 	line = parse_hyperboloid_props(ptr, hyperboloid, &error_code);

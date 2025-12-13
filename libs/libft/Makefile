@@ -11,7 +11,7 @@ AR = ar
 ARFLAGS = -rc
 
 # The flags to use with the compiler
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror
 
 # The command to remove files
 RM = rm -f

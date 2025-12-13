@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/13 19:45:32 by dario             #+#    #+#             */
+/*   Updated: 2025/12/13 20:09:18 by dario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -106,11 +118,11 @@ enum e_error
 	ERR_PB_LIMIT,
 	ERR_PB_COLOR,
 	ERR_PB_TRASH,
-	MAX_ERR_CODE,
 	ERR_MLX_INIT,
 	ERR_MLX_HOOK,
 	ERR_MLX_IMG,
 	ERR_MLX_IMG_TO_WIN,
+	MAX_ERR_CODE,
 };
 
 struct s_data

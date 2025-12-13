@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:14:31 by dario             #+#    #+#             */
-/*   Updated: 2025/11/26 00:38:56 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/13 20:00:21 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ void	render_hook(void *param)
 
 	data = (t_data *)param;
 	render(data);
-    // fps_counter(data->mlx, data->fps);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/13 19:44:24 by dario             #+#    #+#             */
+/*   Updated: 2025/12/13 20:01:39 by dario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/mlx.h"
 #include "../../include/render.h"
 #include "../../include/vector.h"
@@ -30,11 +42,11 @@ t_vec3	vec3_rotate_rodrigues(t_vec3 v, t_vec3 k, float angle)
 	sin_a = sinf(angle);
 	dot = v.x * k.x + v.y * k.y + v.z * k.z;
 	v_rot.x = v.x * cos_a + (k.y * v.z - k.z * v.y) \
-	* sin_a + k.x * dot * (1.0f - cos_a);
+* sin_a + k.x * dot * (1.0f - cos_a);
 	v_rot.y = v.y * cos_a + (k.z * v.x - k.x * v.z) \
-	* sin_a + k.y * dot * (1.0f - cos_a);
+* sin_a + k.y * dot * (1.0f - cos_a);
 	v_rot.z = v.z * cos_a + (k.x * v.y - k.y * v.x) \
-	* sin_a + k.z * dot * (1.0f - cos_a);
+* sin_a + k.z * dot * (1.0f - cos_a);
 	return (v_rot);
 }
 
