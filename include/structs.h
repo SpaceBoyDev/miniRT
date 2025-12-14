@@ -14,53 +14,59 @@
 # define STRUCTS_H
 
 // Typedef ENUM error
-typedef enum e_error		t_error;
+typedef enum e_error			t_error;
 
 // Typedef special atributes
-typedef struct s_color		t_color;
-typedef struct s_vector3	t_vec3;
-typedef struct s_vector3	t_coords;
+typedef struct s_color			t_color;
+typedef struct s_vector3		t_vec3;
+typedef struct s_vector3		t_coords;
 
 //Typedef ray
-typedef struct s_ray		t_ray;
-typedef struct s_hit		t_hit;
+typedef struct s_ray			t_ray;
+typedef struct s_hit			t_hit;
 
 // Typedef data
-typedef struct s_data		t_data;
+typedef struct s_data			t_data;
 
 // Typedef scene
-typedef struct s_scene		t_scene;
+typedef struct s_scene			t_scene;
 
 // Typedef fps
-typedef struct s_fps		t_fps;
+typedef struct s_fps			t_fps;
 
 // Typedef ENUM Geometry ID
-typedef enum e_geometry_id	t_id;
+typedef enum e_geometry_id		t_id;
 
 // Typedef Scene Objects
-typedef struct s_ambient	t_ambient;
-typedef struct s_camera		t_camera;
-typedef struct s_light		t_light;
+typedef struct s_ambient		t_ambient;
+typedef struct s_camera			t_camera;
+typedef struct s_light			t_light;
 
 // Union geo
-typedef union u_geo			t_geo;
+typedef union u_geo				t_geo;
 
 // Typedef Object
-typedef struct s_obj		t_obj;
+typedef struct s_obj			t_obj;
 
 // Typedef Scene Geometry
-typedef struct s_sphere		t_sphere;
-typedef struct s_plane		t_plane;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_cone		t_cone;
+typedef struct s_sphere			t_sphere;
+typedef struct s_plane			t_plane;
+typedef struct s_cylinder		t_cylinder;
+typedef struct s_cone			t_cone;
 
 // Typedef aux structs
-typedef struct s_ray_params	t_ray_params;
-typedef struct s_ray_quad	t_ray_quad;
-typedef struct s_quad		t_quad;
-typedef struct s_pb_ctx		t_pb_ctx;
-typedef struct s_cyl_data	t_cyl_data;
-typedef struct s_perp		t_perp;
+typedef struct s_ray_params		t_ray_params;
+typedef struct s_ray_quad		t_ray_quad;
+typedef struct s_quad			t_quad;
+typedef struct s_pb_ctx			t_pb_ctx;
+typedef struct s_cyl_data		t_cyl_data;
+typedef struct s_perp			t_perp;
+typedef struct s_cone_calc		t_cone_calc;
+typedef struct s_quadratic		t_quadratic;
+typedef struct s_hyper_vecs		t_hyper_vecs;
+typedef struct s_hyper_dots		t_hyper_dots;
+typedef struct s_cone_params	t_cone_params;
+typedef struct s_hyper_params	t_hyper_params;
 
 enum e_error
 {
@@ -324,6 +330,52 @@ struct s_perp
 {
 	t_vec3	d_perp;
 	t_vec3	oc_perp;
+};
+
+struct s_cone_params
+{
+	t_cone	*cone;
+	t_vec3	axis;
+	t_obj	*obj;
+};
+
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+}	t_quadratic;
+
+struct s_cone_calc
+{
+	double	d_dot_a;
+	double	oc_dot_a;
+	double	d_dot_oc;
+	double	d_dot_d;
+};
+
+struct s_hyper_params
+{
+	t_hyperboloid	*hyper;
+	t_vec3			axis;
+	t_obj			*obj;
+};
+
+struct s_hyper_dots
+{
+	double	d_dot_a;
+	double	oc_dot_a;
+	double	d_dot_d;
+	double	oc_dot_oc;
+	double	d_dot_oc;
+};
+
+struct s_hyper_vecs
+{
+	t_vec3	v_offset;
+	t_vec3	v_parall;
+	t_vec3	v_perp;
 };
 
 #endif

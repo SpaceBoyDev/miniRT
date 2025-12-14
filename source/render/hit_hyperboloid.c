@@ -13,123 +13,73 @@
 #include "../../include/render.h"
 #include "../../include/vector.h"
 
-static t_hit	make_hyperboloid_hit(double t, t_vec3 p, t_vec3 n,
-	t_hyperboloid *h, t_obj *obj)
+static t_vec3	adjust_normal(t_vec3 n, t_ray *r)
 {
+	t_vec3	adjusted;
+
+	adjusted = n;
+	if (vec3_dot(n, r->direction) > 0.0)
+		adjusted = vec3_scale(n, -1.0);
+	return (adjusted);
+}
+
+static void	try_hyper_t(t_hit *best, double t, t_ray *r, t_hyper_params *hp)
+{
+	t_vec3	p;
+	t_vec3	n;
 	t_hit	hit;
 
-	hit = (t_hit){0};
-
-	hit.did_hit = true;
-	hit.distance = t;
-	hit.hit_point = p;
-	hit.normal = n;
-	hit.hit_obj = obj;
-	hit.color = h->color;
-	return (hit);
-}
-
-t_vec3	compute_hyper_normal(t_vec3 p, t_hyperboloid *h, t_vec3 axis)
-{
-	t_vec3	v_offset;
-	t_vec3	v_parall;
-	t_vec3	v_perp;
-	t_vec3	normal_raw;
-	double	dot_p_a;
-
-	v_offset = vec3_sub(p, h->position);
-	dot_p_a = vec3_dot(v_offset, axis);
-
-	v_parall = vec3_scale(axis, dot_p_a);
-	v_perp = vec3_sub(v_offset, v_parall);
-
-	normal_raw = vec3_sub(
-		vec3_scale(v_perp, 2.0 / (h->a_param * h->a_param)),
-		vec3_scale(v_parall, 2.0 / (h->c_param * h->c_param))
-	);
-
-	return (vec3_normalize(normal_raw));
-}
-
-static void	get_hyper_abc(t_ray *r, t_hyperboloid *h, double *abc)
-{
-	t_vec3	oc;
-	t_vec3	axis;
-	double	d_dot_a;
-	double	oc_dot_a;
-	double	d_dot_d;
-	double	oc_dot_oc;
-
-	axis = h->axis;
-	oc = vec3_sub(r->origin, h->position);
-
-	d_dot_a = vec3_dot(r->direction, axis);
-	oc_dot_a = vec3_dot(oc, axis);
-
-	d_dot_d = vec3_dot(r->direction, r->direction);
-	oc_dot_oc = vec3_dot(oc, oc);
-
-	abc[0] = (d_dot_d - d_dot_a * d_dot_a) / (h->a_param * h->a_param);
-	abc[0] -= (d_dot_a * d_dot_a) / (h->c_param * h->c_param);
-
-	abc[1] = 2.0 * ((vec3_dot(r->direction, oc) - d_dot_a * oc_dot_a)
-	/ (h->a_param * h->a_param));
-	abc[1] -= 2.0 * ((d_dot_a * oc_dot_a) / (h->c_param * h->c_param));
-	abc[2] = (oc_dot_oc - oc_dot_a * oc_dot_a) / (h->a_param * h->a_param);
-	abc[2] -= (oc_dot_a * oc_dot_a) / (h->c_param * h->c_param);
-	abc[2] -= 1.0;
-}
-
-static void	hit_hyperboloid_surface(t_hit *best, t_ray *r,
-	t_hyperboloid *h, t_obj *obj)
-{
-	double	abc[3];
-	double	disc;
-	double	t[2];
-	
-	get_hyper_abc(r, h, &abc[0]);
-	disc = abc[1] * abc[1] - 4.0 * abc[0] * abc[2];
-
-	if (disc < 0 || fabs(abc[0]) < EPS)
+	if (t <= EPS)
 		return ;
-	
-	disc = sqrt(disc);
-	t[0] = (-abc[1] - disc) / (2.0 * abc[0]);
-	t[1] = (-abc[1] + disc) / (2.0 * abc[0]);
+	p = vec3_add(r->origin, vec3_scale(r->direction, t));
+	if (!check_hyper_height(p, hp))
+		return ;
+	n = compute_hyper_normal(p, hp->hyper, hp->axis);
+	n = adjust_normal(n, r);
+	hit = make_hyperboloid_hit(t, p, n, hp);
+	update_best(best, &hit);
+}
 
-	for (int i = 0; i < 2; i++)
+static void	solve_hyper_hits(t_hit *best, t_ray *r, t_hyper_params *hp,
+		t_quadratic q)
+{
+	double	t0;
+	double	t1;
+	int		i;
+
+	t0 = (-q.b - sqrt(q.disc)) / (2.0 * q.a);
+	t1 = (-q.b + sqrt(q.disc)) / (2.0 * q.a);
+	i = 0;
+	while (i < 2)
 	{
-		if (t[i] <= EPS)
-			continue;
-
-		t_vec3	p = vec3_add(r->origin, vec3_scale(r->direction, t[i]));
-		double	h_proj = vec3_dot(vec3_sub(p, h->position), h->axis);
-		
-		if (fabs(h_proj) > h->h_limit / 2.0)
-			continue;
-
-		t_vec3	n = compute_hyper_normal(p, h, h->axis);
-
-		if (vec3_dot(n, r->direction) > 0.0)
-			n = vec3_scale(n, -1.0);
-		t_hit	hit = make_hyperboloid_hit(t[i], p, n, h, obj);
-		update_best(best, &hit);
+		if (i == 0)
+			try_hyper_t(best, t0, r, hp);
+		else
+			try_hyper_t(best, t1, r, hp);
+		i++;
 	}
 }
 
+static void	hit_hyperboloid_surface(t_hit *best, t_ray *r, t_hyper_params *hp)
+{
+	t_quadratic	q;
+
+	q = get_hyper_quadratic(r, hp->hyper);
+	if (q.disc < 0 || fabs(q.a) < EPS)
+		return ;
+	solve_hyper_hits(best, r, hp, q);
+}
 
 t_hit	hit_hyperboloid(t_obj *obj, t_geo *geo, t_ray *r)
 {
-	t_hyperboloid	*h;
+	t_hyper_params	hp;
 	t_hit			best_hit;
-	t_vec3			axis;
 
-	best_hit = (t_hit){0};
-	h = &(geo->hyperboloid);
-	clear_hit(&best_hit);
-	axis = vec3_normalize(h->axis);
-	h->axis = axis;
-	hit_hyperboloid_surface(&best_hit, r, h, obj);
-
+	best_hit.did_hit = false;
+	hp.hyper = &(geo->hyperboloid);
+	hp.axis = vec3_normalize(hp.hyper->axis);
+	hp.obj = obj;
+	hp.hyper->axis = hp.axis;
+	hit_hyperboloid_surface(&best_hit, r, &hp);
 	return (best_hit);
 }

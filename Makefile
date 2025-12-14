@@ -58,9 +58,13 @@ SRC			+=	fps_counter.c \
 				hit_cylinder.c \
 				hit_cylinder2.c \
 				hit_cone.c \
+				hit_cone2.c \
+				hit_cone3.c \
 				hit_paraboloid.c \
 				hit_paraboloid2.c \
 				hit_hyperboloid.c	\
+				hit_hyperboloid2.c	\
+				hit_hyperboloid3.c	\
 				hit_utils.c	\
 				light.c \
 				raytrace.c \
@@ -136,7 +140,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 debug: CFLAGS += -g3 -fsanitize=address -DDEBUG=1
-debug: all
+debug: all	
 
 clean:
 	@echo "$(BG_BLUE)Cleaning...$(BG_RST)"
@@ -148,7 +152,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
-	@$(RM) $(MLX_BUILD)
+	@$(RM) $(MLX_PATH)
 	@echo "$(CYAN)MLX42 fully cleaned!$(BG_RST)🧹"
 	@echo "$(CYAN)$(NAME) fully cleaned!$(BG_RST)🧹"
 	@echo "$(BG_GREEN)All cleaned!$(BG_RST)"
