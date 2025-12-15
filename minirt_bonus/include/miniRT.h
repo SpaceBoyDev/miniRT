@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:15 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:06:37 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/15 18:47:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	print_error(t_error error);
 void	exit_error(t_error error, t_scene *scene);
 void	free_table(char **table);
 void	free_scene(t_scene *scene);
+void	free_all(t_data *data);
 void	print_all_error_messages(void);
 
 #endif

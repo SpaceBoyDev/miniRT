@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:21:16 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/15 19:04:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int	main(int argc, char **argv)
 	ft_memset(&fps, 0, sizeof(t_fps));
 	data.scene = &scene;
 	data.fps = &fps;
+	scene.data = &data;
 	status = parse_file(argv[1], data.scene);
 	if (status != OK)
 		exit_error(status, data.scene);
 	status = initialize_mlx(&data);
 	if (status != OK)
 		exit_error(status, data.scene);
-	free_scene(data.scene);
+	free_all(&data);
 	return (OK);
 }

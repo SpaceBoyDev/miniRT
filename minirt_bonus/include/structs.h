@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:45:32 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:09:18 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/15 18:44:53 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ struct s_hit
 
 struct s_scene
 {
+	t_data		*data;
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
