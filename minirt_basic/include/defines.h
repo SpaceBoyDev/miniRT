@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:45:27 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:25:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/13 19:45:29 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define ID_SPHERE	    "sp "
 # define ID_PLANE	    "pl "
 # define ID_CYL		    "cy "
+# define ID_CONE	    "co "
+# define ID_PB      	"pb "
+# define ID_HB      	"hb "
 
 # define EPS	0.0001f
 # define SPEED	1

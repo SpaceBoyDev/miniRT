@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror #-g
+CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
 # Libft

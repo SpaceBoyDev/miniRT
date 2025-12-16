@@ -6,22 +6,11 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:29:44 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:35:37 by dario            ###   ########.fr       */
+/*   Updated: 2025/11/26 00:47:14 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parse.h"
-
-char	*line_advance_and_init(t_scene *scene, char *line,
-	int obj_type, void **obj)
-{
-	*obj = init_obj(scene, obj_type);
-	if (!*obj)
-		return (NULL);
-	line += 2;
-	line = skip_blank(line);
-	return (line);
-}
 
 int	parse_sphere(char *line, t_scene *scene)
 {
@@ -92,5 +81,33 @@ int	parse_cylinder(char *line, t_scene *scene)
 		return (ERR_CYL_COLOR);
 	if (!check_trash_line(line))
 		return (ERR_CYL_TRASH);
+	return (OK);
+}
+
+int	parse_cone(char *line, t_scene *scene)
+{
+	t_cone	*cone;
+
+	line = line_advance_and_init(scene, line, CONE, (void **)&cone);
+	line = parse_coords(line, &cone->position);
+	if (!line)
+		return (ERR_CONE_COORDS);
+	line = parse_normalized_vector(line, &cone->axis);
+	if (!line)
+		return (ERR_CONE_AXIS);
+	line = parse_double(line, &cone->diameter);
+	if (!line)
+		return (ERR_CONE_DIAMETER);
+	line = parse_double(line, &cone->height);
+	if (!line)
+		return (ERR_CONE_HEIGHT);
+	line = parse_color(line, &cone->color);
+	cone->color.r = cone->color.r / 255.0;
+	cone->color.g = cone->color.g / 255.0;
+	cone->color.b = cone->color.b / 255.0;
+	if (!line)
+		return (ERR_CONE_COLOR);
+	if (!check_trash_line(line))
+		return (ERR_CONE_TRASH);
 	return (OK);
 }

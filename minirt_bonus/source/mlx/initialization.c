@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 22:17:45 by dario             #+#    #+#             */
-/*   Updated: 2025/12/15 18:57:57 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:33:54 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ int	initialize_mlx(t_data *data)
 		return (ERR_MLX_HOOK);
 	mlx_close_hook(data->mlx, &close_window_hook, data);
 	mlx_loop(data->mlx);
-	mlx_terminate(data->mlx);
 	return (OK);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/10/27 18:48:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:24:08 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ void	free_geometry(t_scene *scene)
 
 void	free_data(t_data *data)
 {
-	free(data->mlx);
-	free(data->img);
-	free_scene(data->scene);
+	mlx_terminate(data->mlx);
 }
 
 void	free_scene(t_scene *scene)
@@ -54,4 +52,10 @@ void	free_scene(t_scene *scene)
 	if (scene->light)
 		free(scene->light);
 	free_geometry(scene);
+}
+
+void	free_all(t_data *data)
+{
+	free_scene(data->scene);
+	free_data(data);
 }

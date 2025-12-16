@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:10:03 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:34:00 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:52:15 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_hit	dispatch_hit_func(t_obj *obj, t_ray *ray)
 		return (hit_plane(obj, obj->geo, ray));
 	else if (obj->id == 2)
 		return (hit_cylinder(obj, obj->geo, ray));
+	else if (obj->id == 3)
+		return (hit_cone(obj, obj->geo, ray));
 	return ((t_hit){0});
 }
 

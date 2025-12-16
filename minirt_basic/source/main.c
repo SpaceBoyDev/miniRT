@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:09:19 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:32:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:20:34 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,23 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_scene	scene;
+	t_fps	fps;
 	t_error	status;
 
 	if (argc != 2)
 		exit_error(ERR_ARGS, NULL);
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_memset(&scene, 0, sizeof(t_scene));
+	ft_memset(&fps, 0, sizeof(t_fps));
 	data.scene = &scene;
+	data.fps = &fps;
+	scene.data = &data;
 	status = parse_file(argv[1], data.scene);
 	if (status != OK)
 		exit_error(status, data.scene);
 	status = initialize_mlx(&data);
 	if (status != OK)
 		exit_error(status, data.scene);
-	free_scene(data.scene);
+	free_all(&data);
 	return (OK);
 }

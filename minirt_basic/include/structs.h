@@ -6,61 +6,67 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:45:32 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:32:09 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/15 18:44:53 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "miniRT.h"
-
 // Typedef ENUM error
-typedef enum e_error		t_error;
+typedef enum e_error			t_error;
 
 // Typedef special atributes
-typedef struct s_color		t_color;
-typedef struct s_vector3	t_vec3;
-typedef struct s_vector3	t_coords;
+typedef struct s_color			t_color;
+typedef struct s_vector3		t_vec3;
+typedef struct s_vector3		t_coords;
 
 //Typedef ray
-typedef struct s_ray		t_ray;
-typedef struct s_hit		t_hit;
+typedef struct s_ray			t_ray;
+typedef struct s_hit			t_hit;
 
 // Typedef data
-typedef struct s_data		t_data;
+typedef struct s_data			t_data;
 
 // Typedef scene
-typedef struct s_scene		t_scene;
+typedef struct s_scene			t_scene;
 
 // Typedef fps
-typedef struct s_fps		t_fps;
+typedef struct s_fps			t_fps;
 
 // Typedef ENUM Geometry ID
-typedef enum e_geometry_id	t_id;
+typedef enum e_geometry_id		t_id;
 
 // Typedef Scene Objects
-typedef struct s_ambient	t_ambient;
-typedef struct s_camera		t_camera;
-typedef struct s_light		t_light;
+typedef struct s_ambient		t_ambient;
+typedef struct s_camera			t_camera;
+typedef struct s_light			t_light;
 
 // Union geo
-typedef union u_geo			t_geo;
+typedef union u_geo				t_geo;
 
 // Typedef Object
-typedef struct s_obj		t_obj;
+typedef struct s_obj			t_obj;
 
 // Typedef Scene Geometry
-typedef struct s_sphere		t_sphere;
-typedef struct s_plane		t_plane;
-typedef struct s_cylinder	t_cylinder;
+typedef struct s_sphere			t_sphere;
+typedef struct s_plane			t_plane;
+typedef struct s_cylinder		t_cylinder;
+typedef struct s_cone			t_cone;
 
 // Typedef aux structs
-typedef struct s_ray_params	t_ray_params;
-typedef struct s_ray_quad	t_ray_quad;
-typedef struct s_quad		t_quad;
-typedef struct s_cyl_data	t_cyl_data;
-typedef struct s_perp		t_perp;
+typedef struct s_ray_params		t_ray_params;
+typedef struct s_ray_quad		t_ray_quad;
+typedef struct s_quad			t_quad;
+typedef struct s_pb_ctx			t_pb_ctx;
+typedef struct s_cyl_data		t_cyl_data;
+typedef struct s_perp			t_perp;
+typedef struct s_cone_calc		t_cone_calc;
+typedef struct s_quadratic		t_quadratic;
+typedef struct s_hyper_vecs		t_hyper_vecs;
+typedef struct s_hyper_dots		t_hyper_dots;
+typedef struct s_cone_params	t_cone_params;
+typedef struct s_hyper_params	t_hyper_params;
 
 enum e_error
 {
@@ -98,6 +104,26 @@ enum e_error
 	ERR_CYL_HEIGHT,
 	ERR_CYL_COLOR,
 	ERR_CYL_TRASH,
+	ERR_CONE_COORDS,
+	ERR_CONE_AXIS,
+	ERR_CONE_DIAMETER,
+	ERR_CONE_HEIGHT,
+	ERR_CONE_COLOR,
+	ERR_CONE_TRASH,
+	ERR_HB_COORDS,
+	ERR_HB_AXIS,
+	ERR_HB_APARAM,
+	ERR_HB_BPARAM,
+	ERR_HB_CPARAM,
+	ERR_HB_LIMIT,
+	ERR_HB_COLOR,
+	ERR_HB_TRASH,
+	ERR_PB_AXIS,
+	ERR_PB_COORDS,
+	ERR_PB_FACTOR,
+	ERR_PB_LIMIT,
+	ERR_PB_COLOR,
+	ERR_PB_TRASH,
 	ERR_MLX_INIT,
 	ERR_MLX_HOOK,
 	ERR_MLX_IMG,
@@ -110,6 +136,16 @@ struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_scene		*scene;
+	t_fps		*fps;
+};
+
+struct s_fps
+{
+	double	frame_times[60];
+	int		index;
+	int		count;
+	double	last_update;
+	double	current_fps;
 };
 
 struct s_color
@@ -144,6 +180,7 @@ struct s_hit
 
 struct s_scene
 {
+	t_data		*data;
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
@@ -175,6 +212,9 @@ enum e_geometry_id
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
+	PARABOLOID,
+	HYPERBOLOID,
 };
 
 struct s_sphere
@@ -200,11 +240,43 @@ struct s_cylinder
 	t_color		color;
 };
 
+struct s_cone
+{
+	t_coords	position;
+	t_vec3		axis;
+	double		diameter;
+	double		height;
+	t_color		color;
+};
+
+typedef struct s_paraboloid
+{
+	t_coords	position;
+	t_coords	axis;
+	double		k_factor;
+	double		h_limit;
+	t_color		color;
+}	t_paraboloid;
+
+typedef struct s_hyperboloid
+{
+	t_coords	position;
+	t_vec3		axis;
+	double		a_param;
+	double		b_param;
+	double		c_param;
+	double		h_limit;
+	t_color		color;
+}	t_hyperboloid;
+
 union u_geo
 {
 	t_sphere		sphere;
 	t_plane			plane;
 	t_cylinder		cylinder;
+	t_cone			cone;
+	t_paraboloid	paraboloid;
+	t_hyperboloid	hyperboloid;
 };
 
 struct s_obj
@@ -231,6 +303,14 @@ struct s_ray_quad
 	double	discriminant;
 };
 
+struct s_pb_ctx
+{
+	t_paraboloid	*pb;
+	t_vec3			axis;
+	t_obj			*obj;
+	t_ray			*r;
+};
+
 struct s_cyl_data
 {
 	t_cylinder	*cyl;
@@ -251,6 +331,52 @@ struct s_perp
 {
 	t_vec3	d_perp;
 	t_vec3	oc_perp;
+};
+
+struct s_cone_params
+{
+	t_cone	*cone;
+	t_vec3	axis;
+	t_obj	*obj;
+};
+
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+}	t_quadratic;
+
+struct s_cone_calc
+{
+	double	d_dot_a;
+	double	oc_dot_a;
+	double	d_dot_oc;
+	double	d_dot_d;
+};
+
+struct s_hyper_params
+{
+	t_hyperboloid	*hyper;
+	t_vec3			axis;
+	t_obj			*obj;
+};
+
+struct s_hyper_dots
+{
+	double	d_dot_a;
+	double	oc_dot_a;
+	double	d_dot_d;
+	double	oc_dot_oc;
+	double	d_dot_oc;
+};
+
+struct s_hyper_vecs
+{
+	t_vec3	v_offset;
+	t_vec3	v_parall;
+	t_vec3	v_perp;
 };
 
 #endif

@@ -3,7 +3,7 @@ NAME		=	miniRT
 MAKEFLAGS	+=	--no-print-directory
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
 # Libft
@@ -44,6 +44,7 @@ SRC			+=	hooks.c \
 SRC			+=	parse_atributes.c \
 				parse_file.c \
 				parse_geometry.c \
+				parse_geometry2.c \
 				parse_objects.c \
 				parse_utils.c \
 				parse_vars.c \
@@ -51,10 +52,19 @@ SRC			+=	parse_atributes.c \
 				parse_vector_vars.c
 
 # Render
-SRC			+=	hit_sphere.c \
+SRC			+=	fps_counter.c \
+				hit_sphere.c \
 				hit_plane.c \
 				hit_cylinder.c \
 				hit_cylinder2.c \
+				hit_cone.c \
+				hit_cone2.c \
+				hit_cone3.c \
+				hit_paraboloid.c \
+				hit_paraboloid2.c \
+				hit_hyperboloid.c	\
+				hit_hyperboloid2.c	\
+				hit_hyperboloid3.c	\
 				hit_utils.c	\
 				light.c \
 				raytrace.c \
@@ -130,7 +140,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 debug: CFLAGS += -g3 -fsanitize=address -DDEBUG=1
-debug: all
+debug: all	
 
 clean:
 	@echo "$(BG_BLUE)Cleaning...$(BG_RST)"

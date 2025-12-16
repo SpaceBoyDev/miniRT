@@ -41,12 +41,12 @@ t_vec3	vec3_rotate_rodrigues(t_vec3 v, t_vec3 k, float angle)
 	cos_a = cosf(angle);
 	sin_a = sinf(angle);
 	dot = v.x * k.x + v.y * k.y + v.z * k.z;
-	v_rot.x = v.x * cos_a + (k.y * v.z - k.z * v.y) \
-* sin_a + k.x * dot * (1.0f - cos_a);
-	v_rot.y = v.y * cos_a + (k.z * v.x - k.x * v.z) \
-* sin_a + k.y * dot * (1.0f - cos_a);
-	v_rot.z = v.z * cos_a + (k.x * v.y - k.y * v.x) \
-* sin_a + k.z * dot * (1.0f - cos_a);
+	v_rot.x = v.x * cos_a + (k.y * v.z - k.z * v.y) * sin_a;
+	v_rot.x += k.x * dot * (1.0f - cos_a);
+	v_rot.y = v.y * cos_a + (k.z * v.x - k.x * v.z) * sin_a;
+	v_rot.y += k.y * dot * (1.0f - cos_a);
+	v_rot.z = v.z * cos_a + (k.x * v.y - k.y * v.x) * sin_a;
+	v_rot.z += k.z * dot * (1.0f - cos_a);
 	return (v_rot);
 }
 

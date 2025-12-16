@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 22:51:46 by dario             #+#    #+#             */
-/*   Updated: 2025/12/13 20:32:28 by dario            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:03:37 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static const char	*g_message[MAX_ERR_CODE] = {
 	"",
 	"Could not allocate memory.",
-	"You must input a .rt file as the single argument.\n"\
-	"How to execute: './miniRT <file.rt>'.",
+	"You must input a .rt file as the single argument.\n\
+	How to execute: './miniRT <file.rt>'.",
 	"The scene file must have the .rt extension.",
 	"Could not open file.",
 	"Wrong scene object identifier.",
@@ -48,6 +48,26 @@ static const char	*g_message[MAX_ERR_CODE] = {
 	"Cylinder height is not valid.",
 	"Cylinder color is not valid.",
 	"Cylinder line has invalid values at the end.",
+	"Cone coordinates are not valid.",
+	"Cone axis is not valid.",
+	"Cone diameter is not valid.",
+	"Cone height is not valid.",
+	"Cone color is not valid.",
+	"Cone line has invalid values at the end.",
+	"Hyperboloid coordinates are not valid",
+	"Hyperboloid axis is not valid",
+	"Hyperboloid A parameter is not valid",
+	"Hyperboloid B parameter is not valid",
+	"Hyperboloid C parameter is not valid",
+	"Hyperboloid limit is not valid",
+	"Hyperboloid color is not valid",
+	"Hyperboloid has invalid values at the end",
+	"Paraboloid axis is invalid",
+	"Paraboloid coordinates are not valid",
+	"Paraboloid factor is not valid",
+	"Paraboloid limit is not valid",
+	"Paraboloid color is not valid",
+	"Paraboloid has invalid values at the end",
 	"MLX failed to initialize.",
 	"MLX failed to add hook.",
 	"MLX failed to create image.",
@@ -67,16 +87,4 @@ void	exit_error(t_error error, t_scene *scene)
 		free_scene(scene);
 	print_error(error);
 	exit (error);
-}
-
-void	print_all_error_messages(void)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_ERR_CODE)
-	{
-		printf("Error %d: %s\n", i, g_message[i]);
-		i++;
-	}
 }
