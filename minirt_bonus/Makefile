@@ -122,16 +122,15 @@ $(LIBFT_LIB):
 	@make -C $(LIBFT) -f Makefile
 	@echo "$(BG_BLUE)Compiling $(NAME)...$(RST)"
 
-$(MLX_NAME): $(MLX_PATH)
+$(MLX_NAME):
 	@echo "$(BG_BLUE)Compiling MLX42...$(RST)"
-	cmake $(MLX_PATH) -B $(MLX_BUILD)
+	@if [ ! -f $(MLX_PATH)/CMakeLists.txt ]; then \
+		echo "$(BG_BLUE)Cloning MLX42...$(RST)"; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH); \
+	fi
+	cmake -S $(MLX_PATH) -B $(MLX_BUILD)
 	make -C $(MLX_BUILD) -j4
 	@echo "$(BG_BLUE)MLX42 compiled!$(RST)"
-
-$(MLX_PATH):
-	@echo "$(BG_BLUE)Cloning MLX42...$(RST)"
-	git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
-	@echo "$(BG_BLUE)MLX42 cloned!$(RST)"
 
 $(OBJ_DIR)%.o: %.c include/miniRT.h | $(OBJ_DIR)
 	@printf "$(MAGENTA)Compiling $< ✅$(RST)\033[0K\r"; $(CC) $(CFLAGS) -c $< -o $@
