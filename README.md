@@ -17,6 +17,28 @@ This repository contains two versions:
 Both versions use an 800 × 800 window and support ambient lighting, one camera,
 one point light and colored objects.
 
+## Gallery
+
+### Atom
+
+![Atom scene](atom.png)
+
+### Multi-object scene
+
+![Multi-object scene](multiobject.png)
+
+### Room
+
+![Room scene](room.png)
+
+### Spheres
+
+![Spheres scene](spheres.png)
+
+### Demo
+
+![miniRT demo](minirt.gif)
+
 ## Requirements
 
 - Linux
